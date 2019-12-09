@@ -2,8 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-/test.py
-/baidu/index/main.ef32a83b7f3d9dfc99ee.js
+*test.py*
+*main.ef32a83b7f3d9dfc99ee.js*
 
 # C extensions
 *.so
