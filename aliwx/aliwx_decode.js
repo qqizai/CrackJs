@@ -49,6 +49,7 @@ console.log(decodeCont(content));
 学习网站：https://www.aliwx.com.cn/reader?bid=6813923&cid=674174
 网站对小说的文本内容进行加密再返回本地，然后本地通过js解密再渲染到前端
 加密方式：不详，网站使用自己的封装的函数
+同刺猬猫加解密思路一样
 难度：无难度
 * */
 
