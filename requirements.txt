@@ -1,0 +1,5 @@
+memory_profiler==0.55.0
+Faker==2.0.3
+PyExecJS==1.5.1
+requests==2.18.4
+lzstring==1.0.4
