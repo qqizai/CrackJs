@@ -1,3 +1,30 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    : 2020/3/15 11:30
+# @Author  : qizai
+# @File    : emoji_js.py
+# @Software: PyCharm
+"""desc: 考点是考验颜文字对JavaScript的混淆还原
+
+解决方案：
+    1、直接通过查看xhr断点，查看那个接口的堆栈调用来源，直接查看最后一个，发现是属于颜文字加密；
+        那么继续往下一个堆栈调用点进行查看，这回发现是没有加密的代码，然后直接扣出来即可.
+    2、直接复制颜文字加密混淆代码，在控制台粘贴，然后删除最后一个表情 “('_');” 然后回车，即可。
+        或者直接删除这个表情后，使用 “toString()” 方法，就可以看到代码转换为明文字符串了。
+
+9-1请问：
+这一页帖子的总阅读量（列表页右侧的数字）是多少？
+
+9-2请问：
+第7个帖子（以1为起始）的HTML中id为content的部分中一共有多少个img标签？
+"""
+
+import requests
+import execjs
+from scrapy import Selector
+
+
+js_code = """
 //定义navigator、window全局变量
 navigator = {
     appCodeName: "Mozilla",
@@ -313,5 +340,59 @@ function getparam() {
     };
     return param
 };
+"""
 
-console.log(getparam())
+ctx = execjs.compile(js_code)
+param = ctx.call("getparam")
+
+url = "http://js-crack-course-9-1.crawler-lab.com/list?key={}&time={}&sign={}"
+# url = "http://js-crack-course-9-3.crawler-lab.com/list?key={}&time={}&sign={}"
+# url = "http://js-crack-course-9-2.crawler-lab.com/list?key={}&time={}&sign={}"
+
+cookie = {
+    "__cfduid": "dc05606102aea5dd71eff872a130050691583766709",
+    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQyNTU2OTcsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ.QMYVl-_sua-TysK1XmpOui1LXi82pXLEEUI7Ifn072A",
+
+}
+
+resp = requests.get(url=url.format(param["key"], param["time"], param["sign"]), cookies=cookie)
+
+print(resp.text)
+
+total = 0
+average = 0
+for one in resp.json()["data"]:
+    total += one["read_count"]
+
+item = {
+    "total": total,
+    "average": total//len(resp.json()["data"])
+}
+# 9-1请问：
+# 这一页帖子的总阅读量（列表页右侧的数字）是多少？
+print("总阅读量和平均阅读量:{}".format(item))
+
+
+# 9-2请问：
+# 第7个帖子（以1为起始）的HTML中id为content的部分中一共有多少个img标签？  0个
+artical_url = "http://js-crack-course-9-1.crawler-lab.com/detail/{}?key={}&time={}&sign={}"
+resp2 = requests.get(url=artical_url.format(resp.json()["data"][6]["id"], param["key"], param["time"], param["sign"]), cookies=cookie)
+print("计算“br”:{}".format(resp2.json()["data"]["content"].count("br")))
+
+
+# 请问：
+# 第5个帖子（以1为起始）的HTML中id为content的部分中一共有多少个数字2？ 0
+resp3 = requests.get(url=artical_url.format(resp.json()["data"][4]["id"], param["key"], param["time"], param["sign"]), cookies=cookie)
+print("计算“数字2”:{}".format(resp3.json()["data"]["content"].count("2")))
+
+
+# 请问：
+# 这一页的所有帖子的内容中（不含列表页）一共提到了多少次“夜幕团队”？475
+count_yemu = 0
+for i in resp.json()["data"]:
+    resp4 = requests.get(
+        url=artical_url.format(i["id"], param["key"], param["time"], param["sign"]),
+        cookies=cookie)
+    count_yemu += resp4.json()["data"]["content"].count("夜幕团队")
+print("计算“夜幕团队”:{}".format(count_yemu))
+
