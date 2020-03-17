@@ -340,6 +340,23 @@ function getparam() {
     };
     return param
 };
+
+
+function getparam_eval() {
+    "use strict";
+    var base64 = new Base64();
+    var key = uuid();
+    var time = (Math.floor((new Date().getTime() + 10010) / 99)).toString();
+    console.log(key, time);
+    //var sign = md5(key + base64.encode(time) + 'xianyucoder11');
+    var sign = window.md5(key + base64.encode(time) + 'xianyucoder11');
+    var param = {
+        "key": key,
+        "time": time,
+        "sign": sign
+    };
+    return param
+};
 """
 
 ctx = execjs.compile(js_code)
@@ -351,48 +368,75 @@ url = "http://js-crack-course-9-1.crawler-lab.com/list?key={}&time={}&sign={}"
 
 cookie = {
     "__cfduid": "dc05606102aea5dd71eff872a130050691583766709",
-    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQyNTU2OTcsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ.QMYVl-_sua-TysK1XmpOui1LXi82pXLEEUI7Ifn072A",
+    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQ0NjEyNTIsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ._Dc0sQ_xke6ZiWpFSDRqBJT_nL9l3Z5jzBGeHWa6HmI",
 
 }
+artical_url = "http://js-crack-course-9-1.crawler-lab.com/detail/{}?key={}&time={}&sign={}"
 
 resp = requests.get(url=url.format(param["key"], param["time"], param["sign"]), cookies=cookie)
 
-print(resp.text)
 
-total = 0
-average = 0
-for one in resp.json()["data"]:
-    total += one["read_count"]
-
-item = {
-    "total": total,
-    "average": total//len(resp.json()["data"])
-}
 # 9-1请问：
 # 这一页帖子的总阅读量（列表页右侧的数字）是多少？
-print("总阅读量和平均阅读量:{}".format(item))
+def read_total_9_1():
+    print(resp.text)
+    total = 0
+    average = 0
+    for one in resp.json()["data"]:
+        total += one["read_count"]
+
+    item = {
+        "total": total,
+        "average": total // len(resp.json()["data"])
+    }
+    print("总阅读量和平均阅读量:{}".format(item))
 
 
 # 9-2请问：
 # 第7个帖子（以1为起始）的HTML中id为content的部分中一共有多少个img标签？  0个
-artical_url = "http://js-crack-course-9-1.crawler-lab.com/detail/{}?key={}&time={}&sign={}"
-resp2 = requests.get(url=artical_url.format(resp.json()["data"][6]["id"], param["key"], param["time"], param["sign"]), cookies=cookie)
-print("计算“br”:{}".format(resp2.json()["data"]["content"].count("br")))
+def count_img():
+    resp2 = requests.get(
+        url=artical_url.format(resp.json()["data"][6]["id"], param["key"], param["time"], param["sign"]),
+        cookies=cookie)
+    print("计算“br”:{}".format(resp2.json()["data"]["content"].count("br")))
 
 
 # 请问：
 # 第5个帖子（以1为起始）的HTML中id为content的部分中一共有多少个数字2？ 0
-resp3 = requests.get(url=artical_url.format(resp.json()["data"][4]["id"], param["key"], param["time"], param["sign"]), cookies=cookie)
-print("计算“数字2”:{}".format(resp3.json()["data"]["content"].count("2")))
+def count_num_2():
+    resp3 = requests.get(
+        url=artical_url.format(resp.json()["data"][4]["id"], param["key"], param["time"], param["sign"]),
+        cookies=cookie)
+    print("计算“数字2”:{}".format(resp3.json()["data"]["content"].count("2")))
 
 
 # 请问：
 # 这一页的所有帖子的内容中（不含列表页）一共提到了多少次“夜幕团队”？475
-count_yemu = 0
-for i in resp.json()["data"]:
-    resp4 = requests.get(
-        url=artical_url.format(i["id"], param["key"], param["time"], param["sign"]),
-        cookies=cookie)
-    count_yemu += resp4.json()["data"]["content"].count("夜幕团队")
-print("计算“夜幕团队”:{}".format(count_yemu))
+def count_yemu():
+    count_yemu = 0
+    for i in resp.json()["data"]:
+        resp4 = requests.get(
+            url=artical_url.format(i["id"], param["key"], param["time"], param["sign"]),
+            cookies=cookie)
+        count_yemu += resp4.json()["data"]["content"].count("夜幕团队")
+    print("计算“夜幕团队”:{}".format(count_yemu))
+
+
+# 9-5请问：  eval func
+# 这一页帖子的总阅读量（列表页右侧的数字）是多少？
+def read_total_9_5():
+    artical_url = "http://js-crack-course-9-4.crawler-lab.com/list?key={}&time={}&sign={}"
+    total = 0
+    param = ctx.call("getparam_eval")
+    print(param)
+    resp5 = requests.get(url=artical_url.format(param["key"], param["time"], param["sign"]), cookies=cookie)
+    print(resp5.text)
+    for i in resp5.json()["data"]:
+        total += i["read_count"]
+    print("计算“总阅读量”:{}".format(total))
+
+
+if __name__ == '__main__':
+    read_total_9_5()
+    pass
 

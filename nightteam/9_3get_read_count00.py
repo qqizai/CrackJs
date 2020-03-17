@@ -341,7 +341,7 @@ sign = hashlib.sha1(tmp_str.encode()).hexdigest()
 
 cookie = {
     "__cfduid": "dc05606102aea5dd71eff872a130050691583766709",
-    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQyNDMzMjMsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ.8bgaorazG8AgJUpmVKEWIIiuln5wR4Psik8LzIAKmbo",
+    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQ0NjExODcsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ.22HvBlQ15nWEQ40sgwZ5BbUF9xBUrmEpFX_98eLLRBY",
 
 }
 
