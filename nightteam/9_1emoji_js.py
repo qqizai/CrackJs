@@ -395,12 +395,10 @@ def login():
         cookie.update(_resp1.cookies.get_dict())
         sess.headers.update(header)
         _resp2 = sess.post(url=login_url, data=json.dumps(l_data))  # , headers=header, allow_redirects=False
-        print(_resp2.text, _resp2.status_code)
         cookie.update({"crawlerlab_token": _resp2.json()["data"]})
-        print(cookie)
         print("自动登录成功")
     except:
-        raise ValueError("登录失败")
+        raise ValueError("自动登录失败")
 
 
 login()
@@ -478,7 +476,7 @@ def crack_12():
     global cookie
     list_url = "http://js-crack-course-12-1.crawler-lab.com/list"
     _resp = requests.get(url=list_url, cookies=cookie)
-    print(_resp.text)
+    print(_resp.text)  # {"status":0,"anti_spider":"/medium?ts=1584978741536"}
     pass
 
 

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="56ecf122-7a17-4c3b-a3a8-469098cdb664" name="Default Changelist" comment="first commit">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nightteam/9_1emoji_js.py" beforeDir="false" afterPath="$PROJECT_DIR$/nightteam/9_1emoji_js.py" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -39,7 +37,7 @@
         <counts>
           <entry key="Fuction eval" value="1" />
           <entry key="cookie" value="1" />
-          <entry key="gitignore" value="2" />
+          <entry key="gitignore" value="3" />
           <entry key="js" value="2" />
           <entry key="json" value="1" />
           <entry key="mp4" value="1" />
@@ -52,7 +50,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JavaScript" value="2" />
-          <entry key="PLAIN_TEXT" value="9" />
+          <entry key="PLAIN_TEXT" value="10" />
           <entry key="Python" value="18" />
         </counts>
       </usages-collector>
@@ -60,14 +58,14 @@
         <counts>
           <entry key="gitignore" value="18" />
           <entry key="js" value="76" />
-          <entry key="py" value="1717" />
+          <entry key="py" value="1723" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JavaScript" value="76" />
           <entry key="PLAIN_TEXT" value="18" />
-          <entry key="Python" value="1717" />
+          <entry key="Python" value="1723" />
         </counts>
       </usages-collector>
     </session>
@@ -89,28 +87,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nightteam/9_1emoji_js.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="481" selection-start-line="481" selection-end-line="481" />
+            <state relative-caret-position="127">
+              <caret line="484" column="14" lean-forward="true" selection-start-line="484" selection-start-column="14" selection-end-line="484" selection-end-column="14" />
               <folding>
                 <element signature="e#485#500#0" expanded="true" />
                 <element signature="e#555#15741#0" />
                 <element signature="e#18947#18956#1" />
-                <marker date="1584978756562" expanded="true" signature="16619:17333" ph="..." />
-                <marker date="1584978756562" expanded="true" signature="17390:17652" ph="..." />
-                <marker date="1584978756562" expanded="true" signature="17728:17962" ph="..." />
-                <marker date="1584978756562" expanded="true" signature="18033:18267" ph="..." />
-                <marker date="1584978756562" expanded="true" signature="18330:18645" ph="..." />
-                <marker date="1584978756562" expanded="true" signature="19129:19467" ph="..." />
+                <marker date="1584978828726" expanded="true" signature="16619:17266" ph="..." />
+                <marker date="1584978828726" expanded="true" signature="17323:17585" ph="..." />
+                <marker date="1584978828726" expanded="true" signature="17661:17895" ph="..." />
+                <marker date="1584978828726" expanded="true" signature="17966:18200" ph="..." />
+                <marker date="1584978828726" expanded="true" signature="18263:18578" ph="..." />
+                <marker date="1584978828726" expanded="true" signature="19062:19457" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nightteam/pwd.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -846,13 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nightteam/12_crack.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
@@ -873,6 +855,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="8" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nightteam/pwd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -882,18 +871,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nightteam/9_1emoji_js.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="481" selection-start-line="481" selection-end-line="481" />
+        <state relative-caret-position="127">
+          <caret line="484" column="14" lean-forward="true" selection-start-line="484" selection-start-column="14" selection-end-line="484" selection-end-column="14" />
           <folding>
             <element signature="e#485#500#0" expanded="true" />
             <element signature="e#555#15741#0" />
             <element signature="e#18947#18956#1" />
-            <marker date="1584978756562" expanded="true" signature="16619:17333" ph="..." />
-            <marker date="1584978756562" expanded="true" signature="17390:17652" ph="..." />
-            <marker date="1584978756562" expanded="true" signature="17728:17962" ph="..." />
-            <marker date="1584978756562" expanded="true" signature="18033:18267" ph="..." />
-            <marker date="1584978756562" expanded="true" signature="18330:18645" ph="..." />
-            <marker date="1584978756562" expanded="true" signature="19129:19467" ph="..." />
+            <marker date="1584978828726" expanded="true" signature="16619:17266" ph="..." />
+            <marker date="1584978828726" expanded="true" signature="17323:17585" ph="..." />
+            <marker date="1584978828726" expanded="true" signature="17661:17895" ph="..." />
+            <marker date="1584978828726" expanded="true" signature="17966:18200" ph="..." />
+            <marker date="1584978828726" expanded="true" signature="18263:18578" ph="..." />
+            <marker date="1584978828726" expanded="true" signature="19062:19457" ph="..." />
           </folding>
         </state>
       </provider>
