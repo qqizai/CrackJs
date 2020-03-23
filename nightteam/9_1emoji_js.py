@@ -21,7 +21,10 @@
 
 import requests
 import execjs
+import json
 from scrapy import Selector
+
+from nightteam.pwd import l_data
 
 
 js_code = """
@@ -366,13 +369,43 @@ url = "http://js-crack-course-9-1.crawler-lab.com/list?key={}&time={}&sign={}"
 # url = "http://js-crack-course-9-3.crawler-lab.com/list?key={}&time={}&sign={}"
 # url = "http://js-crack-course-9-2.crawler-lab.com/list?key={}&time={}&sign={}"
 
+header = {
+    "Host": "api.crawler-lab.com",
+    "Origin": "http://www.crawler-lab.com/",
+    "Referer": "http://www.crawler-lab.com/",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Content-Type": "application/json",
+}
+
+
 cookie = {
-    "__cfduid": "dc05606102aea5dd71eff872a130050691583766709",
-    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQ0NjEyNTIsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ._Dc0sQ_xke6ZiWpFSDRqBJT_nL9l3Z5jzBGeHWa6HmI",
+    "__cfduid": "",
+    # "crawlerlab_token": "",
 
 }
-artical_url = "http://js-crack-course-9-1.crawler-lab.com/detail/{}?key={}&time={}&sign={}"
 
+
+def login():
+    global cookie, header
+    login_url = "http://api.crawler-lab.com/v1/login"
+    try:
+        sess = requests.session()
+        _resp1 = sess.options(url=login_url, data=json.dumps(l_data))
+        cookie.update(_resp1.cookies.get_dict())
+        sess.headers.update(header)
+        _resp2 = sess.post(url=login_url, data=json.dumps(l_data))  # , headers=header, allow_redirects=False
+        print(_resp2.text, _resp2.status_code)
+        cookie.update({"crawlerlab_token": _resp2.json()["data"]})
+        print(cookie)
+        print("自动登录成功")
+    except:
+        raise ValueError("登录失败")
+
+
+login()
+
+artical_url = "http://js-crack-course-9-1.crawler-lab.com/detail/{}?key={}&time={}&sign={}"
 resp = requests.get(url=url.format(param["key"], param["time"], param["sign"]), cookies=cookie)
 
 
@@ -436,7 +469,62 @@ def read_total_9_5():
     print("计算“总阅读量”:{}".format(total))
 
 
-if __name__ == '__main__':
-    read_total_9_5()
+def crack_12():
+    """desc: 反爬思路：服务器通过检测是否为模拟器等，不是的话设置cookie，
+    然后通过返回一个中间人链接，再看看这个返回的状态是否成功，而判断得出的，
+
+    考点：这里当你在浏览器中进行debugger的时候，时间戳已经失效了，所以服务器会认为有人在搞事情，所以返回的status=0
+    """
+    global cookie
+    list_url = "http://js-crack-course-12-1.crawler-lab.com/list"
+    _resp = requests.get(url=list_url, cookies=cookie)
+    print(_resp.text)
     pass
 
+
+if __name__ == '__main__':
+    # read_total_9_5()
+    crack_12()
+    pass
+
+"""
+function anonymous() {
+    var nt0 = '772f34c7919c588750e0188f591d44a0';
+    var nt1 = '77ea177fdb1cbcaca6861746f0f32c30';
+    var nt2 = 'b0f462c457fe8dd37c6fb4919cc32235';
+    var nt3 = '664f34cc0aa75122be2c003b028f360d';
+    var nt4 = 'a0ffccd6ec25f3b1ccf96e1a119c98cf';
+    var nt5 = '379e1da9968a60857292d40751000fdb';
+    var nt6 = '6a959aace276a614bf2738f7ef4b25ac';
+    var nt7 = '0d074dc231efeb5418612e34f1ae5017';
+    var nt8 = 'f927cd5d68cd35c2f9ffd48a53ba78bc';
+    var nt9 = 'b73777942209e27cad55f92eaeedc82f';
+    (function () {
+        document.cookie = 'NIGHTTEAM=31353834393731343739323738';
+        document.cookie = 'NIGHTTEAM_ID=e5d1ef4adb72d22a618d9aa329919619';
+        document.cookie = 'NIGHTTEAM_SIGN=cc77e4c3b2b73822850511f0a9e4a468';
+        document.cookie = 'NIGHTTEAM_TOKEN=018ff92d599720fead773589ffdc0984';
+        if (window.atob) {
+            document.cookie = 'NIGHTTEAM_WINDOW=' + nt2
+        }
+        if ("undefined" != typeof screen && screen.width && screen.height) {
+            document.cookie = 'NIGHTTEAM_UNIT=' + nt5
+        }
+        var switch_flag = true;
+
+        function get_range_value(s) {
+            var new_str = s.substring(20, 32) + "nightteam" + s.substring(0, 16) +
+                "abcdefghijklmnopqrstuvwxyz0123456789";
+            return new_str.substr(0, 32);
+        }
+        if ("undefined" == typeof navigator || navigator.userAgent === void 0 || navigator.userAgent.match(
+                "HeadlessChrome") || navigator.userAgent.match("PhantomJS")) {
+            switch_flag = false;
+        }
+        if (switch_flag) {
+            document.cookie = 'NIGHTTEAM_SWITCH=' + get_range_value(nt4);
+        }
+    })();
+    window.location.href = document.referrer;
+}
+"""
