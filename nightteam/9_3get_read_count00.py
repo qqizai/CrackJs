@@ -1,20 +1,21 @@
-// [][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!+[] +
-// !+[] + !+[]] + (!![] + [])[+!+[]]][([][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]] +
-// (!![] + [])[+[]] + (!![] + [])[!+[] + !+[] + !+[]] + (!![] + [])[+!+[]]] + [])[!+[] + !+[] + !+[]] + (!![] + []
-//     [(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!
-//     +[] + !+[] + !+[]] + (!![] + [])[+!+[]]])[+!+[] + [+[]]] + ([][[]] + [])[+!+[]] + (![] + [])[!+[] + !+[] +
-// !+[]] + (!![] + [])[+[]] + (!![] + [])[+!+[]] + ([][[]] + [])[+[]] + ([][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] +
-//     [+[]]] + (![] + [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!+[] + !+[] + !+[]] + (!![] + [])[+!+[]]] +
-//     [])[!+[] + !+[] + !+[]] + (!![] + [])[+[]] + (!![] + [][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] +
-//     [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!+[] + !+[] + !+[]] + (!![] + [])[+!+[]]])[+!+[] + [+[]]] + (
-//     !![] + [])[+!+[]]]()()
-// var CryptoJS = require("C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js");
-// var crypto = require('crypto');
-// var md5 = crypto.createHash("md5");
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time     : 2020/3/9 17:37
+# @Author   : qizai
+# @File     : get_read_count.py
+# @Software : PyCharm
+"""计算总的阅读数or平均数
+desc: 下面的md5是被修改过的；base64编解码也是被改过的，所以不能使用原生的md5/base64库"""
+
+import math
+import time
+import execjs
+import base64
+import hashlib
+import requests
 
 
-<<<<<<< HEAD
-=======
+js_code = """
 navigator = {
     appCodeName: "Mozilla",
     appMinorVersion: "0",
@@ -41,7 +42,6 @@ navigator = {
 }, window = this, window.navigator = navigator;
 
 
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 ! function () {
     "use strict";
 
@@ -51,13 +51,6 @@ navigator = {
             this.h0 = 1732584193, this.h1 = 4023233417, this.h2 = 2562383102, this.h3 = 271733878, this.h4 = 3285377520,
             this.block = this.start = this.bytes = this.hBytes = 0, this.finalized = this.hashed = !1, this.first = !0
     }
-<<<<<<< HEAD
-    var h = "object" == typeof window ? window : {},
-        s = !h.JS_SHA1_NO_NODE_JS && "object" == typeof process && process.versions && process.versions.node;
-    s && (h = global);
-    var i = !h.JS_SHA1_NO_COMMON_JS && "object" == typeof module && module.exports,
-        e = "function" == typeof define && define.amd,
-=======
     var h = window,
         // s = !h.JS_SHA1_NO_NODE_JS && "object" == typeof process && process.versions && process.versions.node;
         s = false;
@@ -66,7 +59,6 @@ navigator = {
     var i = false,
         // e = "function" == typeof define && define.amd,
         e = false,
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         r = "0123456789abcdef".split(""),
         o = [-2147483648, 8388608, 32768, 128],
         n = [24, 16, 8, 0],
@@ -91,13 +83,8 @@ navigator = {
             return h
         },
         p = function (t) {
-<<<<<<< HEAD
-            var h = eval("require('crypto')"),
-=======
-        //require("C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js")
         //     var h = eval("require('crypto')"),
-            var h = eval("require(\"C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js\")"),
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
+            var h = eval("require('C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js')"),
                 s = eval("require('buffer').Buffer"),
                 i = function (i) {
                     if ("string" == typeof i) return h.createHash("sha1").update(i, "utf8").digest("hex");
@@ -247,11 +234,6 @@ function Base64() {
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
         var i = 0;
-<<<<<<< HEAD
-        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-=======
-        // input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         while (i < input.length) {
             enc1 = _keyStr.indexOf(input.charAt(i++));
             enc2 = _keyStr.indexOf(input.charAt(i++));
@@ -274,11 +256,6 @@ function Base64() {
 
     // private method for UTF-8 encoding
     _utf8_encode = function (string) {
-<<<<<<< HEAD
-        string = string.replace(/\r\n/g,"\n");
-=======
-        // string = string.replace(/\r\n/g,"\n");
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         var utftext = "";
         for (var n = 0; n < string.length; n++) {
             var c = string.charCodeAt(n);
@@ -321,10 +298,7 @@ function Base64() {
         return string;
     };
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 function uuid() {
     var s = [];
     var hexDigits = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -338,32 +312,61 @@ function uuid() {
     return uuid;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 function getparam() {
     "use strict";
-    let base64 = new Base64();
-    let key = uuid();
+    var base64 = new Base64();
+    var key = uuid();
     console.log(new Date().getTime());
-    let time = (Math.floor((new Date().getTime() + 10010) / 99)).toString();
-<<<<<<< HEAD
-    let sign = md5(key + base64.encode(time) + 'xianyuplus');
-=======
-    let sign = window.md5(key + base64.encode(time) + 'xianyuplus');
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
-    let param = {
+    var time = (Math.floor((new Date().getTime() + 10010) / 99)).toString();
+    var sign = window.md5(key + base64.encode(time) + 'xianyuplus');
+    var param = {
         "key": key,
         "time": time,
         "sign": sign
     };
     return param
 };
-
-
 var result = getparam();
-
 console.log(result);
+"""
+
+url = "http://js-crack-course-9-3.crawler-lab.com/list?key={}&time={}&sign={}"
+# url = "http://js-crack-course-9-2.crawler-lab.com/list?key={}&time={}&sign={}"
+t = str(float((int(time.time()*1000)+10010)/99))
+ctx = execjs.compile(js_code)
+parm = ctx.call("getparam")
+uuid = ctx.call("uuid")
+tmp_str = "{}{}xianyuplus".format(uuid, base64.b64encode(t.encode()))
+sign = hashlib.sha1(tmp_str.encode()).hexdigest()
+
+cookie = {
+    "__cfduid": "dc05606102aea5dd71eff872a130050691583766709",
+    "crawlerlab_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODQ0NjExODcsImlkIjoxMjkzLCJuYW1lIjoiMTU2Mjc1MTI4NDAifQ.22HvBlQ15nWEQ40sgwZ5BbUF9xBUrmEpFX_98eLLRBY",
+
+}
+
+resp = requests.get(url=url.format(parm["key"], parm["time"], parm["sign"]), cookies=cookie)
+
+print("befor modify md5:{}".format(sign))
+print("affter modified md5:{}".format(parm["sign"]))
+print(resp.text)
+
+total = 0
+average = 0
+for one in resp.json()["data"]:
+    total += one["read_count"]
+
+item = {
+    "total": total,
+    "average": total//len(resp.json()["data"])
+}
+
+print(item)
+print(len(resp.json()["data"]))
+
+# befor modify md5:c574f0d0f57e235971540634b947e5826161bfdc
+# affter modified md5:ec653a4c9962493458deecddae17d3088f5eb69a
+# {"status":1,"data":[{"id":"2139","avatar_img":"asserts/img/avatar.png","title":"【已完结】500rmb 逆向某红书app sign、shield 参数12113","username":"zPBmTUJ7","read_count":16770},{"id":"18988","avatar_img":"asserts/img/avatar.png","title":"requests报错requests.exceptions.ConnectionError15775","username":"tf5cDZRy","read_count":81100},{"id":"17594","avatar_img":"asserts/img/avatar.png","title":"某电商平台H5页面的js12366","username":"agu4fyC7","read_count":40645},{"id":"12234","avatar_img":"asserts/img/avatar.png","title":"分析一个app的请求参数2205","username":"34yeRzN2","read_count":7031},{"id":"14490","avatar_img":"asserts/img/avatar.png","title":"论坛里某大佬的每周更新JS的GitHub上包括并不包含的JS逆向视频12912","username":"yAHeCUQ2","read_count":91},{"id":"18841","avatar_img":"asserts/img/avatar.png","title":"**bA0 6.1.1 hook9870","username":"gymj076E","read_count":85879},{"id":"808","avatar_img":"asserts/img/avatar.png","title":"requests报错requests.exceptions.ConnectionError19847","username":"VsJck1BY","read_count":93508},{"id":"2447","avatar_img":"asserts/img/avatar.png","title":"招聘高级爬虫工程师！Base北京！19933","username":"udNMWQ8c","read_count":8213},{"id":"3291","avatar_img":"asserts/img/avatar.png","title":"3000 寻求C++高手 某APP协议登录4424","username":"QuiEFM2x","read_count":30909},{"id":"13268","avatar_img":"asserts/img/avatar.png","title":"Selenium在百度搜索关键词然后把对应的标题跟对应的链接取出来15582","username":"z0q8gGwa","read_count":72666},{"id":"17812","avatar_img":"asserts/img/avatar.png","title":"【已完结】500rmb 逆向某红书app sign、shield 参数6579","username":"7MrNzwFa","read_count":68336},{"id":"12307","avatar_img":"asserts/img/avatar.png","title":"夜幕爬虫安全论坛总版规17550","username":"FfqWG2Xw","read_count":81389},{"id":"2151","avatar_img":"asserts/img/avatar.png","title":"碰到的体力活 *json.v51191","username":"O3CxJGtl","read_count":80778},{"id":"166","avatar_img":"asserts/img/avatar.png","title":"关于selenium用多线程多开窗口的问题13065","username":"l6PuGaom","read_count":44257},{"id":"1788","avatar_img":"asserts/img/avatar.png","title":"【已完结】500rmb 逆向某红书app sign、shield 参数875","username":"U0QJ47cT","read_count":62538},{"id":"6214","avatar_img":"asserts/img/avatar.png","title":"【已完结】某app登录以及其他操作的加密参数16503","username":"zZ3xs2lV","read_count":90539},{"id":"5961","avatar_img":"asserts/img/avatar.png","title":"【已完结】某app登录以及其他操作的加密参数958","username":"qSKh8rje","read_count":97982},{"id":"14225","avatar_img":"asserts/img/avatar.png","title":"sougou验证码样本15439","username":"8b3n1rpa","read_count":21702},{"id":"1143","avatar_img":"asserts/img/avatar.png","title":"分析一个app的请求参数11384","username":"4WJ2bdV0","read_count":12855},{"id":"19067","avatar_img":"asserts/img/avatar.png","title":"**bA0 6.1.1 hook19407","username":"fL4bWU5p","read_count":33232},{"id":"12710","avatar_img":"asserts/img/avatar.png","title":"关于selenium用多线程多开窗口的问题9164","username":"g4iBQyLJ","read_count":45738},{"id":"19386","avatar_img":"asserts/img/avatar.png","title":"论坛里某大佬的每周更新JS的GitHub上包括并不包含的JS逆向视频2366","username":"ZCjPqicH","read_count":32359},{"id":"1615","avatar_img":"asserts/img/avatar.png","title":"requests报错requests.exceptions.ConnectionError5890","username":"oQmLCB3w","read_count":13091},{"id":"2105","avatar_img":"asserts/img/avatar.png","title":"求问，scrapy使用代理 超时报错的问题6420","username":"AiN5eUhB","read_count":59855},{"id":"6852","avatar_img":"asserts/img/avatar.png","title":"为什么每一个爬虫工程师都应该学习 Kafka7202","username":"ajiqJcpv","read_count":17464},{"id":"15312","avatar_img":"asserts/img/avatar.png","title":"这棒子网站到底检查什么？！求助！17224","username":"ntpiyl8N","read_count":67309},{"id":"10797","avatar_img":"asserts/img/avatar.png","title":"【Android逆向】某电竞社交app9727","username":"iW603Fq1","read_count":26893},{"id":"16541","avatar_img":"asserts/img/avatar.png","title":"【Android逆向】某电商社区app14720","username":"Kbckp3OE","read_count":516},{"id":"10631","avatar_img":"asserts/img/avatar.png","title":"碰到的体力活 *json.v511304","username":"9sGOI5uF","read_count":91827},{"id":"3331","avatar_img":"asserts/img/avatar.png","title":"某电商平台H5页面的js14468","username":"TMiGJyo4","read_count":78329}]}
+# {'total': 1463801, 'average': 48793}
 
 

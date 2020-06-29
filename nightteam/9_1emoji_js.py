@@ -1,20 +1,34 @@
-// [][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!+[] +
-// !+[] + !+[]] + (!![] + [])[+!+[]]][([][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]] +
-// (!![] + [])[+[]] + (!![] + [])[!+[] + !+[] + !+[]] + (!![] + [])[+!+[]]] + [])[!+[] + !+[] + !+[]] + (!![] + []
-//     [(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!
-//     +[] + !+[] + !+[]] + (!![] + [])[+!+[]]])[+!+[] + [+[]]] + ([][[]] + [])[+!+[]] + (![] + [])[!+[] + !+[] +
-// !+[]] + (!![] + [])[+[]] + (!![] + [])[+!+[]] + ([][[]] + [])[+[]] + ([][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] +
-//     [+[]]] + (![] + [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!+[] + !+[] + !+[]] + (!![] + [])[+!+[]]] +
-//     [])[!+[] + !+[] + !+[]] + (!![] + [])[+[]] + (!![] + [][(![] + [])[+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] +
-//     [])[!+[] + !+[]] + (!![] + [])[+[]] + (!![] + [])[!+[] + !+[] + !+[]] + (!![] + [])[+!+[]]])[+!+[] + [+[]]] + (
-//     !![] + [])[+!+[]]]()()
-// var CryptoJS = require("C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js");
-// var crypto = require('crypto');
-// var md5 = crypto.createHash("md5");
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# @Time    : 2020/3/15 11:30
+# @Author  : qizai
+# @File    : emoji_js.py
+# @Software: PyCharm
+"""desc: 考点是考验颜文字对JavaScript的混淆还原
+
+解决方案：
+    1、直接通过查看xhr断点，查看那个接口的堆栈调用来源，直接查看最后一个，发现是属于颜文字加密；
+        那么继续往下一个堆栈调用点进行查看，这回发现是没有加密的代码，然后直接扣出来即可.
+    2、直接复制颜文字加密混淆代码，在控制台粘贴，然后删除最后一个表情 “('_');” 然后回车，即可。
+        或者直接删除这个表情后，使用 “toString()” 方法，就可以看到代码转换为明文字符串了。
+
+9-1请问：
+这一页帖子的总阅读量（列表页右侧的数字）是多少？
+
+9-2请问：
+第7个帖子（以1为起始）的HTML中id为content的部分中一共有多少个img标签？
+"""
+
+import requests
+import execjs
+import json
+from scrapy import Selector
+
+from nightteam.pwd import l_data
 
 
-<<<<<<< HEAD
-=======
+js_code = """
+//定义navigator、window全局变量
 navigator = {
     appCodeName: "Mozilla",
     appMinorVersion: "0",
@@ -40,8 +54,7 @@ navigator = {
     webdriver: false
 }, window = this, window.navigator = navigator;
 
-
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
+//网站自定义的md5函数
 ! function () {
     "use strict";
 
@@ -51,22 +64,18 @@ navigator = {
             this.h0 = 1732584193, this.h1 = 4023233417, this.h2 = 2562383102, this.h3 = 271733878, this.h4 = 3285377520,
             this.block = this.start = this.bytes = this.hBytes = 0, this.finalized = this.hashed = !1, this.first = !0
     }
-<<<<<<< HEAD
-    var h = "object" == typeof window ? window : {},
-        s = !h.JS_SHA1_NO_NODE_JS && "object" == typeof process && process.versions && process.versions.node;
-    s && (h = global);
-    var i = !h.JS_SHA1_NO_COMMON_JS && "object" == typeof module && module.exports,
-        e = "function" == typeof define && define.amd,
-=======
+    // var h = "object" == typeof window ? window : {},
     var h = window,
+        //对比发现这里永远都是false
         // s = !h.JS_SHA1_NO_NODE_JS && "object" == typeof process && process.versions && process.versions.node;
         s = false;
     s && (h = global);
+    //对比发现这里永远都是false
     // var i = !h.JS_SHA1_NO_COMMON_JS && "object" == typeof module && module.exports,
     var i = false,
+        //对比发现这里永远都是false
         // e = "function" == typeof define && define.amd,
         e = false,
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         r = "0123456789abcdef".split(""),
         o = [-2147483648, 8388608, 32768, 128],
         n = [24, 16, 8, 0],
@@ -91,13 +100,8 @@ navigator = {
             return h
         },
         p = function (t) {
-<<<<<<< HEAD
-            var h = eval("require('crypto')"),
-=======
-        //require("C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js")
-        //     var h = eval("require('crypto')"),
-            var h = eval("require(\"C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js\")"),
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
+            // var h = eval("require('crypto')"),
+            var h = eval("require('D:/python3爬虫视频/JS逆向例子/luosimao/node_modules/crypto-js/crypto-js.js')"),
                 s = eval("require('buffer').Buffer"),
                 i = function (i) {
                     if ("string" == typeof i) return h.createHash("sha1").update(i, "utf8").digest("hex");
@@ -211,7 +215,6 @@ navigator = {
     }))
 }();
 
-
 function Base64() {
     // private property
     _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
@@ -247,11 +250,7 @@ function Base64() {
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
         var i = 0;
-<<<<<<< HEAD
         input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-=======
-        // input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         while (i < input.length) {
             enc1 = _keyStr.indexOf(input.charAt(i++));
             enc2 = _keyStr.indexOf(input.charAt(i++));
@@ -274,11 +273,6 @@ function Base64() {
 
     // private method for UTF-8 encoding
     _utf8_encode = function (string) {
-<<<<<<< HEAD
-        string = string.replace(/\r\n/g,"\n");
-=======
-        // string = string.replace(/\r\n/g,"\n");
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         var utftext = "";
         for (var n = 0; n < string.length; n++) {
             var c = string.charCodeAt(n);
@@ -321,10 +315,7 @@ function Base64() {
         return string;
     };
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 function uuid() {
     var s = [];
     var hexDigits = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -338,22 +329,14 @@ function uuid() {
     return uuid;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 function getparam() {
     "use strict";
-    let base64 = new Base64();
-    let key = uuid();
-    console.log(new Date().getTime());
-    let time = (Math.floor((new Date().getTime() + 10010) / 99)).toString();
-<<<<<<< HEAD
-    let sign = md5(key + base64.encode(time) + 'xianyuplus');
-=======
-    let sign = window.md5(key + base64.encode(time) + 'xianyuplus');
->>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
-    let param = {
+    var base64 = new Base64();
+    var key = uuid();
+    var time= (Math.floor(( new Date().getTime() + 10010) / 99)).toString();
+    //var sign = md5(key + base64.encode(time));
+    var sign = window.md5(key + base64.encode(time));
+    var param = {
         "key": key,
         "time": time,
         "sign": sign
@@ -362,8 +345,184 @@ function getparam() {
 };
 
 
-var result = getparam();
+function getparam_eval() {
+    "use strict";
+    var base64 = new Base64();
+    var key = uuid();
+    var time = (Math.floor((new Date().getTime() + 10010) / 99)).toString();
+    console.log(key, time);
+    //var sign = md5(key + base64.encode(time) + 'xianyucoder11');
+    var sign = window.md5(key + base64.encode(time) + 'xianyucoder11');
+    var param = {
+        "key": key,
+        "time": time,
+        "sign": sign
+    };
+    return param
+};
+"""
 
-console.log(result);
+ctx = execjs.compile(js_code)
+param = ctx.call("getparam")
+
+url = "http://js-crack-course-9-1.crawler-lab.com/list?key={}&time={}&sign={}"
+# url = "http://js-crack-course-9-3.crawler-lab.com/list?key={}&time={}&sign={}"
+# url = "http://js-crack-course-9-2.crawler-lab.com/list?key={}&time={}&sign={}"
+
+header = {
+    "Host": "api.crawler-lab.com",
+    "Origin": "http://www.crawler-lab.com/",
+    "Referer": "http://www.crawler-lab.com/",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36",
+    "Accept": "application/json, text/plain, */*",
+    "Content-Type": "application/json",
+}
 
 
+cookie = {
+    "__cfduid": "",
+    # "crawlerlab_token": "",
+
+}
+
+
+def login():
+    global cookie, header
+    login_url = "http://api.crawler-lab.com/v1/login"
+    try:
+        sess = requests.session()
+        _resp1 = sess.options(url=login_url, data=json.dumps(l_data))
+        cookie.update(_resp1.cookies.get_dict())
+        sess.headers.update(header)
+        _resp2 = sess.post(url=login_url, data=json.dumps(l_data))  # , headers=header, allow_redirects=False
+        cookie.update({"crawlerlab_token": _resp2.json()["data"]})
+        print("自动登录成功")
+    except:
+        raise ValueError("自动登录失败")
+
+
+login()
+
+artical_url = "http://js-crack-course-9-1.crawler-lab.com/detail/{}?key={}&time={}&sign={}"
+resp = requests.get(url=url.format(param["key"], param["time"], param["sign"]), cookies=cookie)
+
+
+# 9-1请问：
+# 这一页帖子的总阅读量（列表页右侧的数字）是多少？
+def read_total_9_1():
+    print(resp.text)
+    total = 0
+    average = 0
+    for one in resp.json()["data"]:
+        total += one["read_count"]
+
+    item = {
+        "total": total,
+        "average": total // len(resp.json()["data"])
+    }
+    print("总阅读量和平均阅读量:{}".format(item))
+
+
+# 9-2请问：
+# 第7个帖子（以1为起始）的HTML中id为content的部分中一共有多少个img标签？  0个
+def count_img():
+    resp2 = requests.get(
+        url=artical_url.format(resp.json()["data"][6]["id"], param["key"], param["time"], param["sign"]),
+        cookies=cookie)
+    print("计算“br”:{}".format(resp2.json()["data"]["content"].count("br")))
+
+
+# 请问：
+# 第5个帖子（以1为起始）的HTML中id为content的部分中一共有多少个数字2？ 0
+def count_num_2():
+    resp3 = requests.get(
+        url=artical_url.format(resp.json()["data"][4]["id"], param["key"], param["time"], param["sign"]),
+        cookies=cookie)
+    print("计算“数字2”:{}".format(resp3.json()["data"]["content"].count("2")))
+
+
+# 请问：
+# 这一页的所有帖子的内容中（不含列表页）一共提到了多少次“夜幕团队”？475
+def count_yemu():
+    count_yemu = 0
+    for i in resp.json()["data"]:
+        resp4 = requests.get(
+            url=artical_url.format(i["id"], param["key"], param["time"], param["sign"]),
+            cookies=cookie)
+        count_yemu += resp4.json()["data"]["content"].count("夜幕团队")
+    print("计算“夜幕团队”:{}".format(count_yemu))
+
+
+# 9-5请问：  eval func
+# 这一页帖子的总阅读量（列表页右侧的数字）是多少？
+def read_total_9_5():
+    artical_url = "http://js-crack-course-9-4.crawler-lab.com/list?key={}&time={}&sign={}"
+    total = 0
+    param = ctx.call("getparam_eval")
+    print(param)
+    resp5 = requests.get(url=artical_url.format(param["key"], param["time"], param["sign"]), cookies=cookie)
+    print(resp5.text)
+    for i in resp5.json()["data"]:
+        total += i["read_count"]
+    print("计算“总阅读量”:{}".format(total))
+
+
+def crack_12():
+    """desc: 反爬思路：服务器通过检测是否为模拟器等，不是的话设置cookie，
+    然后通过返回一个中间人链接，再看看这个返回的状态是否成功，而判断得出的，
+
+    考点：这里当你在浏览器中进行debugger的时候，时间戳已经失效了，所以服务器会认为有人在搞事情，所以返回的status=0
+    """
+    global cookie
+    list_url = "http://js-crack-course-12-1.crawler-lab.com/list"
+    _resp = requests.get(url=list_url, cookies=cookie)
+    print(_resp.text)  # {"status":0,"anti_spider":"/medium?ts=1584978741536"}
+    pass
+
+
+if __name__ == '__main__':
+    # read_total_9_5()
+    crack_12()
+    pass
+
+"""
+function anonymous() {
+    var nt0 = '772f34c7919c588750e0188f591d44a0';
+    var nt1 = '77ea177fdb1cbcaca6861746f0f32c30';
+    var nt2 = 'b0f462c457fe8dd37c6fb4919cc32235';
+    var nt3 = '664f34cc0aa75122be2c003b028f360d';
+    var nt4 = 'a0ffccd6ec25f3b1ccf96e1a119c98cf';
+    var nt5 = '379e1da9968a60857292d40751000fdb';
+    var nt6 = '6a959aace276a614bf2738f7ef4b25ac';
+    var nt7 = '0d074dc231efeb5418612e34f1ae5017';
+    var nt8 = 'f927cd5d68cd35c2f9ffd48a53ba78bc';
+    var nt9 = 'b73777942209e27cad55f92eaeedc82f';
+    (function () {
+        document.cookie = 'NIGHTTEAM=31353834393731343739323738';
+        document.cookie = 'NIGHTTEAM_ID=e5d1ef4adb72d22a618d9aa329919619';
+        document.cookie = 'NIGHTTEAM_SIGN=cc77e4c3b2b73822850511f0a9e4a468';
+        document.cookie = 'NIGHTTEAM_TOKEN=018ff92d599720fead773589ffdc0984';
+        if (window.atob) {
+            document.cookie = 'NIGHTTEAM_WINDOW=' + nt2
+        }
+        if ("undefined" != typeof screen && screen.width && screen.height) {
+            document.cookie = 'NIGHTTEAM_UNIT=' + nt5
+        }
+        var switch_flag = true;
+
+        function get_range_value(s) {
+            var new_str = s.substring(20, 32) + "nightteam" + s.substring(0, 16) +
+                "abcdefghijklmnopqrstuvwxyz0123456789";
+            return new_str.substr(0, 32);
+        }
+        if ("undefined" == typeof navigator || navigator.userAgent === void 0 || navigator.userAgent.match(
+                "HeadlessChrome") || navigator.userAgent.match("PhantomJS")) {
+            switch_flag = false;
+        }
+        if (switch_flag) {
+            document.cookie = 'NIGHTTEAM_SWITCH=' + get_range_value(nt4);
+        }
+    })();
+    window.location.href = document.referrer;
+}
+"""
