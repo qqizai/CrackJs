@@ -131,5 +131,11 @@ dmypy.json
 .pyre/
 
 
+# nodejs
+*node_modules*
+*package-lock.json*
+
 # ide items
 .idea
+.idea/
+
