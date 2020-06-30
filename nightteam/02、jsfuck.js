@@ -13,6 +13,8 @@
 // var md5 = crypto.createHash("md5");
 
 
+<<<<<<< HEAD
+=======
 navigator = {
     appCodeName: "Mozilla",
     appMinorVersion: "0",
@@ -39,6 +41,7 @@ navigator = {
 }, window = this, window.navigator = navigator;
 
 
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 ! function () {
     "use strict";
 
@@ -48,6 +51,13 @@ navigator = {
             this.h0 = 1732584193, this.h1 = 4023233417, this.h2 = 2562383102, this.h3 = 271733878, this.h4 = 3285377520,
             this.block = this.start = this.bytes = this.hBytes = 0, this.finalized = this.hashed = !1, this.first = !0
     }
+<<<<<<< HEAD
+    var h = "object" == typeof window ? window : {},
+        s = !h.JS_SHA1_NO_NODE_JS && "object" == typeof process && process.versions && process.versions.node;
+    s && (h = global);
+    var i = !h.JS_SHA1_NO_COMMON_JS && "object" == typeof module && module.exports,
+        e = "function" == typeof define && define.amd,
+=======
     var h = window,
         // s = !h.JS_SHA1_NO_NODE_JS && "object" == typeof process && process.versions && process.versions.node;
         s = false;
@@ -56,6 +66,7 @@ navigator = {
     var i = false,
         // e = "function" == typeof define && define.amd,
         e = false,
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         r = "0123456789abcdef".split(""),
         o = [-2147483648, 8388608, 32768, 128],
         n = [24, 16, 8, 0],
@@ -80,9 +91,13 @@ navigator = {
             return h
         },
         p = function (t) {
+<<<<<<< HEAD
+            var h = eval("require('crypto')"),
+=======
         //require("C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js")
         //     var h = eval("require('crypto')"),
             var h = eval("require(\"C:/Users/Administrator/AppData/Roaming/npm/node_modules/crypto-js\")"),
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
                 s = eval("require('buffer').Buffer"),
                 i = function (i) {
                     if ("string" == typeof i) return h.createHash("sha1").update(i, "utf8").digest("hex");
@@ -232,7 +247,11 @@ function Base64() {
         var chr1, chr2, chr3;
         var enc1, enc2, enc3, enc4;
         var i = 0;
+<<<<<<< HEAD
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+=======
         // input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         while (i < input.length) {
             enc1 = _keyStr.indexOf(input.charAt(i++));
             enc2 = _keyStr.indexOf(input.charAt(i++));
@@ -255,7 +274,11 @@ function Base64() {
 
     // private method for UTF-8 encoding
     _utf8_encode = function (string) {
+<<<<<<< HEAD
+        string = string.replace(/\r\n/g,"\n");
+=======
         // string = string.replace(/\r\n/g,"\n");
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
         var utftext = "";
         for (var n = 0; n < string.length; n++) {
             var c = string.charCodeAt(n);
@@ -298,7 +321,10 @@ function Base64() {
         return string;
     };
 };
+<<<<<<< HEAD
+=======
 
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 function uuid() {
     var s = [];
     var hexDigits = "0123456789abcdefghijklmnopqrstuvwxyz";
@@ -312,13 +338,21 @@ function uuid() {
     return uuid;
 }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
 function getparam() {
     "use strict";
     let base64 = new Base64();
     let key = uuid();
     console.log(new Date().getTime());
     let time = (Math.floor((new Date().getTime() + 10010) / 99)).toString();
+<<<<<<< HEAD
+    let sign = md5(key + base64.encode(time) + 'xianyuplus');
+=======
     let sign = window.md5(key + base64.encode(time) + 'xianyuplus');
+>>>>>>> f97068866266475884c99f4736c0d41e9cd3609e
     let param = {
         "key": key,
         "time": time,
