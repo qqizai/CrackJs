@@ -87,6 +87,7 @@
 import requests
 import hashlib
 import time
+import getpass
 
 """
 info:
@@ -119,7 +120,8 @@ def get_login(phone, pwd):
     # r = requests.post(url=url, data=data, headers=headers)
     session = requests.Session()
     r = session.post(url=url, data=data, headers=headers)
-    print(r.json())
+    print("login: {}".format(r.json()))
+    print("cookies: {}".format(r.cookies.get_dict()))
 
     url = "https://m.weibo.cn/comments/hotflow?id=4451505240900957&mid=4451505240900957&max_id_type=0"
     resp = session.get(cookies=r.cookies.get_dict(), url=url, headers=headers)
@@ -128,13 +130,14 @@ def get_login(phone, pwd):
 
 
 if __name__ == '__main__':
-    # phone = input("你输入你的账号:")
+    phone = input("你输入你的账号:")
     # 这里输入密码不可见
     # pwd = getpass.getpass("password:")
-    phone = "123@qq.com"
-    pwd = ""
+    pwd = input("password:")
+    # phone = "123@qq.com"
+    # pwd = ""
 
-    # get_login(phone, pwd)
+    get_login(phone, pwd)
 
 
 
