@@ -1,13 +1,16 @@
 # CrackJs
 记录一下js逆向的网站
 
-- [百度指数](https://github.com/qqizai/CrackJs/tree/master/baidu_index) ☆
+- [百du指数](https://github.com/qqizai/CrackJs/tree/master/baidu_index) ☆
 - [谷歌学术镜像网站](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
-- [刺猬猫小说](https://github.com/qqizai/CrackJs/tree/master/ciweimao) ☆☆
-- [阿里文学(同刺猬猫加解密思路一样)](https://github.com/qqizai/CrackJs/tree/master/aliwx) ☆
-- [微博登录](https://github.com/qqizai/CrackJs/tree/master/mweibo) ☆☆☆
-- [梦幻西游](https://github.com/qqizai/CrackJs/tree/master/wy_menghuanxiyou) ☆☆
-- [犀牛数据](https://github.com/qqizai/CrackJs/tree/master/xiniudata) ☆☆
+- [阿li文学(同刺猬猫加解密思路一样)](https://github.com/qqizai/CrackJs/tree/master/aliwx) ☆
+- [刺猬mao小说](https://github.com/qqizai/CrackJs/tree/master/ciweimao) ☆☆
+- [梦幻xi游](https://github.com/qqizai/CrackJs/tree/master/wy_menghuanxiyou) ☆☆
+- [犀niu数据](https://github.com/qqizai/CrackJs/tree/master/xiniudata) ☆☆
+- [微bo登录](https://github.com/qqizai/CrackJs/tree/master/mweibo) ☆☆☆
+- [ji验验证码w参数 - 2020.07.06(后续会继续更新ji验验证码)](https://github.com/qqizai/CrackJs/tree/master/geetest) ☆☆☆☆  
+    
+
 
 
 其他练习等脚本：
