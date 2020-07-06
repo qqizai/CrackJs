@@ -4,12 +4,14 @@
 - [百du指数](https://github.com/qqizai/CrackJs/tree/master/baidu_index) ☆
 - [谷歌学术镜像网站](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
 - [阿li文学(同刺猬猫加解密思路一样)](https://github.com/qqizai/CrackJs/tree/master/aliwx) ☆
+- [空气质量监测](https://github.com/qqizai/CrackJs/tree/master/aqistudy)
 - [刺猬mao小说](https://github.com/qqizai/CrackJs/tree/master/ciweimao) ☆☆
 - [梦幻xi游](https://github.com/qqizai/CrackJs/tree/master/wy_menghuanxiyou) ☆☆
 - [犀niu数据](https://github.com/qqizai/CrackJs/tree/master/xiniudata) ☆☆
+- [零度代理](https://github.com/qqizai/CrackJs/tree/master/lingdu_nyloner) ☆☆
 - [微bo登录](https://github.com/qqizai/CrackJs/tree/master/mweibo) ☆☆☆
 - [ji验验证码w参数 - 2020.07.06(后续会继续更新ji验验证码)](https://github.com/qqizai/CrackJs/tree/master/geetest) ☆☆☆☆  
-    
+- [glidesky相关爬虫练习题目](https://blog.csdn.net/weixin_41173374) 请查看CSDN文章，目前只发了少量的文章
 
 
 
