@@ -11,7 +11,7 @@ import logging
 import requests
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -29,7 +29,6 @@ class GeeTest(object):
         }
 
         self.sess = requests.Session()
-        pass
 
     def get_gt_challenge(self):
         url = "https://www.geetest.com/demo/gt/register-fullpage-official?t={}"
@@ -43,19 +42,67 @@ class GeeTest(object):
             self.gt = ""
             self.challenge = ""
             logger.critical("[GET gt/challenge failed, the resp is not a json.] resp content:{}".format(resp.text))
+        print("gt_challenge  gt: {}  challenge: {}".format(self.gt, self.challenge))
 
-    def get_w(self):
-        url = "https://api.geetest.com/ajax.php?gt={}&challenge={}&lang=zh-cn&pt=0&client_type=web&w={}&callback=geetest_1593416906604"
+    def get_token(self):
+        token = self.sess.get("http://127.0.0.1:8090/get_token")
+        print("token: {}".format(token.text))
+        return token.text
+
+    def get_type(self):
+        self.headers["host"] = "api.geetest.com"
+        url = "https://api.geetest.com/gettype.php?gt={}&callback=geetest_{}"
+        res = self.sess.get(url.format(self.gt, int(time.time()*1000)), headers=self.headers)
+        print("get_type: {}".format(res.text))
+
+    def get_n(self, token):
+        my_n = self.sess.post("http://127.0.0.1:8090/encrypt_n", data={"token": token})
+        my_n = my_n.text
+        return my_n
+
+    def get_o(self, token):
+        my_o = self.sess.post("http://127.0.0.1:8090/encrypt_o", data={"token": token, "gt": self.gt, "challenge": self.challenge})
+        my_o = my_o.text
+        return my_o
+
+    def get_w(self, token):
+        my_w = self.sess.post("http://127.0.0.1:8090/encrypt", data={"token": token, "gt": self.gt, "challenge": self.challenge})
+        my_w = my_w.text
+        print("self.my_w: {}".format(my_w))
+        return my_w
+
+    def get_php1(self, my_w):
+        url = "https://api.geetest.com/get.php?gt={}&challenge={}&lang=zh-cn&pt=0&client_type=web&w={}&callback=geetest_{}"
+        res = self.sess.get(url=url.format(self.gt, self.challenge, my_w, int(time.time()*1000), headers=self.headers))
+        print("get_php: post w: {}".format(res.text))
+
+    def ajax_php(self, my_enc):
+        url = "https://api.geetest.com/ajax.php?gt={}&challenge={}&lang=zh-cn&pt=0&client_type=web&w={}&callback=geetest_{}"
+        # res = self.sess.get(url=url.format(self.gt, self.challenge, self.my_w, int(time.time() * 1000), headers=self.headers))
+        res = self.sess.get(url=url.format(self.gt, self.challenge, my_enc, int(time.time() * 1000), headers=self.headers))
+        print("ajax_php: post w: {}".format(res.text))
+
+    def get_php2(self):
+        url = "https://api.geetest.com/get.php?is_next=true&type={}&gt={}&challenge={}&lang=zh-cn&https=true&protocol=https%3A%2F%2F&offline=false&product=float&api_server=api.geetest.com&isPC=true&width=100%25&callback=geetest_{}"
+        pass
 
     pass
-
 
 
 if __name__ == '__main__':
     begin = GeeTest()
 
     begin.get_gt_challenge()
+    begin.get_type()
 
+    token = begin.get_token()
+    begin.get_w(token)
+
+    my_o = begin.get_o(token)
+    my_n = begin.get_n(token)
+    my_w = my_o+my_n  # my_w = begin.get_w(token1) w 参数也可以一次性生成，但是不太好，因为后面使用到了o参数
+    begin.get_php(my_w)
+    begin.ajax_php(my_o)  # 这个 w 参数是前面的第一步生成的 o 参数
 
     pass
 
