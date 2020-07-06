@@ -46,7 +46,7 @@ class GeeTest(object):
 
     def get_w(self):
         url = "https://api.geetest.com/ajax.php?gt={}&challenge={}&lang=zh-cn&pt=0&client_type=web&w={}&callback=geetest_1593416906604"
-        
+
     pass
 
 
