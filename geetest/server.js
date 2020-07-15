@@ -1,5 +1,5 @@
 var express = require("express")
-var sdk = require("E:\\datas\\python\\爬虫项目\\CrackJs\\geetest\\my_encrypt.js")
+var sdk = require("./my_encrypt.js")
 var bodyParser = require('body-parser')
 
 var api = express()

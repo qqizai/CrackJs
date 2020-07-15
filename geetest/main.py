@@ -101,7 +101,7 @@ if __name__ == '__main__':
     my_o = begin.get_o(token)
     my_n = begin.get_n(token)
     my_w = my_o+my_n  # my_w = begin.get_w(token1) w 参数也可以一次性生成，但是不太好，因为后面使用到了o参数
-    begin.get_php(my_w)
+    begin.get_php1(my_w)
     begin.ajax_php(my_o)  # 这个 w 参数是前面的第一步生成的 o 参数
 
     pass
