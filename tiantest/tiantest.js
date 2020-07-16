@@ -371,10 +371,15 @@ var config = {
             request.send();
         }
 
-        get(tiantest_config.protocol + tiantest_config.api_server + "/client/conf?site_id=" +
+        var my_url = tiantest_config.protocol + tiantest_config.api_server + "/client/conf?site_id=" +
             tiantest_config.site_id + "&lang=" + tiantest_config.lang +
             "&ie=" + (!!window.ActiveXObject || "ActiveXObject" in window) +
-            (tiantest_config.res_server ? "&res_server=" + tiantest_config.res_server : ""), callback);
+            (tiantest_config.res_server ? "&res_server=" + tiantest_config.res_server : "");
+        console.log("---------------------------------------------------------------------------------------")
+        console.log("requests.get: "+my_url);// https://api.tiantest.com/client/conf?site_id=7c07c9c109d3039315bf05f5a9192e54&lang=zh-cn&ie=false
+        console.log("---------------------------------------------------------------------------------------")
+
+        get(my_url, callback);
     }
 
     // 网站真正的初始化------------------------------------------------------------------------------------------------
