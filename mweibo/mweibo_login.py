@@ -89,13 +89,6 @@ import hashlib
 import time
 import getpass
 
-"""
-info:
-author:CriseLYJ
-github:https://github.com/CriseLYJ/
-update_time:2019-3-7
-"""
-
 
 def get_login(phone, pwd):
     new_time = str(int(time.time()))

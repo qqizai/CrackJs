@@ -23,12 +23,33 @@ def decrypt(key, value):
     return exec.call("decrypt", key, value)
 
 
+def my_decrypt(key, value):
+    """python 版本实现的解密函数"""
+    n = list(key)
+    l_n = len(n)
+
+    i = list(value)
+    l_i = len(i)
+
+    a = {}
+    r = []
+    for o in range(l_n//2+1):
+        if o >= l_n / 2:
+            break
+        a[n[o]] = n[l_n// 2 + o]
+    for s in range(l_i):
+        r.append(a[i[s]])
+    return "".join(r)
+
+
 if __name__ == '__main__':
     key = "cvQdX%8JOt.qG3a14,652-%9+.0837"
     # value = "XXG3%QXX3qXQdv%XqQd%GGaQdcdXdQdcqvvQdcaq3QX%GvOQXa3GcQXa33qQdqOvdQdvcadQXOdOcQvG%3qQvdva%QXGa3vQdqvdcQO3qvaQaGcqaQdvda3QXqdc3QXqvXaQXGGOqQXGccGQXd3OdQdcaGaQaaO3aQXaaOOQXqOvGQdc3%v"
     value = "vqOXaQ3GvadQ3vqG%Q3vOccQ3v3cOQ33OaaQ3X%OvQ3GqdaQ3c3a3Q3%cdvQ3vdqvQ3aOcdQ3dq3OQ3vqadQ33cvGQ3ca3OQ3%X%aQvGc%aQvqOcaQ3X%O%Q33GXaQ3Xv33Q3qX3aQ3qqO%Q%OvcGQ33qccQvqOdXQ3GXavQ3vaOGQ3%vqO"
     # value = "66sm.j66mX6jox.6Xjo.ssEjoqo6ojoqXxxjoqEXmj6.sxVj6Emsqj6EmmXjoXVxojoxqEoj6VoVqjxs.mXjxoxE.j6sEmxjoXxoqjVmXxEjEsqXEjoxoEmj6Xoqmj6Xx6Ej6ssVXj6sqqsj6omVojoqEsEjEEVmEj6EEVVj6XVxsjoqm.x"
-    result = decrypt(key, value)
-    print(result)
+    result1 = decrypt(key, value)
+    print(result1)
+    result2 = my_decrypt(key, value)
+    print(result2)
 
 
