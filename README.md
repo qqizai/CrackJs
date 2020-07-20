@@ -7,13 +7,13 @@
 
 
 - [百du指数](https://github.com/qqizai/CrackJs/tree/master/baidu_index) ☆
-- [谷歌学术镜像网站](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
+- [谷ge学术镜像网](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
 - [阿li文学(同刺猬猫加解密思路一样)](https://github.com/qqizai/CrackJs/tree/master/aliwx) ☆
 - [空气质量监测](https://github.com/qqizai/CrackJs/tree/master/aqistudy)
 - [刺猬mao小说](https://github.com/qqizai/CrackJs/tree/master/ciweimao) ☆☆
 - [梦幻xi游](https://github.com/qqizai/CrackJs/tree/master/wy_menghuanxiyou) ☆☆
 - [犀niu数据](https://github.com/qqizai/CrackJs/tree/master/xiniudata) ☆☆
-- [零度代理](https://github.com/qqizai/CrackJs/tree/master/lingdu_nyloner) ☆☆
+- [零du代理](https://github.com/qqizai/CrackJs/tree/master/lingdu_nyloner) ☆☆
 - [微bo登录](https://github.com/qqizai/CrackJs/tree/master/mweibo) ☆☆☆
 - [ji验验证码w参数 - 2020.07.06(后续会继续更新ji验验证码)](https://github.com/qqizai/CrackJs/tree/master/geetest) ☆☆☆☆  
 - [某易易盾 - 2020.07.18 解密中](https://github.com/qqizai/CrackJs/tree/master/dun163) 暂未定多少星，正在解密ing
@@ -46,13 +46,17 @@
 1.调试后，你会发现其实就是一个 decrypt 解密函数，直接将对应的 key 和 加密内容传递进去即可;
 2.提供了两种方法，1-使用 execjs 来执行 js 代码，因为 js 代码比较简单；2-使用 Python 来改写 js 解密代码.
 
+-----------------------------------------------------------------------------------------------------------------
 
-0x01、[谷歌学术镜像网站](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
+
+0x01、[谷ge学术镜像网](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
 
 说明：
 
 1.调试后，你会发现其实就是网站的url进行加密了，但是，这里的加密分发很简单.
 2.加密方式：使用两串字符进行加密，解密 js 已经抠出来 
+
+-----------------------------------------------------------------------------------------------------------------
 
 
 0x02、[阿li文学(同刺猬猫加解密思路一样)](https://github.com/qqizai/CrackJs/tree/master/aliwx) ☆
@@ -63,6 +67,8 @@
 2.加密方式：不详，网站使用自己的封装的函数
 3.同刺猬mao小说加解密思路一样
 
+-----------------------------------------------------------------------------------------------------------------
+
 
 0x03、[刺猬mao小说](https://github.com/qqizai/CrackJs/tree/master/ciweimao) ☆☆
 
@@ -72,6 +78,8 @@
 2.加密方式：不详，网站使用自己的封装的函数
 3.同阿li文学加解密思路一样
 4.建议练习一下扣 js 的过程，主要是学习如何使定位 js 代码 
+
+-----------------------------------------------------------------------------------------------------------------
 
 
 0x04、[梦幻xi游](https://github.com/qqizai/CrackJs/tree/master/wy_menghuanxiyou) ☆☆
@@ -91,6 +99,8 @@
 9.强烈建议练习一下这个例子的扣 js 的过程，主要是学习如何使定位 js 代码 
 *10.总的来说，这里面的思路就是，将前端页面的一串字符串，经过指定的解码，得到的正确答案*
 
+-----------------------------------------------------------------------------------------------------------------
+
 
 0x05、[犀niu数据](https://github.com/qqizai/CrackJs/tree/master/xiniudata) ☆☆
 
@@ -99,9 +109,11 @@
 1.调试后，你会发现 请求前后都是进行了对应的加密、解密的操作
 2.这里是加密函数，是将指定参数进行加密之后，进行post请求，然后再对返回来的response参数进行解密
 
+-----------------------------------------------------------------------------------------------------------------
 
 
-0x06、[零度代理](https://github.com/qqizai/CrackJs/tree/master/lingdu_nyloner) ☆☆
+
+0x06、[零du代理](https://github.com/qqizai/CrackJs/tree/master/lingdu_nyloner) ☆☆ (网站好像已经挂了)
 
 *详细步骤说明*
 
@@ -120,6 +132,8 @@
 - 9，继续调试，然后也是将 base64 解密转换为 nodejs的base64 解密，最后得出答案，恭喜，又破解一个网站！！！
 完毕！！
 
+-----------------------------------------------------------------------------------------------------------------
+
 
 
 0x07、[微bo登录](https://github.com/qqizai/CrackJs/tree/master/mweibo) ☆☆☆
@@ -127,6 +141,8 @@
 说明：
 
 1.最主要就是 sp 参数
+
+-----------------------------------------------------------------------------------------------------------------
 
 
 
@@ -136,6 +152,7 @@
 
 1.最主要就是 w 参数
 
+-----------------------------------------------------------------------------------------------------------------
 
 
 
