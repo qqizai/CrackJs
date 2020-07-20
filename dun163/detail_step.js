@@ -1,20 +1,5 @@
 
 
-/*
-* 1.反复分析初始请求有哪些，这时候得需要多重新点击，可以先从选择这个类型的验证码开始，看看它初始化的时候，请求了哪些接口，哪些参数是我们需要进行获取的
-*
-* 2.可以看到每次都是：get了两次getconf接口；get两次
-*
-*
-*
-*
-*
-*
-*
-*
-* */
-
-
 var __toByte = function(e) {
     function t(t) {
         return e.apply(this, arguments)
@@ -354,8 +339,22 @@ var uuid = function a(e, t) {
 
 
 
+
+
 var my_uuid = uuid(32)
 var cb = B(my_uuid)
-console.log("my_uuid:\t"+my_uuid)
-console.log("cb:     \t"+cb)
+console.log("my_uuid:  "+my_uuid)
+console.log("     cb:  "+cb)
+
+var my_id = "74b1d03fcaf944b4aa3a862b2a1893e1";//id就是当前验证码类型，
+console.log("")
+
+
+/*
+* 1.反复分析初始请求有哪些，这时候得需要多重新点击，可以先从选择这个类型的验证码开始，看看它初始化的时候，请求了哪些接口，哪些参数是我们需要进行获取的
+* 2.可以看到每次都是：get了两次getconf接口(/api/v2/getconf)；get两次get接口(/api/v2/get)；
+* 3.初步猜测：每个接口都有两次请求，那么是不是 getconf 和 get 分别对应，然后分别校验不同的参数.
+* 4.参数fp，就是浏览器指纹，目前定位到了是绑定在 window.gdxidpyhxde 属性中，所以需要观察一下这个参数是怎么生成的.
+*
+* */
 
