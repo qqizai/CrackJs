@@ -5,6 +5,7 @@
 
 如果多人关注的话，会继续更新，且更新更频繁，你给的星星star就是我的动力，越多，更新越快！
 
+#### 综合类：
 
 - [百du指数](https://github.com/qqizai/CrackJs/tree/master/baidu_index) ☆
 - [谷ge学术镜像网](https://github.com/qqizai/CrackJs/tree/master/google_images) ☆
@@ -15,13 +16,24 @@
 - [犀niu数据](https://github.com/qqizai/CrackJs/tree/master/xiniudata) ☆☆
 - [零du代理](https://github.com/qqizai/CrackJs/tree/master/lingdu_nyloner) ☆☆
 - [微bo登录](https://github.com/qqizai/CrackJs/tree/master/mweibo) ☆☆☆
-- [ji验验证码w参数 - 2020.07.06(后续会继续更新ji验验证码)](https://github.com/qqizai/CrackJs/tree/master/geetest) ☆☆☆☆  
-- [某易易盾 - 2020.07.18 解密中](https://github.com/qqizai/CrackJs/tree/master/dun163) 暂未定多少星，正在解密ing
+
+
+
+#### 爬虫练习类：
+
 - [glidesky相关爬虫练习题目](https://blog.csdn.net/weixin_41173374) 请查看CSDN文章，目前只发了少量的文章
 
 
 
-其他练习等脚本：
+#### 验证码类：
+
+- [ji验验证码w参数 - 2020.07.06(后续会继续更新ji验验证码)](https://github.com/qqizai/CrackJs/tree/master/geetest) ☆☆☆☆  
+- [某易易盾 - 2020.07.18 解密中](https://github.com/qqizai/CrackJs/tree/master/dun163) 暂未定多少星，正在解密ing
+- [天yan验证码 - 官网已经挂掉,只剩首页空壳](https://github.com/qqizai/CrackJs/tree/master/tiantest) 目前只扣了初始化的js
+
+
+#### 其他练习等脚本类：
+
 - [m3u8视频下载](https://github.com/qqizai/CrackJs/tree/master/m3u8_video) ☆
 - [鼠标轨迹](https://github.com/qqizai/CrackJs/tree/master/mouse_trace)
 - [navigator属性检测](https://github.com/qqizai/CrackJs/tree/master/navigator)
@@ -30,14 +42,17 @@
 - [工具tools](https://github.com/qqizai/CrackJs/tree/master/tools)
 
 
-了解前端知识：
+#### 了解前端知识：
+
 - [图解Js event对象offsetX, clientX, pageX, screenX, layerX, x区别](https://blog.csdn.net/weixin_41173374/article/details/107463063)
 - [前端边距-反爬遇到的前端知识必知](https://blog.csdn.net/weixin_41173374/article/details/104536561)
 
 
 -----------------------------------------------------------------------------------------------------------------
 
-部分步骤：
+下面是前面提到的部分网站的分析步骤
+
+#### 部分步骤：
 
 0x00、[百du指数](https://github.com/qqizai/CrackJs/tree/master/baidu_index) ☆
 
