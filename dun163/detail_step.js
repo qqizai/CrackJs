@@ -337,18 +337,26 @@ var uuid = function a(e, t) {
 }
 
 
-
-
+//用于生成指定位数的随机字符串，在生成指纹的时候用到
+function get_ramdom_str(e) {
+    for (var n = [], i = 0; i < e; i++) {
+        var r = Math.random() * 62  // var r = Math.random() * je
+            , r = Math.floor(r);
+        n.push("aZbY0cXdW1eVf2Ug3Th4SiR5jQk6PlO7mNn8MoL9pKqJrIsHtGuFvEwDxCyBzA".charAt(r))  // ce = "aZbY0cXdW1eVf2Ug3Th4SiR5jQk6PlO7mNn8MoL9pKqJrIsHtGuFvEwDxCyBzA"
+    }
+    return n.join("")
+}
 
 
 var my_uuid = uuid(32)
 var cb = B(my_uuid)
-console.log("my_uuid:  "+my_uuid)
-console.log("     cb:  "+cb)
+console.log("      my_uuid:  "+my_uuid)
+console.log("           cb:  "+cb)
 
-var my_id = "74b1d03fcaf944b4aa3a862b2a1893e1";//id就是当前验证码类型，
-console.log("")
+var my_id = "74b1d03fcaf944b4aa3a862b2a1893e1";//这个id就是配置文件里面的验证码类型id
+console.log("        my_id:  "+my_id)
 
+console.log("get_ramdom_str: " + get_ramdom_str(7))
 
 /*
 * 1.反复分析初始请求有哪些，这时候得需要多重新点击，可以先从选择这个类型的验证码开始，看看它初始化的时候，请求了哪些接口，哪些参数是我们需要进行获取的
