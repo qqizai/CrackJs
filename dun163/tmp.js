@@ -1,4 +1,15 @@
-
+var window = new Object();
+window.parseFloat = parseFloat;
+window.parseInt = parseInt;
+window.isNaN = isNaN;
+window.decodeURI = decodeURI;
+window.decodeURIComponent = decodeURIComponent;
+window.encodeURI = encodeURI;
+window.encodeURIComponent = encodeURIComponent;
+window.escape = escape;
+window.unescape = unescape;
+window.eval = eval;
+window.Date = Date;
 
 var navigator = new Object();
 navigator.appCodeName = "Mozilla";
@@ -113,19 +124,6 @@ function randomString(len) {
 }
 
 
-// var window = new Object();
-window.parseFloat = parseFloat;
-window.parseInt = parseInt;
-window.isNaN = isNaN;
-window.decodeURI = decodeURI;
-window.decodeURIComponent = decodeURIComponent;
-window.encodeURI = encodeURI;
-window.encodeURIComponent = encodeURIComponent;
-window.escape = escape;
-window.unescape = unescape;
-window.eval = eval;
-window.Date = Date;
-
 document = new Object();
 document.createElement = function (name) {
     return "<" + name + ">" + "</" + name + ">"
@@ -134,31 +132,6 @@ document.createElement.toString = function () {
     return "function createElement() { [native code] }"
 };
 window.document = document;
-
-var navigator = new Object();
-navigator.appCodeName = "Mozilla";
-navigator.appName = "Netscape";
-navigator.appVersion = "5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36";
-navigator.cookieEnabled = true;
-navigator.connection = {
-    'connection': null,
-    'effectiveType': "4g",
-    'rtt': 50,
-    'downlink': 10,
-    'saveData': false
-};
-navigator.deviceMemory = 8;
-navigator.hardwareConcurrency;
-navigator.doNotTrack = null;
-navigator.language = "zh-CN";
-navigator.languages = ["zh-CN", "zh"];
-navigator.onLine = true;
-navigator.platform = 'Win32';
-navigator.product = 'Gecko';
-navigator.productSub = '20030107';
-navigator.userAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36";
-navigator.vendor = "Google Inc.";
-navigator.vendorSub = "";
 
 plugins = [
     {
