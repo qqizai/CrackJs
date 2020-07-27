@@ -6623,40 +6623,84 @@ window.NECaptcha = function(e) {
                                     return img_b64//canvas api exception
                                 }
                             }
-                            function d() {
+                            function d() {//用于检测浏览器是否支持ActiveX控件
                                 try {
-                                    return window[e[105]] && m.h ? p() : h()
+                                    debugger;
+                                    // return window[e[105]] && m.h ? p() : h()
+                                    return h();
                                 } catch (t) {
                                     return l[32]
                                 }
                             }
                             function h() {
-                                if (!J[l[4]])
-                                    return l[0];
-                                var n = [u[164], e[65], e[113], l[5], u[136], s[15], s[101], u[183], s[30], u[110], s[132], e[18], s[22], u[199], s[120], e[87], u[142], s[124], e[48], u[154], u[111], u[186], u[200], s[134], s[1], u[8], e[40], u[126], s[158], s[51], s[14], u[197], e[83], u[140], s[119], e[21], e[42], e[101], u[129], e[59], l[40], e[6], s[84], s[58], u[25], l[7], s[42], u[153], s[27], u[195], s[93], u[178], s[53], u[141], e[39], u[143], s[67], e[2], e[97], s[74], e[15], u[166], u[62], u[48], s[165], s[95], s[69], e[110], s[44], e[102], s[72], s[167], u[119], s[38], u[167], u[148], s[23], s[107], s[133], s[16], e[107], e[68], s[19], u[131], u[194], s[43], e[120], u[49], e[3], u[47], s[59], u[149], l[24], u[55], u[37], u[101], u[152], s[46], l[16], u[170], e[4], e[57], s[160], u[175], l[15], u[11], u[156], l[8], s[122], u[198], l[17], u[4], e[47], s[140], s[116], e[82], u[185], s[39], s[48]]
+                                debugger;
+                                // if (!J[l[4]])
+                                if (!window.navigator["plugins"])
+                                    // return l[0];
+                                    return "";
+                                // var n = [u[164], e[65], e[113], l[5], u[136], s[15], s[101], u[183], s[30], u[110], s[132], e[18], s[22], u[199], s[120], e[87], u[142], s[124], e[48], u[154], u[111], u[186], u[200], s[134], s[1], u[8], e[40], u[126], s[158], s[51], s[14], u[197], e[83], u[140], s[119], e[21], e[42], e[101], u[129], e[59], l[40], e[6], s[84], s[58], u[25], l[7], s[42], u[153], s[27], u[195], s[93], u[178], s[53], u[141], e[39], u[143], s[67], e[2], e[97], s[74], e[15], u[166], u[62], u[48], s[165], s[95], s[69], e[110], s[44], e[102], s[72], s[167], u[119], s[38], u[167], u[148], s[23], s[107], s[133], s[16], e[107], e[68], s[19], u[131], u[194], s[43], e[120], u[49], e[3], u[47], s[59], u[149], l[24], u[55], u[37], u[101], u[152], s[46], l[16], u[170], e[4], e[57], s[160], u[175], l[15], u[11], u[156], l[8], s[122], u[198], l[17], u[4], e[47], s[140], s[116], e[82], u[185], s[39], s[48]]
+                                var n = ["4game","AdblockPlugin","AdobeExManCCDetect","AdobeExManDetect","Alawar NPAPI utils",
+                                    "Aliedit Plug-In","Alipay Security Control 3","AliSSOLogin plugin",
+                                    "AmazonMP3DownloaderPlugin","AOL Media Playback Plugin","AppUp","ArchiCAD",
+                                    "AVG SiteSafety plugin","Babylon ToolBar","Battlelog Game Launcher",
+                                    "BitCometAgent","Bitdefender QuickScan","BlueStacks Install Detector",
+                                    "CatalinaGroup Update","Citrix ICA Client","Citrix online plug-in",
+                                    "Citrix Receiver Plug-in","Coowon Update","DealPlyLive Update","Default Browser Helper",
+                                    "DivX Browser Plug-In","DivX Plus Web Player","DivX VOD Helper Plug-in",
+                                    "doubleTwist Web Plugin","Downloaders plugin","downloadUpdater","eMusicPlugin DLM6",
+                                    "ESN Launch Mozilla Plugin","ESN Sonar API","Exif Everywhere","Facebook Plugin",
+                                    "File Downloader Plug-in","FileLab plugin","FlyOrDie Games Plugin",
+                                    "Folx 3 Browser Plugin","FUZEShare","GDL Object Web Plug-in 16.00","GFACE Plugin",
+                                    "Ginger","Gnome Shell Integration","Google Earth Plugin","Google Earth Plug-in",
+                                    "Google Gears 0.5.33.0","Google Talk Effects Plugin","Google Update",
+                                    "Harmony Firefox Plugin","Harmony Plug-In","Heroes & Generals live","HPDetect",
+                                    "Html5 location provider","IE Tab plugin","iGetterScriptablePlugin","iMesh plugin",
+                                    "Kaspersky Password Manager","LastPass","LogMeIn Plugin 1.0.0.935",
+                                    "LogMeIn Plugin 1.0.0.961","Ma-Config.com plugin","Microsoft Office 2013",
+                                    "MinibarPlugin","Native Client","Nitro PDF Plug-In","Nokia Suite Enabler Plugin",
+                                    "Norton Identity Safe","npAPI Plugin","NPLastPass","NPPlayerShell","npTongbuAddin",
+                                    "NyxLauncher","Octoshape Streaming Services","Online Storage plug-in",
+                                    "Orbit Downloader","Pando Web Plugin","Parom.TV player plugin",
+                                    "PDF integrado do WebKit","PDF-XChange Viewer","PhotoCenterPlugin1.1.2.2",
+                                    "Picasa","PlayOn Plug-in","QQ2013 Firefox Plugin","QQDownload Plugin","QQMiniDL Plugin",
+                                    "QQMusic","RealDownloader Plugin","Roblox Launcher Plugin","RockMelt Update",
+                                    "Safer Update","SafeSearch","Scripting.Dictionary","SefClient Plugin","Shell.UIHelper",
+                                    "Silverlight Plug-In","Simple Pass","Skype Web Plugin","SumatraPDF Browser Plugin",
+                                    "Symantec PKI Client","Tencent FTN plug-in","Thunder DapCtrl NPAPI Plugin",
+                                    "TorchHelper","Unity Player","Uplay PC","VDownloader","Veetle TV Core",
+                                    "VLC Multimedia Plugin","Web Components","WebKit-integrierte PDF","WEBZEN Browser Extension",
+                                    "Wolfram Mathematica","WordCaptureX","WPI Detector 1.4","Yandex Media Plugin",
+                                    "Yandex PDF Viewer","YouTube Plug-in","zako"]
                                     , i = []
                                     , r = {};
-                                return i.push(y(J[l[4]], function(e) {
+
+                                var fc = function(e) {
                                     r[e.name] = t[535];
                                     var n = y(e, function(e) {
-                                        return [e.type, e.suffixes].join(u[97])
-                                    }).join(l[35]);
-                                    return [e.name, e.description, n].join(s[75])
-                                }, this).join(l[26])),
-                                    i.push(y(n, function(e) {
-                                        if (r[e])
-                                            return l[0];
-                                        if (e = J[l[4]][e],
-                                            !e)
-                                            return l[0];
-                                        var t = y(e, function(e) {
-                                            return [e.type, e.suffixes].join(u[97])
-                                        }).join(l[35]);
-                                        return [e.name, e.description, t].join(s[75])
-                                    }, this).join(u[9])),
-                                    i.join(u[9])
+                                        return [e.type, e.suffixes].join("~")//u[97]="~"
+                                    }).join(",");//l[35]=","
+                                    return [e.name, e.description, n].join("::")//s[75]="::"
+                                };
+                                var my_y = y(J[l[4]], fc, this);
+                                i.push(my_y.join("$"));//l[26]="$"
+
+                                var my_y2 = y(n, function(e) {
+                                    if (r[e])
+                                        return "";//l[0]=""
+                                    if (e = J[l[4]][e],
+                                        !e)
+                                        return "";//l[0]=""
+                                    var t = y(e, function(e) {
+                                        return [e.type, e.suffixes].join("~")//u[97]="~"
+                                    }).join(",");//l[35]=","
+                                    return [e.name, e.description, t].join("::")//s[75]="::"
+                                }, this);
+
+                                i.push(my_y2.join(";"));//u[9]=";"
+                                return i.join(";");//u[9]=";"
                             }
                             function p() {
+                                debugger
                                 return window[e[105]] ? y([u[189], e[44], e[67], e[50], s[138], u[150], s[70], u[171], s[97], u[128], e[1], u[53], u[115], u[184], e[111], e[1], u[55], u[101], e[63], s[41], e[100], s[104], e[77]], function(t) {
                                     try {
                                         return new window[e[105]](t),
@@ -6666,7 +6710,8 @@ window.NECaptcha = function(e) {
                                     }
                                 }).join(u[9]) : l[0]
                             }
-                            function y(e, t, n) {
+                            function y(e, t, n) {//最终的获取浏览器插件的函数
+                                debugger
                                 var i = [];
                                 return null == e ? i : b && e.map === b ? e.map(t, n) : (v(e, function(e, r, o) {
                                     i[i.length] = t.call(n, e, r, o)
