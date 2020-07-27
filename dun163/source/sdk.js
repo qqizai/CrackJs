@@ -439,3 +439,4 @@ module.exports = {
 var my_j = Math.random().toString(36).slice(2, 9)
 console.log(my_j)
 
+console.log(get_fp())

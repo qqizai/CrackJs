@@ -126,7 +126,8 @@ Oe = K.join("")
 var h = Oe;
 // h = h + u[7] + p
 // h = h + ":" + p
-h = h + ":" + new Date().getTime() + 900000
+var _t = new Date().getTime() + 900000;
+h = h + ":" + _t
 console.log(h)
 
 
