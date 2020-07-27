@@ -6220,15 +6220,18 @@ window.NECaptcha = function(e) {
                             return e
                         }
                         function a(e, n, i) {
+                            debugger
                             var r, o = [l[44], l[46], l[42], u[50], u[43], u[22], u[63], u[32], u[91], u[27], u[46], u[44], u[86], u[59], u[39], u[68], u[60], u[5], u[82], u[31], u[28], u[33], u[1], u[56], u[21], u[67], u[42], u[88], u[30], l[41], u[15], u[52], u[90], u[6], u[41], u[16], u[66], l[43], u[17], u[36], u[93], u[23], u[34], u[54], u[69], u[58], u[71], u[24], u[94], l[45], u[3], u[76], u[85], u[61], u[14], u[79], u[38], l[34], u[26], u[29], u[13], u[0], u[72], u[70]], a = u[19], s = [];
-                            if (i == t[535])
+                            if (i == t[535]){//i == 1
                                 i = e[n],
                                     r = t[9],
                                     s.push(o[i >>> t[10] & t[147]]),
                                     s.push(o[(i << t[17] & t[116]) + (r >>> t[17] & t[50])]),
                                     s.push(a),
                                     s.push(a);
-                            else if (i == t[10])
+                            }
+                            else if (i == t[10]){// i == 2
+                                debugger;
                                 i = e[n],
                                     r = e[n + t[535]],
                                     e = t[9],
@@ -6236,7 +6239,9 @@ window.NECaptcha = function(e) {
                                     s.push(o[(i << t[17] & t[116]) + (r >>> t[17] & t[50])]),
                                     s.push(o[(r << t[10] & t[142]) + (e >>> t[24] & t[13])]),
                                     s.push(a);
+                            }
                             else {
+                                debugger
                                 if (i != t[13])
                                     throw Error(u[64]);
                                 i = e[n],
@@ -7150,6 +7155,7 @@ window.NECaptcha = function(e) {
                                                 K.push(a(Y, $e, Y.length - $e));
                                                 break
                                             }
+                                            // K.push(a(Y, 0, 0)),
                                             K.push(a(Y, $e, Ie)),
                                                 $e += Ie
                                         }
