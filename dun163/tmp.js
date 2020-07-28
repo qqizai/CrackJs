@@ -408,6 +408,7 @@ function W() {
         b: ye,
         a: pe
     }).get();
+    console.log("T: ", T);
     n["fp"] = T.join(",")
 
     var S = h = x(n),
