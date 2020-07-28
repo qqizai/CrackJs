@@ -1,5 +1,6 @@
 var express = require("express")
 var sdk = require("./source/sdk")
+var sdk2 = require("./tmp")
 var bodyParser = require("body-parser")
 
 
@@ -43,6 +44,17 @@ api.get("/get_fp", function (req, res) {
 api.get("/get_fp2", function (req, res) {
     var fp = sdk.get_fp2();
     res.send(fp);
+})
+
+
+api.get("/get_fp3", function (req, res) {
+    var fp = sdk2.get_fp3();
+    res.send(fp);
+})
+
+api.get("/get_callback", function (req, res) {
+    var call_back = sdk2.get_callback();
+    res.send(call_back);
 })
 
 

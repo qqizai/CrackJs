@@ -6847,6 +6847,7 @@ window.NECaptcha = function(e) {
                                 y = [];
                                 debugger
                                 m.e ? (y.push(m.e(v1)), y.push(m.e(v2))) : (y.push(_(v1)), y.push(_(v2)));
+                                console.log("y: ", y);
                                 return y;
                             }
                         }

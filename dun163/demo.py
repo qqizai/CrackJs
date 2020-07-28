@@ -17,7 +17,7 @@ class YiDun:
             raise ValueError("sdk_url/my_id cann't be None.")
 
         self.cb_url = sdk_url+"/get_cb"
-        self.fp_url = sdk_url+"/get_fp2"
+        self.fp_url = sdk_url+"/get_fp3"
         self.uuid_url = sdk_url+"/get_uuid"
         self.callback_url = sdk_url+"/get_mycallback"
         self.my_id = my_id
@@ -29,8 +29,8 @@ class YiDun:
 
         self.url_conf1 = "https://c.dun.163yun.com/api/v2/getconf?id={id}&ipv6=false&runEnv=10&referer=https://dun.163.com/trial/sense&callback={my_callback}"
         self.url_conf2 = "https://c.dun.163yun.com/api/v2/getconf?id={id}&ipv6=false&runEnv=10&referer=https://dun.163.com/trial/sense&callback={my_callback}"
-        self.url_get1 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=0&version=2.14.0&dpr=1.25&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
-        self.url_get2 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=&version=2.14.0&dpr=1.25&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
+        self.url_get1 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=320&version=2.13.60&dpr=1&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
+        self.url_get2 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=320&version=2.13.6&dpr=1&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
 
         self.headers = {
             # 'Connection': 'keep-alive',
@@ -67,6 +67,7 @@ class YiDun:
 
     def get_conf1(self):
         _url = self.url_conf1.format(id=self.my_id, my_callback="__JSONP_{}_{}".format(self.get_ramdom_str(7), self.count1))
+        # _url = self.url_conf1.format(id=self.my_id, my_callback="__JSONP_{}_0".format(self.get_ramdom_str(7)))
         # _resp = self.session.get(url=_url, headers=self.headers)
         _resp = requests.get(url=_url, headers=self.headers)
         print("get_conf1: ", _url)
@@ -76,6 +77,7 @@ class YiDun:
 
     def get_conf2(self):
         _url = self.url_conf2.format(id=self.my_id, my_callback="__JSONP_{}_{}".format(self.get_ramdom_str(7), self.count1))
+        # _url = self.url_conf2.format(id=self.my_id, my_callback="__JSONP_{}_0".format(self.get_ramdom_str(7)))
         # _resp = self.session.get(url=_url, headers=self.headers)
         _resp = requests.get(url=_url, headers=self.headers)
         print("get_conf2: ", _url)
@@ -93,6 +95,7 @@ class YiDun:
         random_cb_str = requests.get(self.callback_url).text
 
         _url = self.url_get1.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_{}".format(random_cb_str, self.count2))
+        # _url = self.url_get1.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_0".format(random_cb_str))
         # _resp = self.session.get(url=_url, headers=self.headers)
         _resp = requests.get(url=_url, headers=self.headers)
         self.count2 += 1
@@ -109,6 +112,7 @@ class YiDun:
         random_cb_str = requests.get(self.callback_url).text
 
         _url = self.url_get2.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_{}".format(random_cb_str, self.count2))
+        # _url = self.url_get2.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_0".format(random_cb_str))
         # _resp = self.session.get(url=_url, headers=self.headers)
         _resp = requests.get(url=_url, headers=self.headers)
         print("get_conf2: ", _url)
@@ -151,7 +155,7 @@ if __name__ == '__main__':
         print()
         print()
         print()
-        # time.sleep(0.8)
+        time.sleep(0.5)
         # if i > 6:
         #     break
         i += 1
