@@ -40,6 +40,12 @@ api.get("/get_fp", function (req, res) {
 })
 
 
+api.get("/get_fp2", function (req, res) {
+    var fp = sdk.get_fp2();
+    res.send(fp);
+})
+
+
 api.get("/get_mycallback", function (req, res) {
     var cb_str = Math.random().toString(36).slice(2, 9);
     console.log(cb_str)

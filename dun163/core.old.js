@@ -6492,6 +6492,7 @@ window.NECaptcha = function(e) {
                                 }, this);
 
                                 i.push(my_y2.join(u[9]));
+                                console.log("i.join(u[9]): ", i.join(u[9]));
                                 return i.join(u[9]);
                             }
                             function p() {
@@ -6969,6 +6970,7 @@ window.NECaptcha = function(e) {
                                     b: ye,
                                     a: pe
                                 }).get();
+                                console.log("w: ", w);
                                 null != w && void 0 != w && w.length > t[9] ? n[u[135]] = w.join(l[35]) : (n[u[135]] = M(l[42], t[37]),
                                     n[u[112]] = l[43],
                                     e = !1)
@@ -7092,6 +7094,7 @@ window.NECaptcha = function(e) {
                                 }),
                                     e = !1
                             }
+                            debugger;
                             h = h + u[7] + p,
                                 A(le, h, e, _),
                                 D(le, h),
@@ -7099,7 +7102,10 @@ window.NECaptcha = function(e) {
                                 A(ue, fe, e, _),
                                 D(ue, fe),
                                 N(fe),
-                            window[u[77]] && window[u[77]](W, he)
+                            window[u[77]] && window[u[77]](W, he),
+                            console.log("h: ", h),
+                            console.log("u[7]: ", u[7]),
+                            console.log("p: ", p);
                         }
                         R.prototype = {
                             toString: function() {

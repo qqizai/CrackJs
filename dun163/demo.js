@@ -132,6 +132,17 @@ var _t = new Date().getTime() + 900000;
 h = h + ":" + _t
 console.log(h)
 
+/*
+
+["27747153094550", "30084913513448"]
+
+7vJVfgfvcS5yZlpa4euTlQryOKUZIcsgZe4KALm4jRx4mea/uXhGVZ8jgq0hGRpgQVfkVRxmPQB96UbU8CcfLgyqKmWl/7MVMdHwbNSihsJQusBgkZsbrXp3cmH5B3RZf8wKm7JyoXhDZmVimYgWDXdvoWPe/UsI0NPanht8Y0mS0xrD:1595944380625
+
+1595944380625
+
+*/
+
+
 
 /*
 * 目前发现的常量：
