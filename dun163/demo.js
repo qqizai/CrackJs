@@ -20,7 +20,9 @@ var E = []
 for (var C = 0; C < 4; C++) {
     var O = Math.random() * 256
         , O = Math.floor(O);
+    console.log("O: ", O);
     E[C] = b(O)
+    console.log("E[C]: ", E[C])
 }
 
 
