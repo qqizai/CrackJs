@@ -1,6 +1,6 @@
 var express = require("express")
-var sdk = require("./source/sdk")
-var sdk2 = require("./tmp")
+var sdk = require("./sdk")
+var sdk2 = require("./fingerprint2")
 var bodyParser = require("body-parser")
 
 
@@ -62,6 +62,12 @@ api.get("/get_mycallback", function (req, res) {
     var cb_str = Math.random().toString(36).slice(2, 9);
     console.log(cb_str)
     res.send(cb_str);
+})
+
+
+api.get("/get_uuid", function (req, res) {
+    var uuid = sdk.get_uuid();
+    res.send(uuid);
 })
 
 

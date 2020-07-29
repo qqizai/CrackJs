@@ -8611,17 +8611,24 @@ function get_fp2() {
 }
 
 
+function get_uuid() {
+    for (var t = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", e = "", r = 0, n = t.length; r < 16; r++)
+        e += t.charAt(Math.floor(Math.random() * n));
+    return e
+}
+
 
 module.exports = {
     uuid,//需要指定长度，目前使用的是32位
     get_cb,//需要传递参数长度为32位的uuid/其他字符串
     get_ramdom_str,//需要指定长度，callback对应为7位
     get_fp, // 法一：生成随机指纹fp
-    get_fp2 // 法二：生成随机指纹fp
+    get_fp2, // 法二：生成随机指纹fp
+    get_uuid //获取uuid
 }
 
-var my_j = Math.random().toString(36).slice(2, 9)
-console.log(my_j)
+// var my_j = Math.random().toString(36).slice(2, 9)
+// console.log(my_j)
 
-console.log(get_fp())
-console.log(get_fp2())
+// console.log(get_fp())
+// console.log(get_fp2())

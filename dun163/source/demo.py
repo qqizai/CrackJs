@@ -10,6 +10,15 @@ import random
 import time
 
 
+"""
+value = '{"tc":"157.3","dc":"28.8","cc":"94.5","rc":"32.5","rr":"1.5","url":"https://c.dun.163yun.com/api/v2/getconf","host":"c.dun.163yun.com","https":true,"from":"PERF"}'
+res = "1920x1080"
+uuid = "DXunp8fVdZ1CalJJV"
+gif_url = "https://da.dun.163.com/sn.gif?d=pid=captcha&bid={id}&uuid={uuid}&type=network&name=/api/v2/getconf&value={value}&res={}&pu=https://dun.163.com/trial/sense&nts={nts}"
+
+"""
+
+
 class YiDun:
 
     def __init__(self, my_id, sdk_url):
@@ -31,6 +40,7 @@ class YiDun:
         self.url_conf2 = "https://c.dun.163yun.com/api/v2/getconf?id={id}&ipv6=false&runEnv=10&referer=https://dun.163.com/trial/sense&callback={my_callback}"
         self.url_get1 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=320&version=2.13.60&dpr=1&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
         self.url_get2 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=320&version=2.13.6&dpr=1&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
+        self.gif_url = "https://da.dun.163.com/sn.gif?d=pid=captcha&bid={id}&uuid={uuid}&type=network&name=/api/v2/getconf&value={value}&res={res}&pu=https://dun.163.com/trial/sense&nts={nts}"
 
         self.headers = {
             # 'Connection': 'keep-alive',
@@ -65,8 +75,42 @@ class YiDun:
         print("get_ramdom_str: ", _result)
         return _result
 
+    def get_gif(self):
+        my_headers = {
+            'Connection': 'keep-alive',
+            'Pragma': 'no-cache',
+            'Cache-Control': 'no-cache',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
+            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
+            'Sec-Fetch-Site': 'same-site',
+            'Sec-Fetch-Mode': 'no-cors',
+            'Sec-Fetch-Dest': 'image',
+            'Referer': 'https://dun.163.com/trial/sense',
+            'Accept-Language': 'zh-CN,zh;q=0.9',
+            # 'Cookie': 'Hm_lvt_4671c5d502135636b837050ec6d716ce=1595831833; __root_domain_v=.163.com; _qddaz=QD.cdpldb.b3etw0.kd452iym; Hm_lpvt_4671c5d502135636b837050ec6d716ce=1595990740'
+        }
+        _value = '{"tc":"157.3","dc":"28.8","cc":"94.5","rc":"32.5","rr":"1.5","url":"https://c.dun.163yun.com/api/v2/getconf","host":"c.dun.163yun.com","https":true,"from":"PERF"}'
+        sc = "1920x1080"
+        _url = self.gif_url.format(id=self.my_id, uuid=self.get_ramdom_str(17), value=_value, res=sc,
+                                   nts=int(time.time() * 1000))
+        _resp = requests.get(url=_url, headers=my_headers)
+        print("get_gif: ", _resp.status_code)
+        pass
+
+    def get_core_js(self):
+        _url = "https://cstaticdun.126.net/2.14.0/core.v2.14.0.min.js"
+        self.headers["Host"] = "cstaticdun.126.net"
+        _resp = requests.get(url=_url, headers=self.headers)
+        print("get_core_js: {}".format(_resp.status_code))
+        pass
+
     def get_conf1(self):
-        _url = self.url_conf1.format(id=self.my_id, my_callback="__JSONP_{}_{}".format(self.get_ramdom_str(7), self.count1))
+        self.get_gif()
+        self.get_core_js()
+
+        self.headers["Host"] = "c.dun.163.com"
+        _url = self.url_conf1.format(id=self.my_id,
+                                     my_callback="__JSONP_{}_{}".format(self.get_ramdom_str(7), self.count1))
         # _url = self.url_conf1.format(id=self.my_id, my_callback="__JSONP_{}_0".format(self.get_ramdom_str(7)))
         # _resp = self.session.get(url=_url, headers=self.headers)
         _resp = requests.get(url=_url, headers=self.headers)
@@ -145,17 +189,17 @@ if __name__ == '__main__':
         # time.sleep(2)
         dun.get_conf2()
 
-        # time.sleep(0.5)
+        time.sleep(0.5)
 
         dun.get_1()
-        # time.sleep(2)
+        # time.sleep(0.5)
         dun.get_2()
 
         print("-"*200)
         print()
         print()
         print()
-        time.sleep(0.5)
+        time.sleep(10)
         # if i > 6:
         #     break
         i += 1

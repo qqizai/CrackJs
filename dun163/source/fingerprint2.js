@@ -399,7 +399,8 @@ function W() {
     h = X();
     h && (n["icp"] = h), h = null, n["h"] = G;
 
-    var p = (new Date())["getTime"]() + 900000,
+    // var p = (new Date())["getTime"]() + 900000,
+    var p = (new Date())["getTime"]() + 900000-1000,
         _ = p + 1000 * 60 * 60 * 24 * 365 * 5;
 
     n["u"] = $(3) + p + $(3);
@@ -543,8 +544,8 @@ function get_callback() {
 }
 
 
-console.log(get_fp3())
-console.log(get_callback())
+// console.log(get_fp3())
+// console.log(get_callback())
 
 module.exports = {
     get_fp3,
@@ -552,5 +553,4 @@ module.exports = {
 }
 
 
-//__JSONP_yb0q33l_0
-//__JSONP_r62501k_0
+
