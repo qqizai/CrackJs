@@ -5,18 +5,9 @@
 # @File     : demo.py
 # @Software : PyCharm
 
-import requests
-import random
 import time
-
-
-"""
-value = '{"tc":"157.3","dc":"28.8","cc":"94.5","rc":"32.5","rr":"1.5","url":"https://c.dun.163yun.com/api/v2/getconf","host":"c.dun.163yun.com","https":true,"from":"PERF"}'
-res = "1920x1080"
-uuid = "DXunp8fVdZ1CalJJV"
-gif_url = "https://da.dun.163.com/sn.gif?d=pid=captcha&bid={id}&uuid={uuid}&type=network&name=/api/v2/getconf&value={value}&res={}&pu=https://dun.163.com/trial/sense&nts={nts}"
-
-"""
+import random
+import requests
 
 
 class YiDun:
@@ -26,9 +17,9 @@ class YiDun:
             raise ValueError("sdk_url/my_id cann't be None.")
 
         self.cb_url = sdk_url+"/get_cb"
-        self.fp_url = sdk_url+"/get_fp3"
+        self.fp_url = sdk_url+"/get_fp2"
         self.uuid_url = sdk_url+"/get_uuid"
-        self.callback_url = sdk_url+"/get_mycallback"
+        self.callback_url = sdk_url+"/get_callback"
         self.my_id = my_id
         self.count1 = 0
         self.count2 = 0
@@ -36,11 +27,8 @@ class YiDun:
         self.success = 0
         self.total = 0
 
-        self.url_conf1 = "https://c.dun.163yun.com/api/v2/getconf?id={id}&ipv6=false&runEnv=10&referer=https://dun.163.com/trial/sense&callback={my_callback}"
-        self.url_conf2 = "https://c.dun.163yun.com/api/v2/getconf?id={id}&ipv6=false&runEnv=10&referer=https://dun.163.com/trial/sense&callback={my_callback}"
-        self.url_get1 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=320&version=2.13.60&dpr=1&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
-        self.url_get2 = "https://c.dun.163.com/api/v2/get?id={id}&fp={fp}&https=true&type=undefined&width=320&version=2.13.6&dpr=1&dev=1&cb={cb}&ipv6=false&runEnv=10&group=&scene=&referer=https://dun.163.com/trial/sense&callback={my_callback}"
-        self.gif_url = "https://da.dun.163.com/sn.gif?d=pid=captcha&bid={id}&uuid={uuid}&type=network&name=/api/v2/getconf&value={value}&res={res}&pu=https://dun.163.com/trial/sense&nts={nts}"
+        self.url_conf = "https://c.dun.163yun.com/api/v2/getconf"
+        self.url_get = "https://c.dun.163.com/api/v2/get"
 
         self.headers = {
             # 'Connection': 'keep-alive',
@@ -54,155 +42,87 @@ class YiDun:
             # 'Sec-Fetch-Dest': 'script',
             'Referer': 'https://dun.163.com/trial/sense',
             # 'Accept-Language': 'zh-CN,zh;q=0.9',
-            # 'Cookie': '_ga=GA.1.285e8ffa8848f.79f5b9b3a7e3ea765458; Hm_lvt_4671c5d502135636b837050ec6d716ce=1595395863; Hm_lpvt_4671c5d502135636b837050ec6d716ce=1595395863; __root_domain_v=.163.com; _qddaz=QD.faxdwr.567oli.kcwxi6ut'
         }
 
         self.session = requests.Session()
 
-        pass
-
     def get_ramdom_str(self, length):
-        """
-        获取指定长度的随机字符串
-        :param length:
-        :return:
-        """
+        """获取指定长度的随机字符串"""
         my_str = "aZbY0cXdW1eVf2Ug3Th4SiR5jQk6PlO7mNn8MoL9pKqJrIsHtGuFvEwDxCyBzA"
         _result = ""
         for _ in range(length):
             i = int(random.random()*62)
             _result += my_str[i]
-        print("get_ramdom_str: ", _result)
         return _result
 
-    def get_gif(self):
-        my_headers = {
-            'Connection': 'keep-alive',
-            'Pragma': 'no-cache',
-            'Cache-Control': 'no-cache',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36',
-            'Accept': 'image/webp,image/apng,image/*,*/*;q=0.8',
-            'Sec-Fetch-Site': 'same-site',
-            'Sec-Fetch-Mode': 'no-cors',
-            'Sec-Fetch-Dest': 'image',
-            'Referer': 'https://dun.163.com/trial/sense',
-            'Accept-Language': 'zh-CN,zh;q=0.9',
-            # 'Cookie': 'Hm_lvt_4671c5d502135636b837050ec6d716ce=1595831833; __root_domain_v=.163.com; _qddaz=QD.cdpldb.b3etw0.kd452iym; Hm_lpvt_4671c5d502135636b837050ec6d716ce=1595990740'
-        }
-        _value = '{"tc":"157.3","dc":"28.8","cc":"94.5","rc":"32.5","rr":"1.5","url":"https://c.dun.163yun.com/api/v2/getconf","host":"c.dun.163yun.com","https":true,"from":"PERF"}'
-        sc = "1920x1080"
-        _url = self.gif_url.format(id=self.my_id, uuid=self.get_ramdom_str(17), value=_value, res=sc,
-                                   nts=int(time.time() * 1000))
-        _resp = requests.get(url=_url, headers=my_headers)
-        print("get_gif: ", _resp.status_code)
-        pass
-
-    def get_core_js(self):
-        _url = "https://cstaticdun.126.net/2.14.0/core.v2.14.0.min.js"
-        self.headers["Host"] = "cstaticdun.126.net"
-        _resp = requests.get(url=_url, headers=self.headers)
-        print("get_core_js: {}".format(_resp.status_code))
-        pass
-
-    def get_conf1(self):
-        self.get_gif()
-        self.get_core_js()
-
+    def get_conf(self):
         self.headers["Host"] = "c.dun.163.com"
-        _url = self.url_conf1.format(id=self.my_id,
-                                     my_callback="__JSONP_{}_{}".format(self.get_ramdom_str(7), self.count1))
-        # _url = self.url_conf1.format(id=self.my_id, my_callback="__JSONP_{}_0".format(self.get_ramdom_str(7)))
-        # _resp = self.session.get(url=_url, headers=self.headers)
-        _resp = requests.get(url=_url, headers=self.headers)
-        print("get_conf1: ", _url)
-        print("resp1: ", _resp.text)
-        self.count1 += 1
-        pass
-
-    def get_conf2(self):
-        _url = self.url_conf2.format(id=self.my_id, my_callback="__JSONP_{}_{}".format(self.get_ramdom_str(7), self.count1))
-        # _url = self.url_conf2.format(id=self.my_id, my_callback="__JSONP_{}_0".format(self.get_ramdom_str(7)))
-        # _resp = self.session.get(url=_url, headers=self.headers)
-        _resp = requests.get(url=_url, headers=self.headers)
-        print("get_conf2: ", _url)
-        print("resp2: ", _resp.text)
-        self.count1 += 1
-        pass
+        my_callback = self.session.get(self.callback_url).text
+        data = {
+            "id": self.my_id,
+            "ipv6": "false",
+            "runEnv": 10,
+            "referer": "https://dun.163.com/trial/sense",
+            "callback": my_callback,
+        }
+        _resp = self.session.get(url=self.url_conf, headers=self.headers, params=data)
+        print("get_conf: ", _resp.text)
 
     def get_1(self):
-        self.fail_flag = False
-
         self.headers["Host"] = "c.dun.163.com"
         cb = requests.get(self.cb_url).text
         self.fp = requests.get(self.fp_url).text
-        print("self.fp: {}".format(self.fp))
-        random_cb_str = requests.get(self.callback_url).text
+        my_callback = requests.get(self.callback_url).text
+        data = {
+            "id": self.my_id,
+            "fp": "",
+            "https": "true",
+            "type": 2,
+            "width": 320,
+            "version": "2.14.0",
+            "dpr": "1",
+            "dev": "1",
+            "cb": cb,
+            "ipv6": "false",
+            "runEnv": "10",
+            "group": "",
+            "scene": "",
+            "referer": "https://dun.163.com/trial/sense",
+            "callback": my_callback,
+        }
 
-        _url = self.url_get1.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_{}".format(random_cb_str, self.count2))
-        # _url = self.url_get1.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_0".format(random_cb_str))
-        # _resp = self.session.get(url=_url, headers=self.headers)
-        _resp = requests.get(url=_url, headers=self.headers)
-        self.count2 += 1
-        print("get_conf2: ", _url)
-        print("resp2: ", _resp.text)
+        _resp = requests.get(url=self.url_get, params=data, headers=self.headers)
 
-        if "param check error" in _resp.text:
-            self.fail_flag = True
-        pass
-
-    def get_2(self):
-        self.headers["Host"] = "c.dun.163.com"
-        cb = requests.get(self.cb_url).text
-        random_cb_str = requests.get(self.callback_url).text
-
-        _url = self.url_get2.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_{}".format(random_cb_str, self.count2))
-        # _url = self.url_get2.format(id=self.my_id, cb=cb, fp=self.fp, my_callback="__JSONP_{}_0".format(random_cb_str))
-        # _resp = self.session.get(url=_url, headers=self.headers)
-        _resp = requests.get(url=_url, headers=self.headers)
-        print("get_conf2: ", _url)
-        print("resp2: ", _resp.text)
-        self.count2 += 1
-
-        if "param check error" in _resp.text:
-            self.fail_flag = True
-
-        if not self.fail_flag:
-            self.success += 1
-
-        self.total += 1
-
-        print("目前成功率为：{} {}/{}".format(self.success/self.total, self.success, self.total))
-        pass
-
-    pass
+        print("get_1: {}".format(_resp.text))
+        return _resp.text
 
 
 if __name__ == '__main__':
 
-    my_id = "5a0e2d04ffa44caba3f740e6a8b0fa84"
+    my_id = "07e2387ab53a4d6f930b8d9a9be71bdf"
     sdk_url = "http://127.0.0.1:8088"
     dun = YiDun(my_id, sdk_url)
 
-    i = 0
+    success = 0
+    total = 0
     while True:
-        dun.get_conf1()
-        # time.sleep(2)
-        dun.get_conf2()
+        fail_flag = False
 
-        time.sleep(0.5)
+        dun.get_conf()
+        _text = dun.get_1()
+        if "param check error" in _text:
+            fail_flag = True
+        if not fail_flag:
+            success += 1
 
-        dun.get_1()
-        # time.sleep(0.5)
-        dun.get_2()
+        total += 1
 
+        print("目前成功率为：{} {}/{}".format(success / total, success, total))
         print("-"*200)
         print()
-        print()
-        print()
-        time.sleep(10)
-        # if i > 6:
-        #     break
-        i += 1
+        time.sleep(1)
+        if total > 100:
+            break
     pass
 
 
