@@ -320,8 +320,7 @@ var f2 = function (e) {
             m = !1;
         if (this.ended) return !1;
         u = t === ~~t ? t : !0 === t ? my_a.Z_FINISH : my_a.Z_NO_FLUSH, "string" == typeof e ? d.input = i.binstring2buf(e) :
-            "[object ArrayBuffer]" === my_c.call(e) ? d.input = new Uint8Array(e) : d.input = e, d.next_in = 0, d.avail_in = d
-            .input.length;
+            "[object ArrayBuffer]" === my_c.call(e) ? d.input = new Uint8Array(e) : d.input = e, d.next_in = 0, d.avail_in = d.input.length;
         do {
             if (0 === d.avail_out && (d.output = new Uint8Array(p), d.next_out = 0, d.avail_out = p), (n = my_inflate(d, my_a.Z_NO_FLUSH)) ===
             my_a.Z_NEED_DICT && h && (n = my_inflateSetDictionary(this.strm, h)), n === my_a.Z_BUF_ERROR && !0 === m && (n = a
