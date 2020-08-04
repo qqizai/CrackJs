@@ -3877,8 +3877,14 @@ window.NECaptcha = function(e) {
                                 clientY: n,
                                 dragX: t - i.startX
                             });
-                        var u = this.$store.state.token
-                            , f = p(u, [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime] + "");
+                        var u = this.$store.state.token;
+                        var my_xy = [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime];
+                        this.my_xy = []
+                        this.my_xy.push(my_xy);
+                        console.log("my_xy: ", my_xy)
+                        console.log("this.my_xy: ", this.my_xy);
+                        // var f = p(u, [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime] + "");
+                        var f = p(u, my_xy + "");
                         this.traceData.push(f),
                         "dragstart" === i.status && this.onMouseMoveStart(e),
                         "dragging" === i.status && this.onMouseMoving(e)

@@ -4050,8 +4050,14 @@ window.NECaptcha = function(e) {
                                 clientY: n,
                                 dragX: t - i.startX
                             });
-                        var u = this.$store.state.token
-                            , f = p(u, [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime] + "");
+                        var u = this.$store.state.token;
+                        var my_xy = [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime];
+                        this.my_xy = []
+                        this.my_xy.push(my_xy);
+                        console.log("my_xy: ", my_xy)
+                        console.log("this.my_xy: ", this.my_xy);
+                        // var f = p(u, [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime] + "");
+                        var f = p(u, my_xy + "");
                         this.traceData.push(f),
                         "dragstart" === i.status && this.onMouseMoveStart(e),
                         "dragging" === i.status && this.onMouseMoving(e)
@@ -6639,7 +6645,7 @@ window.NECaptcha = function(e) {
                             }
                             function d() {//用于检测浏览器是否支持ActiveX控件
                                 try {
-                                    debugger;
+                                    // debugger;
                                     // return window[e[105]] && m.h ? p() : h()
                                     return h();
                                 } catch (t) {
@@ -6647,7 +6653,7 @@ window.NECaptcha = function(e) {
                                 }
                             }
                             function h() {
-                                debugger;
+                                // debugger;
                                 // if (!J[l[4]])
                                 if (!window.navigator["plugins"]){
                                     // return l[0];
@@ -6696,7 +6702,7 @@ window.NECaptcha = function(e) {
                                     var n = y(e, function(e) {
                                         return [e.type, e.suffixes].join("~")//u[97]="~"
                                     }).join(",");//l[35]=","
-                                    debugger;
+                                    // debugger;
                                     console.log("n: ", n);
                                     return [e.name, e.description, n].join("::")//s[75]="::"  */
 
@@ -6734,7 +6740,7 @@ window.NECaptcha = function(e) {
                                 return i;//u[9]=";"
                             }
                             function p() {
-                                debugger
+                                // debugger
                                 return window[e[105]] ? y([u[189], e[44], e[67], e[50], s[138], u[150], s[70], u[171], s[97], u[128], e[1], u[53], u[115], u[184], e[111], e[1], u[55], u[101], e[63], s[41], e[100], s[104], e[77]], function(t) {
                                     try {
                                         return new window[e[105]](t),
@@ -6745,7 +6751,7 @@ window.NECaptcha = function(e) {
                                 }).join(u[9]) : l[0]
                             }
                             function y(e, t, n) {//最终的获取浏览器插件的函数
-                                debugger
+                                // debugger
                                 var i = [];
                                 //todo 这里需要核查，是否异常，因为这里的生成会报异常！
                                 return null == e ? i : b && e.map === b ? e.map(t, n) : (v(e, function(e, r, o) {
@@ -6781,7 +6787,7 @@ window.NECaptcha = function(e) {
                             // 改写为这个：("undefined" == "object" ? "undefined" : "object") == "function" ? m.e = i : ((m.b = i.b), (m.a = i.a)),
                             ((m.b = i.b), (m.a = i.a));
                             this.get = function() {//原来 m.get(){}就是这个函数
-                                debugger;
+                                // debugger;
                                 var i = []
                                     , o = [];
                                 if (K) {
@@ -6811,7 +6817,7 @@ window.NECaptcha = function(e) {
                                         } catch (v) {
                                             l = !1
                                         }
-                                    debugger;
+                                    // debugger;
                                     if (l)
                                         try {
                                             i.push(j()),//i.push一个图片，可以直接写死：data:image/png;base64,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
@@ -6845,7 +6851,7 @@ window.NECaptcha = function(e) {
                                 // var v2 = o.join(s[139]);
 
                                 y = [];
-                                debugger
+                                // debugger
                                 m.e ? (y.push(m.e(v1)), y.push(m.e(v2))) : (y.push(_(v1)), y.push(_(v2)));
                                 console.log("y: ", y);
                                 return y;
@@ -7355,10 +7361,10 @@ window.NECaptcha = function(e) {
                                 else {
                                     var Ie = 3;
                                     try {
-                                        debugger
+                                        // debugger
                                         // for (var K = [], $e = t[9]; $e < Y.length; ) {
                                         for (var K = [], $e = 0; $e < Y.length; ) {
-                                            debugger
+                                            // debugger
                                             if (!($e + Ie <= Y.length)) {
                                                 K.push(a(Y, $e, Y.length - $e));
                                                 break
@@ -7373,17 +7379,17 @@ window.NECaptcha = function(e) {
                                     }
                                 }
                                 h = Oe
-                                debugger
+                                // debugger
                             } catch (xe) {
                                 console.log("执行了错误的类型检测")
-                                debugger
+                                // debugger
                                 h = x({
                                     ec: l[44],
                                     em: xe.message
                                 }),
                                     e = !1
                             }
-                            debugger
+                            // debugger
                             h = h + u[7] + p,//这个就是浏览器指纹
                                 A(le, h, e, _),
                                 D(le, h),
