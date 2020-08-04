@@ -1,7 +1,7 @@
 
 
 
-function(e, t, n) {
+function demo(e, t, n) {
     "use strict";
     var r = Object.assign || function(e) {
         for (var t = 1; t < arguments.length; t++) {
