@@ -71,7 +71,7 @@ function my_n(e, t) {
  * 轨迹描述：
  * [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime]
  *
- * 滑动距离，
+ * [滑动距离，滑动后的位置Y-起始位置Y，滑动的时间]
  *
  * */
 
