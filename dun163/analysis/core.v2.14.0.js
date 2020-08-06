@@ -3869,16 +3869,26 @@ window.NECaptcha = function(e) {
                         , r = i.status
                         , s = i.beginTime
                         , l = i.startX;
+                    //debugger;
                     if (i.status = s && t - l > 3 && "dragend" === r ? "dragstart" : r,
                     "dragend" !== i.status) {
+                        console.log("[clientX, startX]= ["+i.startX+", "+e.clientX+"]");
                         !(e.type.indexOf("touch") !== -1 && o.supportPassive) && e.preventDefault(),
                             Object.assign(i, {
                                 clientX: t,
                                 clientY: n,
                                 dragX: t - i.startX
                             });
-                        var u = this.$store.state.token
-                            , f = p(u, [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime] + "");
+                        var u = this.$store.state.token;
+                        var my_xy = [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime];
+                        if(!window.my_xy){
+                            window.my_xy = [];
+                        }
+                        window.my_xy.push(my_xy);
+                        console.log("my_xy: ", my_xy)
+                        console.log("window.my_xy: ", window.my_xy);
+                        // var f = p(u, [Math.round(i.dragX < 0 ? 0 : i.dragX), Math.round(i.clientY - i.startY), a.now() - i.beginTime] + "");
+                        var f = p(u, my_xy + "");
                         this.traceData.push(f),
                         "dragstart" === i.status && this.onMouseMoveStart(e),
                         "dragging" === i.status && this.onMouseMoving(e)
@@ -3908,20 +3918,35 @@ window.NECaptcha = function(e) {
                 },
                 onMouseUp: function(e) {
                     var t = this.drag;
-                    if ("dragend" === t.status)
+                    if ("dragend" === t.status){
+                        console.log("为什么是end了");
                         return void Object.assign(t, {
                             beginTime: 0
                         });
+                    }
+                    //debugger;
                     Object.assign(t, w);
-                    var n = a.sample(this.traceData, u)
-                        , i = this.$store.state.token
-                        , r = h(p(i, parseInt(this.$jigsaw.style.left, 10) / this.width * 100 + ""));
+                    this.traceData = ["/rZjiOeHvA33","/XZjiweH\\A33","/XZjieeRrp33","/IZj//e\\v4i3","/ZZj/Oe\\vEq3","xrZj/we\\vgj3","xrZjx/e\\vvz3","xrZjxOe\\r4i3","xrZjip/kvEi8","xrZjipgkvENg","xXZjip+kvEI/","xXZjip+kvEA1","igr90pgnn4jxvp33","igr90pgPn4j1vA33","igr90pgpn4j1\\A33","igp90pgOn4jirp33","igj90pgOn4j/rA33","igj90pgOn4jUvp33","igj90pgHn4j0rA33","igq90pgHn4jkrA33","igX90pgHn4j8vp33","igi90pgHn4q1vp33","igN90pgHn4qivi33","igN90pgHn4qi\\A33","igI90pgHn4q/rp33","igA90pgHn4qUrA33","iEr90pgHn4q0rc33","iEp90pgHn4qXvA33","iEj90pgHn4qgvc33","iEq90pgHn4qgrp33","iEX90pgOn4qkri33","iEN90pgOn4q8vA33","iEz90pgPn4Xxvc33","iEI90pgnn4X1vc33","i4p90pgvn4X1rA33","i4j90pgrn4Xirp33","i4q90pg6n4X/vA33","i4i90p4kr4X1","i4N90pwkr4Xg","i4I90p9kr4iX","i4I90pukr4NX","/vr90pvkr4zi","/vr90pvkr4z8","/vr90pOkr4Ik","/vj90p+kr4A0","/vq90p7krErU","/vX90p7krEp1","/vi90pgkrEpk","/vN90pgkrEj0","/vz90pgkrEqU","/vI90pgkrEXi","/vI9i/ePrEr3","/vA9i/ePrvq3","/gr9i/eP\\4p3","/gr9iOeP\\Ez3","/gp9iwepv4i3","/gj9iwepvEq3","/gj9ieepvgj3","/gq9ieepvgA3","/gi9ieepvvI3","/gN9//epr4q3","/gz9/weprEj3","/gA9/eeprEA3","/Ep9x/eprgI3","/EX9xOeprvi3","/Ei9ipgkrgIU","/Ez9ipgkrgA1","/EA9ipgkrvrx","/4p9ip7krvrk","/4j9ip7krvpX","/4q9ip7krvjU","/4X9ip7krvq1","/4N9ip7krvXx","/4z9ip7krvXg","/4I9ip7krvi0","xvr9ip7krvN1","xvr9ip7krvzx","xvr9ip7krvzU","xvj9ip7krvzg","xvq9ip7krvIX","xvX9ip7krvA/","xvi9ip7k\\4ri","xvz9ipgk\\4r8","xvI9ipgk\\4pk","xvA9ip/k\\4j0","xgp9xOeHvvX3","xgj9x/eHr4j3","xgq9/eeHrEr3","xgi9/eeHrEI3","xgN9/weHrgN3","xgz9/OeHrvj3","xgz9/OeHrvX3","xgA9ieeHrvA3","igr/0i+k\\4Ik","igri0i7k\\4A0","igr10i/k\\ErU","igr10/E\\n4A1vA33","igrx0/Ern4A1\\A33","igrg0/Enn4Airp33","igrX0/EPn4A/ri33","igr00/Epn4AUrc33","igrU0/EOn4A0vi33","igrU0/EOn4A0\\c33","igr70/ERn4A0\\A33","igp/0/E\\vZZ8riF3","igp/0/E\\vIZ8rpz3","igpi0/E\\vXZ8\\cN3","igp10/E\\vrZ8\\Aj3","igp10/E\\vrZ8\\Ai3","igp10/E\\rZZ1vc9v","igpx0/E\\rIZ1vcup","igpg0/E\\rXZ1vcv2","igpg0/E\\rrZ1vcOG","igpX0/E\\\\ZZ1vc+6","igpX0/E\\\\IZ1vc7\\","igp00/ErvIZ1vcgO","igpU0/ErvIZ1vc/P","igp70/ErvXZ1vcL6","igp70/ErvrZ1vcDp","igpz0/ErvrZ1vA9n","igj/0/ErrZZ1vA92","igj/0/ErrIZ1vAuv","igj/0/ErrIZ1vAv\\","igji0/ErrIZ1vAO6","igj10/ErrIZ1vA+p","igj10/ErrXZ1vA7O","igjx0/ErrXZ1vA72","igjg0/Er\\ZZ1vAgG","igjX0/Er\\IZ1vA/6","igj00/Er\\IZ1vAL\\","igj70/Er\\IZ1vADn","igj70/Er\\IZ1vi9P","igjz0/EvvZZ1vi9G","igq/0/EvvIZ1viuv","igq10/EvvIZ1viv\\","igq10/EvvIZ1viOn","igqg0/EvvIZ1vi+P","igq00/EvvIZ1vi+6","igq00/EvvXZ1vi7\\","igq70/EvvXZ1vign","igX/0/EvvXZ1vi/P","igX/0/EvvXZ1vi/r","igX10/EvvXZ1viLv","igXx0/EvvXZ1viDp","igXg0/EvvXZ1vp9O","igX00/EvvXZ1vp92","igXU0/EvvXZ1vpuG","igX70/EvvXZ1vpv6","igXz0/EvvXZ1vpO\\","igii0/EvvXZ1vp+n","igi10/EvvXZ1vp7P","igix0/EvvIZ1vp7v","igiX0/EvvZZ1vpgp","igi00/Er\\IZ1vp/O","igi70/ErrrZ1vp/2","igiz0/ErrrZ1vpLG","igN/0/ErrXZ1vpD6","igN10/ErrIZ1rc9\\","igNg0/ErvrZ1rcun","igNg0/ErvXZ1rcvP","igN00/ErvIZ1rcvr","igN70/ErvIZ1rcOv","igN70/E\\\\IZ1rc+\\","igNz0/E\\\\ZZ1rc7O","igzi0/E\\rrZ1rc72","igz10/E\\rIZ1rcgG","igzg0/E\\rZZ1rc/\\","igzX0/E\\vrZ1rcLn","igz00/E\\vXZ1rcDP","igz70/E\\vIZ1rcDr","igI/0/ERn4p0vcX3","igIi0/ERn4p0viq3","igIx0/EHn4p0vim3","igIg0/EOn4p0vpF3","igIX0/Epn4p0rcz3","igIU0/Epn4p0rAN3","igI70/EPn4p0riq3","igIz0/EPn4p0rpj3","igAi0/Enn4p0rpi3","igA10/Evn4p0\\cX3","igAx0/Ern4p0\\Ap3","igAg0/Ern4pXvcj3","igA00/E\\n4pXvcF3","igA00/E\\n4pXvAX3","igA70/E\\n4pXviN3","iEr/0/E\\n4pXvpq3","iEr/0/E\\n4pXrcj3","iEr10/E\\n4pXrci3","iErx0/E\\n4pXrAX3","iErg0/E\\n4pXrip3","iErX0/E\\n4pXrpr3","iEr00/E\\n4pXrpm3","iEr70/E\\n4pX\\cF3","iEr70/E\\n4pX\\Az3","iEp/0/E\\n4pgvcm3","iEp10/E\\n4pgvAF3","iEp10/E\\n4pgviz3","iEpg0/E\\n4pgvpN3","iEp00/E\\n4pgrcq3","iEp00/Ern4pgrAj3","iEp70/Evn4pgrAF3","iEj/0/EPn4pgriz3","iEji0/Epn4pgrpN3","iEj10/EOn4pg\\cq3","iEjg0/ERn4pg\\Aj3","iEjX0/E\\vZZ1rpDr","iEjU0/E\\vXZ1\\c9v","iEj70/E\\vrZ1\\cup","iEjz0/E\\rZZ1\\cvO","iEqi0/E\\rXZ1\\cv2","iEq10/E\\rrZ1\\cOG","iEqg0/E\\\\IZ1\\c+p","iEqX0/ErvZZ1\\c7O","iEq00/ErvIZ1\\c72","iEq70/ErvXZ1\\cgG","iEX/0/ErvrZ1\\c/6","iEX/0/ErrZZ1\\cL\\","iEX/0/ErrZZ1\\cDn","iEX10/ErrIZ1\\A9P","iEX10/ErrIZ1\\A9G","iEXg0/ErrXZ1\\Au6","iEXg0/ErrXZ1\\Av\\","iEXX0/ErrrZ1\\AOn","iEXU0/Er\\ZZ1\\A+P","iEX70/Er\\IZ1\\A+r","iEX70/Er\\IZ1\\A7\\","iEi/0/Er\\IZ1\\Agn","iEii0/EvvZZ1\\A/r","iEi10/EvvZZ1\\ALv","iEi10/EvvIZ1\\ADr","iEix0/EvvIZivcuP","iEig0/EvvIZivcuG","iEiX0/EvvIZivcv2","iEi00/EvvIZivcgn","iEi00/EvvIZivc/2","iEiU0/EvvIZivcD6","iEi70/EvvIZivA9r","iEiz0/EvvIZivAOn","iEN/0/EvvIZivA7n","iEN/0/EvvIZivA72","iEN10/EvvIZivA/6","iENx0/EvvIZivADO","iENg0/EvvZZivADr","iENg0/EvvZZivi92","iENX0/Er\\IZiviur","iEN00/Er\\IZiviv6","iENU0/Er\\IZiviOp","iENU0/Er\\IZivi+n","iEN70/Er\\IZivi+2","iENz0/Er\\IZivig6","iENz0/Er\\ZZivi/p","iEz/0/Er\\ZZiviL2","iEz10/Er\\ZZiviDr","iEz10/ErrrZivp92","iEz10/ErrrZivpur","iEz10/ErrXZivpvp","iEzx0/ErrXZivpOn","iEzx0/ErrIZivp+p","iEzg0/ErrIZivpLp","iEzX0/ErrIZivpDn","iEz00/ErrZZirc9p","iEz00/ErrZZirc+2","iEz00/ErvrZirc7r","iEzU0/ErvXZircg2","iEz70/ErvIZircL6","iEz70/ErvIZircDp","iEI70/Enn4jXvpz3","iEI70/Evn4jXrcp3","iEI70/Ern4jXrAm3"];
+                    var n = a.sample(this.traceData, u);
+                    var i = this.$store.state.token;
+                    debugger;
+                    var value_parseInt = parseInt(this.$jigsaw.style.left, 10) / this.width * 100;
+                    debugger;
+                    var value_p = p(i, value_parseInt + "");
+                    debugger;
+                    var r = h(value_p);
+                    debugger;
+                    var value_d = h(n.join(":"));
+                    debugger;
+                    console.log("mouseDownCounts/length :"+this.mouseDownCounts + "," + this.traceData.length);
+                    var value_ext = h(p(i, this.mouseDownCounts + "," + this.traceData.length));
+                    debugger;
                     this.onVerifyCaptcha({
                         data: JSON.stringify({
-                            d: h(n.join(":")),
+                            d: value_d,
                             m: "",
                             p: r,
-                            ext: h(p(i, this.mouseDownCounts + "," + this.traceData.length))
+                            ext: value_ext
                         })
                     })
                 },
@@ -6220,18 +6245,15 @@ window.NECaptcha = function(e) {
                             return e
                         }
                         function a(e, n, i) {
-                            debugger
                             var r, o = [l[44], l[46], l[42], u[50], u[43], u[22], u[63], u[32], u[91], u[27], u[46], u[44], u[86], u[59], u[39], u[68], u[60], u[5], u[82], u[31], u[28], u[33], u[1], u[56], u[21], u[67], u[42], u[88], u[30], l[41], u[15], u[52], u[90], u[6], u[41], u[16], u[66], l[43], u[17], u[36], u[93], u[23], u[34], u[54], u[69], u[58], u[71], u[24], u[94], l[45], u[3], u[76], u[85], u[61], u[14], u[79], u[38], l[34], u[26], u[29], u[13], u[0], u[72], u[70]], a = u[19], s = [];
-                            if (i == t[535]){//i == 1
+                            if (i == t[535])
                                 i = e[n],
                                     r = t[9],
                                     s.push(o[i >>> t[10] & t[147]]),
                                     s.push(o[(i << t[17] & t[116]) + (r >>> t[17] & t[50])]),
                                     s.push(a),
                                     s.push(a);
-                            }
-                            else if (i == t[10]){// i == 2
-                                debugger;
+                            else if (i == t[10])
                                 i = e[n],
                                     r = e[n + t[535]],
                                     e = t[9],
@@ -6239,9 +6261,7 @@ window.NECaptcha = function(e) {
                                     s.push(o[(i << t[17] & t[116]) + (r >>> t[17] & t[50])]),
                                     s.push(o[(r << t[10] & t[142]) + (e >>> t[24] & t[13])]),
                                     s.push(a);
-                            }
                             else {
-                                debugger
                                 if (i != t[13])
                                     throw Error(u[64]);
                                 i = e[n],
@@ -6333,7 +6353,6 @@ window.NECaptcha = function(e) {
                         }
                         function m(i) {
                             function r() {
-                                debugger;
                                 for (var n = [e[34], s[20], s[123], u[174], s[137], l[37], s[144], s[89], s[161], e[32], l[19], e[54], s[11], e[89], s[92], u[134], e[88], s[34], s[32], u[65], u[163], u[147], e[33], s[47], e[29], e[28], u[113], s[162], e[106], u[151], e[49], u[51], s[90], u[137], u[176], s[2], e[115], u[179], u[80], u[45], s[37], e[69], s[108], u[20], s[169], s[121], s[68], s[62], u[181], e[38], s[135], e[86], e[35], s[29], e[112], e[24], s[88], e[45], e[98], s[173], u[122], s[168], e[25], u[35], s[81], s[94], s[129], s[64], e[116], e[108], e[118], u[165], e[31], s[102], e[30], s[55], u[182], s[163], e[13], e[119], e[20], s[5], l[27], e[91], e[41], e[36], u[57], s[147], u[177], e[8], u[196], e[73], u[157], s[7], e[51], s[57], s[77], u[159], l[3], u[18], s[86], u[139], e[72], u[123], e[96], s[13], u[127], e[23], s[3], l[47], s[40], s[56], s[71], u[106], u[78], s[100], l[38]], i = [], r = t[9]; r < n.length; r++)
                                     try {
                                         var a = n[r];
@@ -6342,32 +6361,27 @@ window.NECaptcha = function(e) {
                                 return i.join(u[9])
                             }
                             function o() {
-                                debugger;
                                 function n(t) {
                                     var n = {};
-                                    c.style.fontFamily = t;
-                                    f.appendChild(c);
-                                    n.height = c.offsetHeight;
-                                    n.width = c.offsetWidth;
-                                    f[e[58]](c);
-                                    return n;
+                                    return c.style.fontFamily = t,
+                                        f.appendChild(c),
+                                        n.height = c.offsetHeight,
+                                        n.width = c.offsetWidth,
+                                        f[e[58]](c),
+                                        n
                                 }
-                                var i = [s[9], s[127], s[170]];
-                                var r = [];
-                                var o = s[125];
-                                var a = e[78];
-                                var f = G[e[10]];
-                                var c = G[u[120]](s[109]);
+                                var i = [s[9], s[127], s[170]]
+                                    , r = []
+                                    , o = s[125]
+                                    , a = e[78]
+                                    , f = G[e[10]]
+                                    , c = G[u[120]](s[109]);
                                 for (c.style.fontSize = a,
-                                     c.style.visibility = s[25],
-                                     c.innerHTML = o,
-                                     o = t[9];
-                                     o < i.length;
-                                     o++){
+                                         c.style.visibility = s[25],
+                                         c.innerHTML = o,
+                                         o = t[9]; o < i.length; o++)
                                     r[o] = n(i[o]);
-                                }
                                 return function(e) {
-                                    debugger;
                                     for (var o = t[9]; o < r.length; o++) {
                                         var a = n(e + l[35] + i[o])
                                             , s = r[o];
@@ -6378,7 +6392,6 @@ window.NECaptcha = function(e) {
                                 }
                             }
                             function a() {
-                                debugger;
                                 var t = null
                                     , n = null
                                     , i = [];
@@ -6394,7 +6407,6 @@ window.NECaptcha = function(e) {
                                 try {
                                     i.push(f(t, n))
                                 } catch (a) {}
-                                debugger;
                                 return i.join(u[9])
                             }
                             function f(n, i) {
@@ -6429,139 +6441,78 @@ window.NECaptcha = function(e) {
                                     return e[75]
                                 }
                             }
-                            function c() {//用于检测指定列表之中的那些标签，的那些RGB色号
-                                debugger;
-                                var n = G[u[120]](u[108]);//n=G["createElement"]("div")
-                                var i = [];
-                                //循环检测下面这个列表 r 的标签的颜色
-                                // var r = ["ActiveBorder", "ActiveCaption", "AppWorkspace", "Background", "ButtonFace", "ButtonHighlight", "ButtonShadow", "ButtonText", "CaptionText", "GrayText", "Highlight", "HighlightText", "InactiveBorder", "InactiveCaption", "InactiveCaptionText", "InfoBackground", "InfoText", "Menu", "MenuText", "Scrollbar", "ThreeDDarkShadow", "ThreeDFace", "ThreeDHighlight", "ThreeDLightShadow", "ThreeDShadow", "Window", "WindowFrame", "WindowText"]
-                                var r = [s[110], e[22], e[79], e[66], u[145], s[153], s[10], s[130], e[26], l[1], e[80], u[107], u[114], u[191], u[2], s[106], e[0], u[192], u[109], e[94], s[118], s[73], s[35], s[111], l[33], e[95], s[60], u[103]];
-
-                                //真机这里是为false的
-                                /*if (!window[s[141]])
-                                    return i.join(l[0]);*/
-
+                            function c() {
+                                var n = G[u[120]](u[108])
+                                    , i = []
+                                    , r = [s[110], e[22], e[79], e[66], u[145], s[153], s[10], s[130], e[26], l[1], e[80], u[107], u[114], u[191], u[2], s[106], e[0], u[192], u[109], e[94], s[118], s[73], s[35], s[111], l[33], e[95], s[60], u[103]];
+                                if (!window[s[141]])
+                                    return i.join(l[0]);
                                 for (var o = t[9]; o < r.length; o++)
                                     try {
-                                        G[e[10]].appendChild(n),//先添加标签
+                                        G[e[10]].appendChild(n),
                                             n.style.color = r[o],
-                                            i.push(r[o]),//i.push("ActiveBorder")
-                                            i.push(window[s[141]](n).getPropertyValue(s[24])),//i.push("rgb(255, 255, 255)")
-                                            G[e[10]][e[58]](n)//检测完颜色之后，移除标签
+                                            i.push(r[o]),
+                                            i.push(window[s[141]](n).getPropertyValue(s[24])),
+                                            G[e[10]][e[58]](n)
                                     } catch (a) {
-                                        //获取系统颜色失败
-                                        // i.push(e[99])
-                                        // i.push("get system colors exception")
-                                        debugger;
-                                        console.log(i)
+                                        i.push(e[99])
                                     }
-                                //最后i:
-                                // ["ActiveBorder", "rgb(255, 255, 255)", "ActiveCaption", "rgb(204, 204, 204)", "AppWorkspace", "rgb(255, 255, 255)", "Background", "rgb(99, 99, 206)", "ButtonFace", "rgb(240, 240, 240)", "ButtonHighlight", "rgb(221, 221, 221)", "ButtonShadow", "rgb(136, 136, 136)", "ButtonText", "rgb(0, 0, 0)", "CaptionText", "rgb(0, 0, 0)", "GrayText", "rgb(109, 109, 109)", "Highlight", "rgb(0, 120, 215)", "HighlightText", "rgb(255, 255, 255)", "InactiveBorder", "rgb(255, 255, 255)", "InactiveCaption", "rgb(255, 255, 255)", "InactiveCaptionText", "rgb(127, 127, 127)", "InfoBackground", "rgb(251, 252, 197)", "InfoText", "rgb(0, 0, 0)", "Menu", "rgb(247, 247, 247)", "MenuText", "rgb(0, 0, 0)", "Scrollbar", "rgb(255, 255, 255)", "ThreeDDarkShadow", "rgb(102, 102, 102)", "ThreeDFace", "rgb(192, 192, 192)", "ThreeDHighlight", "rgb(221, 221, 221)", "ThreeDLightShadow", "rgb(192, 192, 192)", "ThreeDShadow", "rgb(136, 136, 136)", "Window", "rgb(255, 255, 255)", "WindowFrame", "rgb(204, 204, 204)", "WindowText", "rgb(0, 0, 0)"]
-                                //"ActiveBorder:rgb(255, 255, 255):ActiveCaption:rgb(204, 204, 204):AppWorkspace:rgb(255, 255, 255):Background:rgb(99, 99, 206):ButtonFace:rgb(240, 240, 240):ButtonHighlight:rgb(221, 221, 221):ButtonShadow:rgb(136, 136, 136):ButtonText:rgb(0, 0, 0):CaptionText:rgb(0, 0, 0):GrayText:rgb(109, 109, 109):Highlight:rgb(0, 120, 215):HighlightText:rgb(255, 255, 255):InactiveBorder:rgb(255, 255, 255):InactiveCaption:rgb(255, 255, 255):InactiveCaptionText:rgb(127, 127, 127):InfoBackground:rgb(251, 252, 197):InfoText:rgb(0, 0, 0):Menu:rgb(247, 247, 247):MenuText:rgb(0, 0, 0):Scrollbar:rgb(255, 255, 255):ThreeDDarkShadow:rgb(102, 102, 102):ThreeDFace:rgb(192, 192, 192):ThreeDHighlight:rgb(221, 221, 221):ThreeDLightShadow:rgb(192, 192, 192):ThreeDShadow:rgb(136, 136, 136):Window:rgb(255, 255, 255):WindowFrame:rgb(204, 204, 204):WindowText:rgb(0, 0, 0)"
-                                // return i.join(u[7])
-                                return i.join(":")
+                                return i.join(u[7])
                             }
                             function j() {
                                 try {
-                                    debugger;
-                                    var n = G[u[120]](s[66]);//n = G["createElement"]("canvas")
-                                    var i = n[s[171]](e[104]);//i = n["getContext"]("2d")
-                                    var r = s[91];//r = "mwC nkbafjord phsgly exvt zqiu, ὠ tphst/:/uhbgtic.mo/levva"
-                                    i[s[156]] = u[188];//i["textBaseline"]="top"
-                                    i[u[98]] = e[84];//i["font"]="70px 'Arial'"
-                                    i[s[156]] = u[155];//i["textBaseline"]="alphabetic"
-                                    i[u[172]] = e[121];//i["fillStyle"]="#f60"
-                                    i[e[122]](t[275], t[535], t[146], t[60]);//i["fillRect"](125, 1, 62, 20)
-                                    i[u[172]] = s[157];//i["fillStyle"] = "#069"
-                                    i.fillText(r, t[10], t[50]);//i.fillText(r, 2, 15)
-                                    i[u[172]] = e[64];//i["fillStyle"] = "rgba(102, 204, 0, 0.7)"
-                                    i.fillText(r, t[17], t[54]);//i.fillText(r, 4, 17)
-                                    return n[u[102]]();//n["toDataURL"]()
+                                    var n = G[u[120]](s[66])
+                                        , i = n[s[171]](e[104])
+                                        , r = s[91];
+                                    return i[s[156]] = u[188],
+                                        i[u[98]] = e[84],
+                                        i[s[156]] = u[155],
+                                        i[u[172]] = e[121],
+                                        i[e[122]](t[275], t[535], t[146], t[60]),
+                                        i[u[172]] = s[157],
+                                        i.fillText(r, t[10], t[50]),
+                                        i[u[172]] = e[64],
+                                        i.fillText(r, t[17], t[54]),
+                                        n[u[102]]()
                                 } catch (o) {
-                                    // return u[190]
-                                    return "canvas api exception"
+                                    return u[190]
                                 }
                             }
-                            function d() {//用于检测浏览器是否支持ActiveX控件
+                            function d() {
                                 try {
-                                    debugger;
-                                    // return window[e[105]] && m.h ? p() : h()
-                                    return h();
+                                    return window[e[105]] && m.h ? p() : h()
                                 } catch (t) {
                                     return l[32]
                                 }
                             }
                             function h() {
-                                debugger;
-                                // if (!J[l[4]])
-                                if (!window.navigator["plugins"])
-                                    // return l[0];
-                                    return "";
-                                // var n = [u[164], e[65], e[113], l[5], u[136], s[15], s[101], u[183], s[30], u[110], s[132], e[18], s[22], u[199], s[120], e[87], u[142], s[124], e[48], u[154], u[111], u[186], u[200], s[134], s[1], u[8], e[40], u[126], s[158], s[51], s[14], u[197], e[83], u[140], s[119], e[21], e[42], e[101], u[129], e[59], l[40], e[6], s[84], s[58], u[25], l[7], s[42], u[153], s[27], u[195], s[93], u[178], s[53], u[141], e[39], u[143], s[67], e[2], e[97], s[74], e[15], u[166], u[62], u[48], s[165], s[95], s[69], e[110], s[44], e[102], s[72], s[167], u[119], s[38], u[167], u[148], s[23], s[107], s[133], s[16], e[107], e[68], s[19], u[131], u[194], s[43], e[120], u[49], e[3], u[47], s[59], u[149], l[24], u[55], u[37], u[101], u[152], s[46], l[16], u[170], e[4], e[57], s[160], u[175], l[15], u[11], u[156], l[8], s[122], u[198], l[17], u[4], e[47], s[140], s[116], e[82], u[185], s[39], s[48]]
-                                var n = ["4game","AdblockPlugin","AdobeExManCCDetect","AdobeExManDetect","Alawar NPAPI utils",
-                                        "Aliedit Plug-In","Alipay Security Control 3","AliSSOLogin plugin",
-                                        "AmazonMP3DownloaderPlugin","AOL Media Playback Plugin","AppUp","ArchiCAD",
-                                        "AVG SiteSafety plugin","Babylon ToolBar","Battlelog Game Launcher",
-                                        "BitCometAgent","Bitdefender QuickScan","BlueStacks Install Detector",
-                                        "CatalinaGroup Update","Citrix ICA Client","Citrix online plug-in",
-                                        "Citrix Receiver Plug-in","Coowon Update","DealPlyLive Update","Default Browser Helper",
-                                        "DivX Browser Plug-In","DivX Plus Web Player","DivX VOD Helper Plug-in",
-                                        "doubleTwist Web Plugin","Downloaders plugin","downloadUpdater","eMusicPlugin DLM6",
-                                        "ESN Launch Mozilla Plugin","ESN Sonar API","Exif Everywhere","Facebook Plugin",
-                                        "File Downloader Plug-in","FileLab plugin","FlyOrDie Games Plugin",
-                                        "Folx 3 Browser Plugin","FUZEShare","GDL Object Web Plug-in 16.00","GFACE Plugin",
-                                        "Ginger","Gnome Shell Integration","Google Earth Plugin","Google Earth Plug-in",
-                                        "Google Gears 0.5.33.0","Google Talk Effects Plugin","Google Update",
-                                        "Harmony Firefox Plugin","Harmony Plug-In","Heroes & Generals live","HPDetect",
-                                        "Html5 location provider","IE Tab plugin","iGetterScriptablePlugin","iMesh plugin",
-                                        "Kaspersky Password Manager","LastPass","LogMeIn Plugin 1.0.0.935",
-                                        "LogMeIn Plugin 1.0.0.961","Ma-Config.com plugin","Microsoft Office 2013",
-                                        "MinibarPlugin","Native Client","Nitro PDF Plug-In","Nokia Suite Enabler Plugin",
-                                        "Norton Identity Safe","npAPI Plugin","NPLastPass","NPPlayerShell","npTongbuAddin",
-                                        "NyxLauncher","Octoshape Streaming Services","Online Storage plug-in",
-                                        "Orbit Downloader","Pando Web Plugin","Parom.TV player plugin",
-                                        "PDF integrado do WebKit","PDF-XChange Viewer","PhotoCenterPlugin1.1.2.2",
-                                        "Picasa","PlayOn Plug-in","QQ2013 Firefox Plugin","QQDownload Plugin","QQMiniDL Plugin",
-                                        "QQMusic","RealDownloader Plugin","Roblox Launcher Plugin","RockMelt Update",
-                                        "Safer Update","SafeSearch","Scripting.Dictionary","SefClient Plugin","Shell.UIHelper",
-                                        "Silverlight Plug-In","Simple Pass","Skype Web Plugin","SumatraPDF Browser Plugin",
-                                        "Symantec PKI Client","Tencent FTN plug-in","Thunder DapCtrl NPAPI Plugin",
-                                        "TorchHelper","Unity Player","Uplay PC","VDownloader","Veetle TV Core",
-                                        "VLC Multimedia Plugin","Web Components","WebKit-integrierte PDF","WEBZEN Browser Extension",
-                                        "Wolfram Mathematica","WordCaptureX","WPI Detector 1.4","Yandex Media Plugin",
-                                        "Yandex PDF Viewer","YouTube Plug-in","zako"]
+                                if (!J[l[4]])
+                                    return l[0];
+                                var n = [u[164], e[65], e[113], l[5], u[136], s[15], s[101], u[183], s[30], u[110], s[132], e[18], s[22], u[199], s[120], e[87], u[142], s[124], e[48], u[154], u[111], u[186], u[200], s[134], s[1], u[8], e[40], u[126], s[158], s[51], s[14], u[197], e[83], u[140], s[119], e[21], e[42], e[101], u[129], e[59], l[40], e[6], s[84], s[58], u[25], l[7], s[42], u[153], s[27], u[195], s[93], u[178], s[53], u[141], e[39], u[143], s[67], e[2], e[97], s[74], e[15], u[166], u[62], u[48], s[165], s[95], s[69], e[110], s[44], e[102], s[72], s[167], u[119], s[38], u[167], u[148], s[23], s[107], s[133], s[16], e[107], e[68], s[19], u[131], u[194], s[43], e[120], u[49], e[3], u[47], s[59], u[149], l[24], u[55], u[37], u[101], u[152], s[46], l[16], u[170], e[4], e[57], s[160], u[175], l[15], u[11], u[156], l[8], s[122], u[198], l[17], u[4], e[47], s[140], s[116], e[82], u[185], s[39], s[48]]
                                     , i = []
                                     , r = {};
-
-                                var fc = function(e) {
+                                return i.push(y(J[l[4]], function(e) {
                                     r[e.name] = t[535];
                                     var n = y(e, function(e) {
-                                        return [e.type, e.suffixes].join("~")//u[97]="~"
-                                    }).join(",");//l[35]=","
-                                    return [e.name, e.description, n].join("::")//s[75]="::"
-                                };
-                                var my_y = y(J[l[4]], fc, this);
-                                i.push(my_y.join("$"));//l[26]="$"
-
-                                var my_y2 = y(n, function(e) {
-                                    if (r[e])
-                                        return "";//l[0]=""
-                                    if (e = J[l[4]][e],
-                                        !e)
-                                        return "";//l[0]=""
-                                    var t = y(e, function(e) {
-                                        return [e.type, e.suffixes].join("~")//u[97]="~"
-                                    }).join(",");//l[35]=","
-                                    return [e.name, e.description, t].join("::")//s[75]="::"
-                                }, this);
-
-                                i.push(my_y2.join(";"));//u[9]=";"
-                                return i.join(";");//u[9]=";"
+                                        return [e.type, e.suffixes].join(u[97])
+                                    }).join(l[35]);
+                                    return [e.name, e.description, n].join(s[75])
+                                }, this).join(l[26])),
+                                    i.push(y(n, function(e) {
+                                        if (r[e])
+                                            return l[0];
+                                        if (e = J[l[4]][e],
+                                            !e)
+                                            return l[0];
+                                        var t = y(e, function(e) {
+                                            return [e.type, e.suffixes].join(u[97])
+                                        }).join(l[35]);
+                                        return [e.name, e.description, t].join(s[75])
+                                    }, this).join(u[9])),
+                                    i.join(u[9])
                             }
                             function p() {
-                                debugger;
-                                // return window[e[105]] ? y([u[189], e[44], e[67], e[50], s[138], u[150], s[70], u[171], s[97], u[128], e[1], u[53], u[115], u[184], e[111], e[1], u[55], u[101], e[63], s[41], e[100], s[104], e[77]], function(t) {
-                                return window["ActiveXObject"] ? y([u[189], e[44], e[67], e[50], s[138], u[150], s[70], u[171], s[97], u[128], e[1], u[53], u[115], u[184], e[111], e[1], u[55], u[101], e[63], s[41], e[100], s[104], e[77]], function(t) {
+                                return window[e[105]] ? y([u[189], e[44], e[67], e[50], s[138], u[150], s[70], u[171], s[97], u[128], e[1], u[53], u[115], u[184], e[111], e[1], u[55], u[101], e[63], s[41], e[100], s[104], e[77]], function(t) {
                                     try {
                                         return new window[e[105]](t),
                                             t
@@ -6570,8 +6521,7 @@ window.NECaptcha = function(e) {
                                     }
                                 }).join(u[9]) : l[0]
                             }
-                            function y(e, t, n) {//最终的获取浏览器插件的函数
-                                debugger;
+                            function y(e, t, n) {
                                 var i = [];
                                 return null == e ? i : b && e.map === b ? e.map(t, n) : (v(e, function(e, r, o) {
                                     i[i.length] = t.call(n, e, r, o)
@@ -6579,7 +6529,6 @@ window.NECaptcha = function(e) {
                                     i)
                             }
                             function v(e, n) {
-                                debugger;
                                 if (null !== e)
                                     if (g && e.forEach === g)
                                         e.forEach(n, void 0);
@@ -6602,72 +6551,61 @@ window.NECaptcha = function(e) {
                                 a: !0
                             };
                             ("undefined" == typeof i ? "undefined" : n(i)) == e[16] ? m.e = i : (null != i.b && void 0 != i.b && (m.b = i.b),
-                            null != i.a && void 0 != i.a && (m.a = i.a));
-                            debugger;
-                            this.get = function() {
-                                debugger;
-                                var i = []
-                                    , o = [];
-                                if (K) {
-                                    var l;
-                                    try {
-                                        l = !!window[e[90]]
-                                    } catch (f) {
-                                        l = !0
-                                    }
-                                    i.push(l);
-                                    var h;
-                                    try {
-                                        h = !!window[s[26]]
-                                    } catch (p) {
-                                        h = !0
-                                    }
-                                    debugger;
-                                    console.log("addBehavior: ", n(G[e[10]][e[52]]));
-                                    if (i.push(h),
-                                        i.push(!!window[s[28]]),
-                                        G[e[10]] ? i.push(n(G[e[10]][e[52]])) : i.push("undefined"),
-                                        i.push(n(window[s[65]])),
-                                        i.push(J[u[146]]),
-                                        i.push(J[s[142]]),
-                                        l = m.i)
+                            null != i.a && void 0 != i.a && (m.a = i.a)),
+                                this.get = function() {
+                                    var i = []
+                                        , o = [];
+                                    if (K) {
+                                        var l;
                                         try {
-                                            var y = G[u[120]](s[66]);
-                                            l = !(!y[s[171]] || !y[s[171]](e[104]))
-                                        } catch (v) {
-                                            l = !1
+                                            l = !!window[e[90]]
+                                        } catch (f) {
+                                            l = !0
                                         }
-                                    if (l)
+                                        i.push(l);
+                                        var h;
                                         try {
-                                            i.push(j()),
-                                            m.b && i.push(a())
-                                        } catch (g) {
-                                            i.push(u[12])
+                                            h = !!window[s[26]]
+                                        } catch (p) {
+                                            h = !0
                                         }
-                                    i.push(c()),
-                                    // m.a && o.push(r()),//这一句不会执行，因为m.a为false
-                                    o.push(navigator.userAgent),//o.push(J[s[96]]) 可以写成随机的
-                                    o.push(navigator.language),//o.push(J[u[104]]) 常见为中文：zh-CN
-                                    o.push(window.screen.colorDepth),//o.push(window[e[9]][e[109]])  可以写成 24或者32
-                                    // m.j && (y = window[e[9]] ? [window[e[9]].height, window[e[9]].width] : [t[9], t[9]],
-                                    // ("undefined" == typeof y ? "undefined" : n(y)) !== s[85] && o.push(y.join(u[91]))),
-                                    //简写成下面这个，等于获取屏幕的高和长，形式是： 如: o.push("1080x1920")
-                                    (y = [window.screen.height, window.screen.width], o.push(y.join("x"))),
-                                    //getTimezoneOffset() 方法可返回格林威治时间和本地时间之间的时差，以分钟为单位.目前收集中国可能出现的值为：
-                                    // 东时区：[+5.5, +6, +7, +8, +8.5]对应转换为分钟数的话就是：[-330, -360, -420, -480, -510]
-                                    // o.push((new Date)[u[81]]()),
-                                    my_array = [-330, -360, -420, -480, -510],
-                                    o.push(my_array[Math.floor(Math.random()*my_array.length)]),
-                                    // o.push(J[u[75]]),
-                                    o.push(null),
-                                    o.push(d())
+                                        if (i.push(h),
+                                            i.push(!!window[s[28]]),
+                                            G[e[10]] ? i.push(n(G[e[10]][e[52]])) : i.push("undefined"),
+                                            i.push(n(window[s[65]])),
+                                            i.push(J[u[146]]),
+                                            i.push(J[s[142]]),
+                                            l = m.i)
+                                            try {
+                                                var y = G[u[120]](s[66]);
+                                                l = !(!y[s[171]] || !y[s[171]](e[104]))
+                                            } catch (v) {
+                                                l = !1
+                                            }
+                                        if (l)
+                                            try {
+                                                i.push(j()),
+                                                m.b && i.push(a())
+                                            } catch (g) {
+                                                i.push(u[12])
+                                            }
+                                        i.push(c()),
+                                        m.a && o.push(r()),
+                                            o.push(J[s[96]]),
+                                            o.push(J[u[104]]),
+                                            o.push(window[e[9]][e[109]]),
+                                        m.j && (y = window[e[9]] ? [window[e[9]].height, window[e[9]].width] : [t[9], t[9]],
+                                        ("undefined" == typeof y ? "undefined" : n(y)) !== s[85] && o.push(y.join(u[91]))),
+                                            o.push((new Date)[u[81]]()),
+                                            o.push(J[u[75]]),
+                                            o.push(d())
+                                    }
+                                    return y = [],
+                                        m.e ? (y.push(m.e(i.join(s[139]))),
+                                            y.push(m.e(o.join(s[139])))) : (y.push(_(i.join(s[139]))),
+                                            y.push(_(o.join(s[139])))),
+                                        y
                                 }
-                                return y = [],
-                                    m.e ? (y.push(m.e(i.join(s[139]))),
-                                        y.push(m.e(o.join(s[139])))) : (y.push(_(i.join(s[139]))),
-                                        y.push(_(o.join(s[139])))),
-                                    y
-                            }
                         }
                         function _(e) {
                             var n, i, r, o, a, s, u = t[82];
@@ -7155,7 +7093,6 @@ window.NECaptcha = function(e) {
                                                 K.push(a(Y, $e, Y.length - $e));
                                                 break
                                             }
-                                            // K.push(a(Y, 0, 0)),
                                             K.push(a(Y, $e, Ie)),
                                                 $e += Ie
                                         }
