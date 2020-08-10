@@ -1,61 +1,15 @@
 
-/**
- * 自定义集合
- * */
-function my_set() {
-    let items = {}
-    this.has = function (value) {
-        return value in items
-    }
-    this.add = function (value) {
-        if (!this.has(value)) {
-            items[value] = value
-            return true
-        }
-        return false
-    }
-    this.remove = function (value) {
-        if (this.has(value)) {
-            delete items[value]
-            return true
-        }
-        return false
-    }
-    this.clear = function () {
-        items = []
-    }
-    this.size = function () {
-        return Object.keys(items).length
-    }
-    this.values = function () { // 提取items对象的所有属性，以数组形式返回
-        return Object.keys(items)
-    }
-}
-
-/**
- * 生成从 [minNum, maxNum] 的随机数
- * **/
-function randomNum(minNum, maxNum, total){
-    var res = new my_set();
-    for (var i = 0; i < total;) {
-        res.add(Math.ceil(Math.random()*(maxNum-minNum+1)+minNum));
-        i = res.size();
-    }
-    return res;
-}
-
-
 
 function n(e, t) {
-    function n(e, t) {
+    function _n(e, t) {
         return e.charCodeAt(Math.floor(t % e.length))
     }
-    function i(e, t) {
+    function _i(e, t) {
         return t.split("").map(function(t, i) {
-            return t.charCodeAt(0) ^ n(e, i)
+            return t.charCodeAt(0) ^ _n(e, i)
         })
     }
-    return t = i(e, t),
+    return t = _i(e, t),
         _(t)
 }
 __toByte = function(e) {
@@ -64,10 +18,7 @@ __toByte = function(e) {
     }
     return t.toString = function() {
         return e.toString()
-    }
-        ,
-        t
-}(function(e) {
+    }, t}(function(e) {
     if (e < -128)
         return __toByte(128 - (-128 - e));
     if (e >= -128 && e <= 127)
@@ -363,8 +314,6 @@ var i = function(e, t) {
 }
     , B = function(e) {
     var t = "14731382d816714fC59E47De5dA0C871D3F";
-    if (null == t || void 0 == t)
-        throw new Error("1008");
     null != e && void 0 != e || (e = "");
     var n = e + E(e)
         , i = c(n)
@@ -426,24 +375,24 @@ function cb() {
 }
 
 function sample(e, t) {
-    var n = e.length;
-    if (n <= t)
+    var array_length = e.length;
+    if (array_length <= t)
         return e;
-    for (var i = [], r = 0, o = 0; o < n; o++)
-        o >= r * (n - 1) / (t - 1) && (i.push(e[o]),
+    for (var i = [], r = 0, o = 0; o < array_length; o++)
+        o >= r * (array_length - 1) / (t - 1) && (i.push(e[o]),
             r += 1);
     return i
 }
 function my_encrypt(trace_list, token, left) {
 // function _get_data(token,trace_list,left){
     var traceData = [];
-    for (var i of trace_list) {
-        ff = n(token, i + "");
-        traceData.push(ff);
+    for (i in trace_list) {
+        var ttt = n(token, i + "");
+        traceData.push(ttt);
     };
-    nn = sample(traceData, 50),
-    rr = B(n(token, parseInt(left, 10) / 320 * 100 + ""))
-    res = JSON.stringify({
+    var nn = sample(traceData, 50);
+    var rr = B(n(token, parseInt(left, 10) / 320 * 100 + ""));
+    var res = JSON.stringify({
         d: B(nn.join(":")),
         m: "",
         p: rr,
