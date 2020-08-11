@@ -12,7 +12,7 @@ import random
 import requests
 
 # from dun163.source.trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, get_trace_list, get_track
-from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, get_trace_list, get_track
+from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4, get_trace_list, get_track
 
 
 class YiDun:
@@ -133,16 +133,17 @@ class YiDun:
         pass
 
     def encrypt_data(self):
-        # handle_img2 = HandleSliderImg2("bg.jpg", "front.png")
-        # handle_img2 = HandleSliderImg("bg.jpg", "front.png")
-        handle_img2 = HandleSliderImg3("bg.jpg", "front.png")
+        #handle_img2 = HandleSliderImg("bg.jpg", "front.png")
+        #handle_img2 = HandleSliderImg2("bg.jpg", "front.png")
+        #handle_img2 = HandleSliderImg3("bg.jpg", "front.png")
+        handle_img2 = HandleSliderImg4("bg.jpg", "front.png")
         result2 = handle_img2.main()
         trace_list = get_trace_list(result2[0][0])
         # trace_list = get_track(result2[0][0])
         params = {
             "trace_list": json.dumps(trace_list),
-            # "position_left": result2[0][0],
-            "position_left": trace_list[-1][0],
+            "position_left": result2[0][0]-10,
+            # "position_left": trace_list[-1][0],
             "token": self.my_token,
         }
         resp = self.session.post(self.encrypt_trace_url, data=params)
@@ -157,7 +158,7 @@ class YiDun:
             "id": self.my_id,
             "token": self.my_token,
             "acToken": "",
-            "data": data,
+            "data": str(data),
             "width": "320",
             "type": "2",
             "version": "2.14.1",
@@ -188,6 +189,7 @@ class YiDun:
 
         print(resp.text)
         print(resp.status_code)
+        return resp.text
 
 
 if __name__ == '__main__':
@@ -198,28 +200,27 @@ if __name__ == '__main__':
 
     success = 0
     total = 0
-    # while True:
-    fail_flag = False
+    while True:
+        fail_flag = False
 
-    # dun.get_conf()
-    _text = dun.get_image()
-    if "param check error" in _text:
-        fail_flag = True
-    if not fail_flag:
-        success += 1
+        # dun.get_conf()
+        _text = dun.get_image()
 
-    total += 1
-
-    print("目前成功率为：{} {}/{}".format(success / total, success, total))
-    print("-"*200)
-    print()
-    time.sleep(1)
-    # if total > 100:
-    #     break
+        time.sleep(1)
 
 
-    # dun.encrypt_data()
-    dun.check_data()
+
+        # dun.encrypt_data()
+        _text = dun.check_data()
+
+        if '{"result":false' not in _text:
+            success += 1
+        total += 1
+        print("目前成功率为：{} {}/{}".format(success / total, success, total))
+        print("-"*200)
+        print()
+        if total > 100:
+            break
     pass
 
 

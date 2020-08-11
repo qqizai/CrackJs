@@ -76,7 +76,9 @@ api.post("/get_trace_data", function (req, res) {
     var trace_list = JSON.parse(req.body.trace_list);
     var position_left = req.body.position_left;
     var result = encrypt_trace.encrypt_trace(trace_list, token, position_left);
+    console.log(result)
     result = JSON.stringify(result);
+    console.log(result)
     res.send(result)
 })
 

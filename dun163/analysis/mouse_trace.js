@@ -386,18 +386,21 @@ var my_sample = function(e, t, token) {
 
 function my_encrypt(traceDataArray, token, position_left) {
     var _n = my_sample(traceDataArray, 50, token);
-    var value_parseInt = parseInt(position_left, 10) / 3;
+    var value_parseInt = parseInt(position_left, 10) / 320 * 100;
     var value_p = n(token, value_parseInt + "");
     var r = B(value_p);
     var value_d = B(_n.join(":"));
     var value_ext = B(n(token, 1 + "," + traceDataArray.length));
 
-    var data = JSON.stringify({
+    var data = {
         d: value_d,
         m: "",
         p: r,
         ext: value_ext
-    })
+    }
+    data = JSON.stringify(data);
+    console.log("data:")
+    console.log(data)
     return data;
 }
 

@@ -62,7 +62,7 @@ def get_trace_list(distance):
     """根据距离随机生成轨迹"""
     tract_list = []
     diff_time = random.randint(280, 382)
-    for x in range(0, distance + 1):
+    for x in range(4, distance + 1):
 
         if x < distance//10+1 or x < distance // 10 * 5 + 1:
             y = 0
@@ -260,8 +260,8 @@ class HandleSliderImg3(object):
             if len(loc[1]) > 1:
                 L += (R - L) / 2
             elif len(loc[1]) == 1:
-                print('目标区域起点x坐标为：%d' % loc[1][0])
                 left_x = loc[1][0] + 1
+                print('目标区域起点x坐标为：%d' % left_x)
                 break
             elif len(loc[1]) < 1:
                 R -= (R - L) / 2
@@ -270,6 +270,43 @@ class HandleSliderImg3(object):
         return [[left_x]]
 
 
+
+class HandleSliderImg4(object):
+
+    def __init__(self, bg_path, small_img_path):
+        self.img_big = cv.imread(bg_path)  # 第二个参数是以什么模式读取图片
+        self.img_small = cv.imread(small_img_path)
+
+    # 模板匹配(用于寻找缺口有点误差)
+    def template_match(self):
+        method = cv.TM_CCOEFF_NORMED
+        width, height = self.img_small.shape[:2]
+        result = cv.matchTemplate(self.img_small, self.img_big, method)
+
+        # 寻找矩阵(一维数组当作向量,用Mat定义) 中最小值和最大值的位置
+        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
+        left_up = max_loc
+        left_up = list(left_up)
+        left_up[0] += 2
+        left_up = tuple(left_up)
+        print("left_up: ", left_up)
+        right_down = (left_up[0] + height, left_up[1] + width)
+
+        # 绘制矩形边框，将匹配区域标注出来
+        # self.img_big：目标图像
+        # left_up：矩形的左上角位置
+        # right_down：矩形的右下角位置
+        # (0,0,255)：矩形边框颜色
+        # 1：矩形边框大小
+        cv.rectangle(self.img_big, left_up, right_down, (0,0,255), 1)
+        cv.imwrite("result.png", self.img_big)
+        # show(self.img_big)
+        return [left_up, right_down]
+
+    def main(self):
+        return self.template_match()
+
+    pass
 
 
 
