@@ -11,7 +11,6 @@ import time
 import random
 import requests
 
-# from dun163.source.trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, get_trace_list, get_track
 from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, get_trace_list, get_track
 
 
@@ -22,7 +21,7 @@ class YiDun:
             raise ValueError("sdk_url/my_id cann't be None.")
 
         self.cb_url = sdk_url+"/get_cb"
-        self.fp_url = sdk_url+"/get_fp2"
+        self.fp_url = sdk_url+"/get_fp"
         self.callback_url = sdk_url+"/get_callback"
         self.encrypt_trace_url = sdk_url+"/get_trace_data"
         self.my_id = my_id
@@ -140,13 +139,14 @@ class YiDun:
         trace_list = get_trace_list(result2[0][0])
         # trace_list = get_track(result2[0][0])
         params = {
-            "trace_list": json.dumps(trace_list),
-            # "position_left": result2[0][0],
-            "position_left": trace_list[-1][0],
+            "trace_list": str(trace_list),
+            "position_left": result2[0][0],
             "token": self.my_token,
         }
         resp = self.session.post(self.encrypt_trace_url, data=params)
         my_data = json.loads(resp.text)
+        print("encrypt_data: {}".format(resp.text))
+        print(f"my_data: {my_data}")
         return my_data
 
     def check_data(self):

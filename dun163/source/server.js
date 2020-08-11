@@ -35,11 +35,6 @@ api.get("/get_cb", function (req, res) {
     res.send(cb);
 })
 
-api.get("/get_cb2", function (req, res) {
-    var cb = encrypt_trace.cb();
-    res.send(cb);
-})
-
 api.get("/get_fp", function (req, res) {
     var fp = sdk.get_fp();
     res.send(fp);
@@ -77,7 +72,12 @@ api.get("/get_uuid", function (req, res) {
 
 
 api.post("/get_trace_data", function (req, res) {
-    res.send(encrypt_trace.encrypt_trace(req.body.trace_list, req.body.token, req.body.position_left))
+    var token = req.body.token;
+    var trace_list = JSON.parse(req.body.trace_list);
+    var position_left = req.body.position_left;
+    var result = encrypt_trace.encrypt_trace(trace_list, token, position_left);
+    result = JSON.stringify(result);
+    res.send(result)
 })
 
 
