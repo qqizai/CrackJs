@@ -18,6 +18,8 @@ from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3,
 class YiDun:
 
     def __init__(self, my_id, sdk_url):
+        self.index = 102
+
         if sdk_url is None or my_id is None:
             raise ValueError("sdk_url/my_id cann't be None.")
 
@@ -119,10 +121,11 @@ class YiDun:
         if matcher:
             my_json = json.loads(matcher.group())
             print(my_json)
-            self.download_img(my_json["data"]["bg"][0], "bg.jpg")
-            self.download_img(my_json["data"]["front"][0], "front.png")
+            self.download_img(my_json["data"]["bg"][0], "./captcha/bg_{}000001.jpg".format(self.index))
+            self.download_img(my_json["data"]["front"][0], "./captcha/bg_{}000002.png".format(self.index))
             self.my_token = my_json["data"]["token"]
             print(f"self.my_token: {self.my_token}")
+            self.index += 1
         return _resp.text
 
     def download_img(self, img_url, file_name):
@@ -206,15 +209,13 @@ if __name__ == '__main__':
         # dun.get_conf()
         _text = dun.get_image()
 
-        time.sleep(1)
-
-
-
-        # dun.encrypt_data()
-        _text = dun.check_data()
-
-        if '{"result":false' not in _text:
-            success += 1
+        # time.sleep(1)
+        #
+        # # dun.encrypt_data()
+        # _text = dun.check_data()
+        #
+        # if '{"result":false' not in _text:
+        #     success += 1
         total += 1
         print("目前成功率为：{} {}/{}".format(success / total, success, total))
         print("-"*200)
