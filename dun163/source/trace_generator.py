@@ -271,7 +271,6 @@ class HandleSliderImg3(object):
         return [[left_x]]
 
 
-
 class HandleSliderImg4(object):
 
     def __init__(self, bg_path, small_img_path):

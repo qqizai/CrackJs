@@ -12,7 +12,7 @@ import random
 import requests
 
 # from dun163.source.trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, get_trace_list, get_track
-from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4, get_trace_list, get_track
+from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4, GrayImg, get_trace_list, get_track
 
 
 class YiDun:
@@ -121,8 +121,10 @@ class YiDun:
         if matcher:
             my_json = json.loads(matcher.group())
             print(my_json)
-            self.download_img(my_json["data"]["bg"][0], "./captcha/bg_{}000001.jpg".format(self.index))
-            self.download_img(my_json["data"]["front"][0], "./captcha/bg_{}000002.png".format(self.index))
+            # self.download_img(my_json["data"]["bg"][0], "./captcha/bg_{}000001.jpg".format(self.index))
+            # self.download_img(my_json["data"]["front"][0], "./captcha/bg_{}000002.png".format(self.index))
+            self.download_img(my_json["data"]["bg"][0], "./bg.jpg")
+            self.download_img(my_json["data"]["front"][0], "./front.png")
             self.my_token = my_json["data"]["token"]
             print(f"self.my_token: {self.my_token}")
             self.index += 1
@@ -139,7 +141,9 @@ class YiDun:
         #handle_img2 = HandleSliderImg("bg.jpg", "front.png")
         #handle_img2 = HandleSliderImg2("bg.jpg", "front.png")
         #handle_img2 = HandleSliderImg3("bg.jpg", "front.png")
-        handle_img2 = HandleSliderImg4("bg.jpg", "front.png")
+        # handle_img2 = HandleSliderImg4("bg.jpg", "front.png")
+        handle_img2 = GrayImg("bg.jpg", "front.png")
+
         result2 = handle_img2.main()
         trace_list = get_trace_list(result2[0][0])
         # trace_list = get_track(result2[0][0])
@@ -209,18 +213,18 @@ if __name__ == '__main__':
         # dun.get_conf()
         _text = dun.get_image()
 
-        # time.sleep(1)
-        #
-        # # dun.encrypt_data()
-        # _text = dun.check_data()
-        #
-        # if '{"result":false' not in _text:
-        #     success += 1
+        time.sleep(1)
+
+        # dun.encrypt_data()
+        _text = dun.check_data()
+
+        if '{"result":false' not in _text:
+            success += 1
         total += 1
         print("目前成功率为：{} {}/{}".format(success / total, success, total))
         print("-"*200)
         print()
-        if total > 100:
+        if total > 10:
             break
     pass
 
