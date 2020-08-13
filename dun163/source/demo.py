@@ -10,9 +10,11 @@ import json
 import time
 import random
 import requests
+import shutil
 
 # from dun163.source.trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, get_trace_list, get_track
-from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4, GrayImg, get_trace_list, get_track
+from trace_generator import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4, get_trace_list, get_track
+from handle_img import Gap
 
 
 class YiDun:
@@ -120,13 +122,11 @@ class YiDun:
         matcher = re.search(r"\{.*?(?=\))", _resp.text)
         if matcher:
             my_json = json.loads(matcher.group())
-            print(my_json)
             # self.download_img(my_json["data"]["bg"][0], "./captcha/bg_{}000001.jpg".format(self.index))
             # self.download_img(my_json["data"]["front"][0], "./captcha/bg_{}000002.png".format(self.index))
             self.download_img(my_json["data"]["bg"][0], "./bg.jpg")
             self.download_img(my_json["data"]["front"][0], "./front.png")
             self.my_token = my_json["data"]["token"]
-            print(f"self.my_token: {self.my_token}")
             self.index += 1
         return _resp.text
 
@@ -134,7 +134,6 @@ class YiDun:
         _resp = self.session.get(img_url)
         with open(file_name, "wb") as f:
             f.write(_resp.content)
-        print(f"保存 {file_name} 成功")
         pass
 
     def encrypt_data(self):
@@ -142,14 +141,14 @@ class YiDun:
         #handle_img2 = HandleSliderImg2("bg.jpg", "front.png")
         #handle_img2 = HandleSliderImg3("bg.jpg", "front.png")
         # handle_img2 = HandleSliderImg4("bg.jpg", "front.png")
-        handle_img2 = GrayImg("bg.jpg", "front.png")
+        handle_img2 = Gap("bg.jpg", "front.png")
 
         result2 = handle_img2.main()
         trace_list = get_trace_list(result2[0][0])
         # trace_list = get_track(result2[0][0])
         params = {
             "trace_list": json.dumps(trace_list),
-            "position_left": result2[0][0]-10,
+            "position_left": result2[0][0]-1,
             # "position_left": trace_list[-1][0],
             "token": self.my_token,
         }
@@ -191,11 +190,9 @@ class YiDun:
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36'
         }
 
-        print(params)
         resp = requests.get(url=self.check_url, headers=headers, params=params)
 
-        print(resp.text)
-        print(resp.status_code)
+        print(resp.status_code, resp.text)
         return resp.text
 
 
@@ -207,24 +204,30 @@ if __name__ == '__main__':
 
     success = 0
     total = 0
+    fail = 0
     while True:
         fail_flag = False
 
         # dun.get_conf()
         _text = dun.get_image()
 
-        time.sleep(1)
+        time.sleep(0.3)
 
         # dun.encrypt_data()
         _text = dun.check_data()
 
         if '{"result":false' not in _text:
             success += 1
+        else:
+            fail += 1
+            shutil.move("bg.jpg", "../statics/fail_img/bg_{}.jpg".format(fail))
+            shutil.move("front.png", "../statics/fail_img/front_{}.png".format(fail))
+            shutil.move("bg_res.jpg", "../statics/fail_img/bg_res_{}.jpg".format(fail))
         total += 1
         print("目前成功率为：{} {}/{}".format(success / total, success, total))
         print("-"*200)
         print()
-        if total > 10:
+        if total > 1000:
             break
     pass
 

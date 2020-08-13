@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time     : 2020/8/8 10:11
 # @Author   : qizai
-# @File     : handle_imgm.py
+# @File     : handle_img.py
 # @Software : PyCharm
 """
 cv.adaptiveThreshold(src, thresh, maxval, type, dst=None)
@@ -18,7 +18,7 @@ OpenCV提供了不同类型的阈值：
     cv.THRESH_TRUNC             dst(x,y) = threshold, if src(x,y)>thresh; else：dst(x,y) = src(x,y)  截断阈值化处理。大于127的像素点处理为127，其余保持不变
     cv.THRESH_TOZERO            dst(x,y) = src(x,y), if src(x,y)>thresh; else：dst(x,y) = 0          低阈值零处理。大于127的像素点保持不变，其余处理为0
     cv.THRESH_TOZERO_INV        dst(x,y) = 0, if src(x,y)>thresh; else：dst(x,y) = src(x,y)          超阈值零处理。大于127的像素点处理为0，其余保持不变
-    cv.ADAPTIVE_THRESH_MEAN_C:  阈值是邻近区域的平均值减去常数C
+    cv.ADAPTIVE_THRESH_MEAN_C:  阈值是邻近区域的平均值减去常数C  参考：https://www.cnblogs.com/GaloisY/p/11037350.html
 
 """
 
