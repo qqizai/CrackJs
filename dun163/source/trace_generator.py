@@ -32,33 +32,6 @@ array = [[4, 0, 279], [4, 0, 287], [5, 0, 319], [6, 0, 335], [7, 0, 344], [8, 0,
          [156, -10, 1294], [157, -10, 1301], [158, -10, 1310], [159, -10, 1317], [160, -10, 1326], [160, -10, 1382]]
 
 
-def get_track(space):
-    x = [0, 0]
-    y = [0, 0, 0]
-    z = [0]
-    # x
-    count = np.linspace(-math.pi / 2, math.pi / 2, random.randrange(20, 30))
-    # print(count)
-    func = list(map(math.sin, count))
-    nx = [i + 1 for i in func]
-    add = random.randrange(10, 15)
-    sadd = space + add
-    x.extend(list(map(lambda x: x * (sadd / 2), nx)))
-    # x.extend(np.linspace(sadd, space, 4 if add > 12 else 3))
-    x.extend(np.linspace(sadd, space, 3 if add > 12 else 2))
-    x = [math.floor(i) for i in x]
-    # y
-    for i in range(len(x) - 2):
-        if y[-1] < 30:
-            y.append(y[-1] + random.choice([0, 0, 1, 1, 2, 2, 1, 2, 0, 0, 3, 3]))
-        else:
-            y.append(y[-1] + random.choice([0, 0, -1, -1, -2, -2, -1, -2, 0, 0, -3, -3]))
-    # z
-    for i in range(len(x) - 1):
-        z.append((z[-1] // 100 * 100) + 100 + random.choice([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2]))
-    return list(map(list, zip(x, y, z)))
-
-
 def get_trace_list(distance):
     """根据距离随机生成轨迹"""
     tract_list = []
@@ -276,74 +249,27 @@ class HandleSliderImg4(object):
     def __init__(self, bg_path, small_img_path):
         self.img_big = cv.imread(bg_path)  # 第二个参数是以什么模式读取图片
         self.img_small = cv.imread(small_img_path)
-
-    # 模板匹配(用于寻找缺口有点误差)
-    def template_match(self):
-        method = cv.TM_CCOEFF_NORMED
-        width, height = self.img_small.shape[:2]
-        result = cv.matchTemplate(self.img_small, self.img_big, method)
-
-        # 寻找矩阵(一维数组当作向量,用Mat定义) 中最小值和最大值的位置
-        min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
-        left_up = max_loc
-        left_up = list(left_up)
-        left_up[0] += 2
-        left_up = tuple(left_up)
-        print("left_up: ", left_up)
-        right_down = (left_up[0] + height, left_up[1] + width)
-
-        # 绘制矩形边框，将匹配区域标注出来
-        # self.img_big：目标图像
-        # left_up：矩形的左上角位置
-        # right_down：矩形的右下角位置
-        # (0,0,255)：矩形边框颜色
-        # 1：矩形边框大小
-        cv.rectangle(self.img_big, left_up, right_down, (0,0,255), 1)
-        cv.imwrite("result.png", self.img_big)
-        # show(self.img_big)
-        return [left_up, right_down]
-
-    def main(self):
-        return self.template_match()
-
-    pass
-
-
-class GrayImg:
-
-    def __init__(self, bg_path, small_img_path):
-        self.img_big = cv.imread(bg_path)  # 第二个参数是以什么模式读取图片
-        self.img_small = cv.imread(small_img_path)
+        self.img_big_path = bg_path
+        self.img_small_path = small_img_path
 
     # 模板匹配(用于寻找缺口有点误差)
     def template_match(self):
         method = cv.TM_CCOEFF_NORMED
         width, height = self.img_small.shape[:2]
 
-        img = cv.imread('bg_type1.jpg', cv.IMREAD_GRAYSCALE)
+        img = cv.imread(self.img_big_path, cv.IMREAD_GRAYSCALE)
         _, thresh1 = cv.threshold(img, 127, 255, cv.THRESH_BINARY)
         _, thresh2 = cv.threshold(img, 127, 255, cv.THRESH_BINARY_INV)
         # 灰度渐变
         _, thresh3 = cv.threshold(img, 127, 255, cv.THRESH_TRUNC)
         thresh4 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh4 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh5 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 91, 0)
-        thresh6 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh7 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 91, 0)
-        ret, thresh8 = cv.threshold(img, 0, 255, cv.THRESH_OTSU)
 
-
-        img1 = cv.imread('front_type1.png', cv.IMREAD_GRAYSCALE)
+        img1 = cv.imread(self.img_small_path, cv.IMREAD_GRAYSCALE)
         _1, thresh11 = cv.threshold(img1, 127, 255, cv.THRESH_BINARY)
         _1, thresh21 = cv.threshold(img1, 127, 255, cv.THRESH_BINARY_INV)
         # 灰度渐变
         _1, thresh31 = cv.threshold(img1, 127, 255, cv.THRESH_TRUNC)
         thresh41 = cv.adaptiveThreshold(img1, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh41 = cv.adaptiveThreshold(img1, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh51 = cv.adaptiveThreshold(img1, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 91, 0)
-        thresh61 = cv.adaptiveThreshold(img1, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh71 = cv.adaptiveThreshold(img1, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 91, 0)
-        ret1, thresh81 = cv.threshold(img1, 0, 255, cv.THRESH_OTSU)
 
         result = cv.matchTemplate(thresh41, thresh4, method)
 
@@ -369,51 +295,26 @@ class GrayImg:
 
     def main(self):
         return self.template_match()
-        """img = cv.imread('bg_type1.jpg', cv.IMREAD_GRAYSCALE)
-        _, thresh1 = cv.threshold(img, 127, 255, cv.THRESH_BINARY)
-        _, thresh2 = cv.threshold(img, 127, 255, cv.THRESH_BINARY_INV)
-        # 灰度渐变
-        _, thresh3 = cv.threshold(img, 127, 255, cv.THRESH_TRUNC)
-        thresh4 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh5 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 91, 0)
-        thresh6 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 5, 0)
-        thresh7 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 91, 0)
-        ret, thresh8 = cv.threshold(img, 0, 255, cv.THRESH_OTSU)
-        titles = ['Original Image', 'BINARY', 'BINARY_INV', 'TRUNC', 'adaptive_mean_5', 'adaptive_mean_91',
-                  'adaptive_gaussian_5', 'adaptive_gaussian_91', 'OTSU']
-        images = [img, thresh1, thresh2, thresh3, thresh4, thresh5, thresh6, thresh7, thresh8]
-
-        for i in range(9):
-            plt.subplot(3, 3, i + 1), plt.imshow(images[i], 'gray')
-            plt.title(titles[i])
-            plt.xticks([]), plt.yticks([])
-
-        plt.show()"""
-
 
 
 if __name__ == "__main__":
-    file_name = "bg.jpg"
+    bg_path = "bg.jpg"
     target_path = "front.png"
-    # handle_img = HandleSliderImg(file_name, target_path)
+    # handle_img = HandleSliderImg(bg_path, target_path)
     # result = handle_img.main()
     # print(result)
     #
-    # handle_img2 = HandleSliderImg2(file_name, target_path)
+    # handle_img2 = HandleSliderImg2(bg_path, target_path)
     # result2 = handle_img2.main()
     # print(result2)
     #
-    # result = HandleSliderImg3(file_name, target_path).main()
+    # result3 = HandleSliderImg3(bg_path, target_path).main()
 
-    # trace_list = get_trace_list(result2[0][0])
     # trace_list = get_trace_list(219)
     # print(len(trace_list), trace_list)
 
-    # trace_list = get_track(219)
-    # print(len(trace_list), trace_list)
-
-    handle_img2 = GrayImg("bg_type1.jpg", "front_type1.png")
-    result2 = handle_img2.main()
-    print(result2)
+    handle_img4 = HandleSliderImg4(bg_path, target_path)
+    result4 = handle_img4.main()
+    print(result4)
 
     pass

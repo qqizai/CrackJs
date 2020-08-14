@@ -599,10 +599,6 @@ function get_fp2() {
     window.self = window;
     window.window = window;
 
-
-
-
-
     window.NECaptcha = function(e) {
         function t(i) {
             if (n[i])
