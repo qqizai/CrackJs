@@ -599,10 +599,6 @@ function get_fp2() {
     window.self = window;
     window.window = window;
 
-
-
-
-
     window.NECaptcha = function(e) {
         function t(i) {
             if (n[i])
@@ -3516,8 +3512,8 @@ function get_fp2() {
                                 e.setDate(e.getDate() + 365),
                                     o.userData.expires = e.toUTCString()
                             } catch (t) {
-                                return console.log("userData is disabled!"),
-                                    !1
+                                console.log("userData is disabled!");
+                                return !1
                             }
                         return !0
                     },
@@ -3560,8 +3556,8 @@ function get_fp2() {
                                 var e = i.getItem(this.name) || "";
                                 return e ? e.split(",").length : 0
                             } catch (t) {
-                                return console.log("localstorage or userData is disabled!"),
-                                    0
+                                console.log("localstorage or userData is disabled!");
+                                return 0
                             }
                         }
                         ,
@@ -7084,7 +7080,7 @@ function get_fp2() {
                                     // if (!J[l[4]])
                                     if (!window.navigator["plugins"]){
                                         // return l[0];
-                                        console.log("竟让没有插件！！！");
+                                        console.log("竟然没有插件！！！在这里你可以去浏览器调试，抓一个回来，写死在这里");
                                         return "";
                                     }
 
@@ -7130,7 +7126,7 @@ function get_fp2() {
                                         return [e.type, e.suffixes].join("~")//u[97]="~"
                                     }).join(",");//l[35]=","
                                     debugger;
-                                    console.log("n: ", n);
+                                    //console.log("n: ", n);
                                     return [e.name, e.description, n].join("::")//s[75]="::"  */
 
                                         //n=[e.type, e.suffixes].join("~")//u[97]="~"
@@ -7671,7 +7667,7 @@ function get_fp2() {
                                     }).get();
 
                                     // w = ["27747153094550", "30084913513448"]
-                                    console.log("w: ", w)
+                                    //console.log("w: ", w)
 
                                     null != w && void 0 != w && w.length > t[9] ? n[u[135]] = w.join(l[35]) : (n[u[135]] = M(l[42], t[37]),
                                         n[u[112]] = l[43],
@@ -7813,14 +7809,14 @@ function get_fp2() {
                                     debugger
                                 } catch (xe) {
                                     console.log("执行了错误的类型检测")
-                                    debugger
+                                    //debugger
                                     h = x({
                                         ec: l[44],
                                         em: xe.message
                                     }),
                                         e = !1
                                 }
-                                debugger
+                                //debugger
                                 h = h + u[7] + p,//这个就是浏览器指纹
                                     A(le, h, e, _),
                                     D(le, h),
@@ -7832,7 +7828,7 @@ function get_fp2() {
 
                                 window.fingerprint = h;
                                 // window.fingerprint = "YV2GqHOdiWBqhDpxAWodoKV\\Et3ug+58t5O9qOj614m/1Tc5oUZBkE06brUIGYuL1MP7AYQ6gVnZHneLbwTDDZvD226KwKMjGjUmvrbBn1SHS95kXH\\2lprdStJ5f9jTNRtPLoqY6Xrgff+v72cB3nt\\sNPJbnsQ3J2\\T2fN44b4LUOd:"+p;
-                                console.log("h: ", h);
+                                //console.log("h: ", h);
                             }
                             R.prototype = {
                                 toString: function() {

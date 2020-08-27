@@ -1,7 +1,7 @@
 var express = require("express")
 var sdk = require("./sdk")
 var sdk2 = require("./fingerprint2")
-var encrypt_trace = require("../analysis/mouse_trace")
+var encrypt_trace = require("./mouse_trace")
 var bodyParser = require("body-parser")
 
 
@@ -60,7 +60,6 @@ api.get("/get_callback", function (req, res) {
 
 api.get("/get_mycallback", function (req, res) {
     var cb_str = Math.random().toString(36).slice(2, 9);
-    console.log(cb_str)
     res.send(cb_str);
 })
 
@@ -76,9 +75,7 @@ api.post("/get_trace_data", function (req, res) {
     var trace_list = JSON.parse(req.body.trace_list);
     var position_left = req.body.position_left;
     var result = encrypt_trace.encrypt_trace(trace_list, token, position_left);
-    console.log(result)
     result = JSON.stringify(result);
-    console.log(result)
     res.send(result)
 })
 

@@ -2,70 +2,34 @@
 # -*- coding: utf-8 -*-
 # @Time     : 2020/8/8 10:11
 # @Author   : qizai
-# @File     : temp.py
+# @File     : handle_img.py
 # @Software : PyCharm
+"""
+cv.adaptiveThreshold(src, thresh, maxval, type, dst=None)
+    src: 源图像，要是灰度图像
+    thresh: 阈值，用于对像素值进行分类
+    maxval: 分配给超过阈值的像素值的最大值
+    type: 指定阈值类型；下面会列出具体类型
+    dst: 目标图像
 
+OpenCV提供了不同类型的阈值：
+    cv.THRESH_BINARY            dst(x,y) = maxval, if src(x,y)>thresh; else：dst(x,y) = 0            二值化阈值处理。大于127的像素点会被处理为255，其余处理为0
+    cv.THRESH_BINARY_INV        dst(x,y) = 0, if src(x,y)>thresh;      else：dst(x,y) = maxval       反二值化阈值处理。灰度值大于127的像素点处理为0，其余为255
+    cv.THRESH_TRUNC             dst(x,y) = threshold, if src(x,y)>thresh; else：dst(x,y) = src(x,y)  截断阈值化处理。大于127的像素点处理为127，其余保持不变
+    cv.THRESH_TOZERO            dst(x,y) = src(x,y), if src(x,y)>thresh; else：dst(x,y) = 0          低阈值零处理。大于127的像素点保持不变，其余处理为0
+    cv.THRESH_TOZERO_INV        dst(x,y) = 0, if src(x,y)>thresh; else：dst(x,y) = src(x,y)          超阈值零处理。大于127的像素点处理为0，其余保持不变
+    cv.ADAPTIVE_THRESH_MEAN_C:  阈值是邻近区域的平均值减去常数C  参考：https://www.cnblogs.com/GaloisY/p/11037350.html
+
+"""
+
+
+import os
 import math
 import random
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
-
-# 真实轨迹，拿来参考的
-array = [[4, 0, 279], [4, 0, 287], [5, 0, 319], [6, 0, 335], [7, 0, 344], [8, 0, 351], [8, 0, 360], [9, 0, 365],
-         [11, 0, 374], [12, 1, 382], [13, 1, 390], [16, 1, 398], [17, 1, 405], [18, 1, 414], [20, 1, 421], [20, 1, 430],
-         [21, 1, 437], [23, 1, 446], [24, 1, 461], [25, 1, 469], [27, 1, 476], [28, 1, 483], [30, 1, 499], [32, 1, 508],
-         [32, 1, 515], [34, 1, 531], [35, 1, 533], [36, 1, 539], [38, 1, 547], [39, 1, 555], [40, 1, 564], [42, 1, 571],
-         [44, 1, 580], [45, 1, 587], [46, 1, 594], [48, 1, 601], [51, 1, 610], [52, 1, 617], [53, 1, 626], [54, 1, 635],
-         [56, 1, 641], [58, 0, 649], [60, 0, 658], [62, 0, 665], [65, 0, 674], [66, 0, 682], [68, 0, 690], [70, 0, 698],
-         [71, 0, 705], [72, 0, 712], [74, 0, 719], [75, -1, 731], [76, -1, 735], [77, -1, 744], [79, -1, 751],
-         [80, -1, 760], [81, -1, 775], [83, -1, 783], [84, -1, 792], [84, -1, 799], [85, -1, 808], [86, -1, 815],
-         [88, -1, 824], [88, -2, 830], [90, -2, 837], [92, -2, 846], [92, -2, 853], [94, -2, 862], [96, -2, 869],
-         [96, -2, 878], [98, -2, 885], [99, -2, 894], [100, -2, 901], [102, -3, 910], [103, -3, 917], [104, -3, 926],
-         [106, -4, 933], [107, -4, 940], [108, -4, 948], [108, -4, 955], [110, -4, 965], [111, -4, 971], [112, -4, 980],
-         [113, -5, 987], [114, -5, 996], [115, -5, 1003], [116, -5, 1012], [116, -5, 1019], [117, -5, 1028],
-         [118, -5, 1039], [119, -5, 1057], [120, -5, 1065], [120, -5, 1074], [122, -6, 1082], [124, -6, 1090],
-         [124, -6, 1098], [127, -6, 1108], [128, -7, 1114], [128, -7, 1121], [130, -7, 1130], [131, -7, 1137],
-         [132, -7, 1153], [132, -7, 1162], [134, -8, 1169], [136, -8, 1176], [136, -8, 1183], [138, -8, 1192],
-         [140, -8, 1199], [141, -8, 1208], [143, -8, 1215], [144, -8, 1224], [145, -9, 1232], [147, -9, 1240],
-         [149, -9, 1248], [150, -9, 1255], [152, -9, 1264], [152, -10, 1271], [154, -10, 1280], [156, -10, 1287],
-         [156, -10, 1294], [157, -10, 1301], [158, -10, 1310], [159, -10, 1317], [160, -10, 1326], [160, -10, 1382]]
-
-
-def get_trace_list(distance):
-    """根据距离随机生成轨迹"""
-    tract_list = []
-    diff_time = random.randint(280, 382)
-    for x in range(4, distance + 1):
-
-        if x < distance//10+1 or x < distance // 10 * 5 + 1:
-            y = 0
-        elif x < distance//10*2+1 or x < distance // 10 * 4 + 1:
-            y = -1
-        elif x < distance // 10 * 3 + 1:
-            y = -2
-        elif x < distance // 10 * 6 + 1:
-            y = 1
-        elif x < distance // 10 * 7 + 1:
-            y = 2
-        elif x < distance // 10 * 8 + 1:
-            y = 3
-        elif x < distance // 10 * 9 + 1:
-            y = 4
-        else:
-            y = 5
-
-        # 本次x,随机生成几个一样的 [x, y, 递增的随机时间差]
-        count = random.randint(1, 5 if y>=4 else 4)
-        for _ in range(count):
-            tract_list.append([x, y, diff_time])
-            if y <= 2:
-                diff_time += random.randint(5, 6)
-            elif y <= 4:
-                diff_time += random.randint(5, 8)
-            elif y == 5:
-                diff_time += random.randint(10, 33)
-    return tract_list
+import copy
 
 
 def show(name):
@@ -79,10 +43,10 @@ class HandleSliderImg(object):
     def __init__(self, bg_path, small_img_path):
         self.img_big = cv.imread(bg_path, 0)  # 第二个参数是以什么模式读取图片
         self.img_small = cv.imread(small_img_path, 0)
-        cv.imwrite("img_big.png", self.img_big)
-        cv.imwrite("img_small.png", self.img_small)
-        self.img_big = cv.imread("img_big.png")
-        self.img_small = cv.imread("img_small.png")
+        cv.imwrite("../statics/demo_img/img_big.png", self.img_big)
+        cv.imwrite("../statics/demo_img/img_small.png", self.img_small)
+        self.img_big = cv.imread("../statics/demo_img/img_big.png")
+        self.img_small = cv.imread("../statics/demo_img/img_small.png")
         self.img_big_gray = cv.cvtColor(self.img_big, cv.COLOR_BGR2GRAY)
         self.handle_small_img()
 
@@ -122,8 +86,8 @@ class HandleSliderImg(object):
                         flag_x_start = True
 
         self.target_img = img_gray[left_up_y:right_down_y, left_up_x:right_down_x]
-        cv.imwrite("target.png", self.target_img)
-        self.target_img = cv.imread("target.png")
+        cv.imwrite("../statics/demo_img/target.png", self.target_img)
+        self.target_img = cv.imread("../statics/demo_img/target.png")
         return self.target_img
 
     def img_to_binarization(self, image):
@@ -161,7 +125,7 @@ class HandleSliderImg(object):
         # (0,0,255)：矩形边框颜色
         # 1：矩形边框大小
         cv.rectangle(self.img_big, left_up, right_down, (7, 249, 151), 1)
-        cv.imwrite("result.png", self.img_big)
+        cv.imwrite("../statics/demo_img/result.png", self.img_big)
         # show(self.img_big)
         return (left_up, right_down)
 
@@ -181,8 +145,8 @@ class HandleSliderImg2(object):
         target = cv.imread(self.small_img_path, 0)
         template = cv.imread(self.bg_path, 0)
         width, height = target.shape[::-1]
-        temp = "img_small2.png"
-        targ = "img_big2.png"
+        temp = "../statics/demo_img/img_small2.png"
+        targ = "../statics/demo_img/img_big2.png"
         cv.imwrite(temp, template)
         cv.imwrite(targ, target)
         target = cv.imread(targ)
@@ -197,7 +161,7 @@ class HandleSliderImg2(object):
         left_up = (x, y)
         right_down = (left_up[0] + width, left_up[1] + height)
         cv.rectangle(template, left_up, right_down, (7, 249, 151), 2)
-        cv.imwrite("result2.png", template)
+        cv.imwrite("../statics/demo_img/result2.png", template)
         # show(template)
         return (left_up, right_down)
 
@@ -240,36 +204,75 @@ class HandleSliderImg3(object):
             elif len(loc[1]) < 1:
                 R -= (R - L) / 2
         cv.rectangle(img_rgb, (left_x, 0), (left_x+10, 100), (7, 249, 151), 2)
-        cv.imwrite("result3.png", img_rgb)
+        cv.imwrite("../statics/demo_img/result3.png", img_rgb)
         return [[left_x]]
 
 
 class HandleSliderImg4(object):
 
     def __init__(self, bg_path, small_img_path):
+        self.big_path = bg_path
+        self.small_img_path = small_img_path
         self.img_big = cv.imread(bg_path)  # 第二个参数是以什么模式读取图片
         self.img_small = cv.imread(small_img_path)
-        self.img_big_path = bg_path
-        self.img_small_path = small_img_path
+        self.handle_small_img(copy.deepcopy(self.img_small))
+
+    def handle_small_img(self, img_small):
+        """对滑块进行下一步处理，去除空白"""
+        img_gray = cv.cvtColor(img_small, cv.COLOR_BGR2GRAY)
+
+        # 初始化目标小图滑块的左上角、右下角坐标
+        (left_up_y, left_up_x), (right_down_y, right_down_x) = (0, 0), (0, 0)
+        flag_y_start = False
+        for index_y, one_row in enumerate(img_gray):
+            if sum(one_row) == 0:
+                # 获取图片最下边的坐标 y
+                if flag_y_start:
+                    right_down_y = index_y + 1
+                    break
+                continue
+
+            # 获取图片最上边的坐标 y
+            if not flag_y_start:
+                left_up_y = index_y - 1
+                # 同时标记已经出现了y
+                flag_y_start = True
+
+            flag_x_start = False
+            for index_x, one_column in enumerate(one_row):
+
+                if one_column == 0:
+                    # 获取图片最右边的坐标 x
+                    if flag_x_start and index_x > right_down_x:
+                        right_down_x = index_x - 1
+                    continue
+                else:
+                    # 获取图片最左边的坐标 x
+                    if index_x < left_up_x or left_up_x == 0:
+                        left_up_x = index_x - 1
+                        flag_x_start = True
+
+        cv.imwrite("../statics/demo_img/target.png", self.img_small[left_up_y:right_down_y, left_up_x:right_down_x])
 
     # 模板匹配(用于寻找缺口有点误差)
     def template_match(self):
         method = cv.TM_CCOEFF_NORMED
-        width, height = self.img_small.shape[:2]
+        img_big = cv.imread(self.big_path, cv.IMREAD_GRAYSCALE)  # cv.COLOR_BGR2GRAY  cv.IMREAD_GRAYSCALE
+        img_target = cv.imread("../statics/demo_img/target.png", cv.IMREAD_GRAYSCALE)
 
-        img = cv.imread(self.img_big_path, cv.IMREAD_GRAYSCALE)
-        _, thresh1 = cv.threshold(img, 127, 255, cv.THRESH_BINARY)
-        _, thresh2 = cv.threshold(img, 127, 255, cv.THRESH_BINARY_INV)
-        # 灰度渐变
-        _, thresh3 = cv.threshold(img, 127, 255, cv.THRESH_TRUNC)
-        thresh4 = cv.adaptiveThreshold(img, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
+        width, height = img_target.shape[:2]
 
-        img1 = cv.imread(self.img_small_path, cv.IMREAD_GRAYSCALE)
-        _1, thresh11 = cv.threshold(img1, 127, 255, cv.THRESH_BINARY)
-        _1, thresh21 = cv.threshold(img1, 127, 255, cv.THRESH_BINARY_INV)
+        _, thresh1 = cv.threshold(img_big, 127, 255, cv.THRESH_BINARY)
+        _, thresh2 = cv.threshold(img_big, 127, 255, cv.THRESH_BINARY_INV)
         # 灰度渐变
-        _1, thresh31 = cv.threshold(img1, 127, 255, cv.THRESH_TRUNC)
-        thresh41 = cv.adaptiveThreshold(img1, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
+        _, thresh3 = cv.threshold(img_big, 127, 255, cv.THRESH_TRUNC)
+        thresh4 = cv.adaptiveThreshold(img_big, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
+
+        _1, thresh11 = cv.threshold(img_target, 127, 255, cv.THRESH_BINARY)
+        _1, thresh21 = cv.threshold(img_target, 127, 255, cv.THRESH_BINARY_INV)
+        # 灰度渐变。第二个参数是阈值，用于对像素值进行分类。第三个参数是分配给超过阈值的像素值的最大值
+        _1, thresh31 = cv.threshold(img_target, 127, 255, cv.THRESH_TRUNC)
+        thresh41 = cv.adaptiveThreshold(img_target, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 5, 0)
 
         result = cv.matchTemplate(thresh41, thresh4, method)
 
@@ -279,18 +282,12 @@ class HandleSliderImg4(object):
         left_up = list(left_up)
         left_up[0] += 2
         left_up = tuple(left_up)
-        print("left_up: ", left_up)
         right_down = (left_up[0] + height, left_up[1] + width)
 
-        # 绘制矩形边框，将匹配区域标注出来
-        # self.img_big：目标图像
-        # left_up：矩形的左上角位置
-        # right_down：矩形的右下角位置
-        # (0,0,255)：矩形边框颜色
-        # 1：矩形边框大小
-        cv.rectangle(thresh4, left_up, right_down, (0,0,255), 1)
-        cv.imwrite("result.png", thresh4)
-        show(thresh4)
+        # 标注原图
+        cv.rectangle(self.img_big, left_up, right_down, (0, 0, 255), 2)
+        # show(self.img_big)
+        cv.imwrite(self.big_path.replace(".jpg", "_res.jpg"), self.img_big)
         return [left_up, right_down]
 
     def main(self):
@@ -318,3 +315,15 @@ if __name__ == "__main__":
     print(result4)
 
     pass
+
+    """其他参数说明"""
+    # 绘制矩形边框，将匹配区域标注出来
+    # self.img_big：目标图像
+    # left_up：矩形的左上角位置
+    # right_down：矩形的右下角位置
+    # (0,0,255)：矩形边框颜色
+    # 1：矩形边框大小
+
+    # 标注处理后的图
+    # cv.rectangle(thresh4, left_up, right_down, (0, 0, 255), 2)
+
