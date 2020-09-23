@@ -16,7 +16,7 @@ from common.trace_generator import get_trace_list
 from common.handle_img import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4
 
 
-class YiDun:
+class YiDunSlideCaptcha:
 
     def __init__(self, my_id, sdk_url):
         self.index = 102
@@ -135,7 +135,7 @@ if __name__ == '__main__':
 
     my_id = "5a0e2d04ffa44caba3f740e6a8b0fa84"
     sdk_url = "http://127.0.0.1:8088"
-    dun = YiDun(my_id, sdk_url)
+    dun = YiDunSlideCaptcha(my_id, sdk_url)
 
     success = 0
     total = 0
