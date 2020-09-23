@@ -12,8 +12,8 @@ import random
 import requests
 import shutil
 
-from trace_generator import get_trace_list
-from handle_img import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4
+from common.trace_generator import get_trace_list
+from common.handle_img import HandleSliderImg, HandleSliderImg2, HandleSliderImg3, HandleSliderImg4
 
 
 class YiDun:

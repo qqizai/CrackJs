@@ -1,7 +1,7 @@
 var express = require("express")
-var sdk = require("./sdk")
-var sdk2 = require("./fingerprint2")
-var encrypt_trace = require("./mouse_trace")
+var sdk = require("../common/sdk")
+var sdk2 = require("../common/fingerprint2")
+var encrypt_trace = require("../common/mouse_trace")
 var bodyParser = require("body-parser")
 
 
