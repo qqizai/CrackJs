@@ -71,16 +71,19 @@ class YiDunDownloadClickCaptcha(object):
         }
 
         resp = self.session.get(self.url_get, params=params, headers=self.headers)
-        print(resp.text, resp.status_code)
         matcher = re.search(r"\{.*?(?=\))", resp.text)
         my_json = {}
-        if matcher:
-            my_json = json.loads(matcher.group())
-            self.download_img(my_json["data"]["bg"][0], "../statics/demo_img/bg.jpg")
-            # self.download_img(my_json["data"]["front"][0], "../statics/demo_img/front.png")
-            # self.my_token = my_json["data"]["token"]
-            # self.index += 1
-            print(my_json)
+        try:
+            if matcher:
+                my_json = json.loads(matcher.group())
+                img_url = my_json["data"]["bg"][0]
+                img_text = my_json["data"]["front"]
+                img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(".jpg", "_" + img_text + ".jpg").replace(".png", "_"+img_text+".png")
+                self.download_img(img_url, img_name)
+                self.total += 1
+                print("%d %s" % (self.total, img_name))
+        except Exception as e:
+            print(e)
         return my_json
 
 
@@ -97,7 +100,12 @@ if __name__ == '__main__':
     total = 0
     fail = 0
 
-    dun.get_captcha()
+    while True:
+        if total > 3000:
+            break
+        dun.get_captcha()
+        total += 1
+
 
     pass
 
