@@ -78,7 +78,8 @@ class YiDunDownloadClickCaptcha(object):
                 my_json = json.loads(matcher.group())
                 img_url = my_json["data"]["bg"][0]
                 img_text = my_json["data"]["front"]
-                img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(".jpg", "_" + img_text + ".jpg").replace(".png", "_"+img_text+".png")
+                # img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(".jpg", "_" + img_text + ".jpg").replace(".png", "_"+img_text+".png")
+                img_name = r"E:\datas\python\data_captchas\yidun\JPEGImages\%s" % img_url.split("/")[-1]
                 self.download_img(img_url, img_name)
                 self.total += 1
                 print("%d %s" % (self.total, img_name))
