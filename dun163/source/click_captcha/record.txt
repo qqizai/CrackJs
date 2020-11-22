@@ -57,7 +57,7 @@ coord: f(this.$store.state.token, [Math.round(t), Math.round(n), s.now() - this.
                 data: JSON.stringify({
                     d: "",
                     m: u(s.sample(n, h).join(":")),
-                    p: u(t.join(":")),  // 这里是将前面每个文字的加密后的参数，用于 : 来连接起来，再用 u 函数去加密
+                    p: u(t.join(":")),  // 这里是将前面每个文字的加密后的参数，用于 : 来连接起来，再用 u 函数去加密, u 函数就是之前的 B 函数
                     ext: u(f(this.$store.state.token, this.clickCounts + "," + n.length))
                 })
             })

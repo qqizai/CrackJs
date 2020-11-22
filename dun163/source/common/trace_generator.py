@@ -5,11 +5,10 @@
 # @File     : temp.py
 # @Software : PyCharm
 
-import math
 import random
+
 import cv2 as cv
 import numpy as np
-from matplotlib import pyplot as plt
 
 # 真实轨迹，拿来参考的
 array = [[4, 0, 279], [4, 0, 287], [5, 0, 319], [6, 0, 335], [7, 0, 344], [8, 0, 351], [8, 0, 360], [9, 0, 365],
@@ -38,9 +37,9 @@ def get_trace_list(distance):
     diff_time = random.randint(280, 382)
     for x in range(4, distance + 1):
 
-        if x < distance//10+1 or x < distance // 10 * 5 + 1:
+        if x < distance // 10 + 1 or x < distance // 10 * 5 + 1:
             y = 0
-        elif x < distance//10*2+1 or x < distance // 10 * 4 + 1:
+        elif x < distance // 10 * 2 + 1 or x < distance // 10 * 4 + 1:
             y = -1
         elif x < distance // 10 * 3 + 1:
             y = -2
@@ -56,7 +55,7 @@ def get_trace_list(distance):
             y = 5
 
         # 本次x,随机生成几个一样的 [x, y, 递增的随机时间差]
-        count = random.randint(1, 5 if y>=4 else 4)
+        count = random.randint(1, 5 if y >= 4 else 4)
         for _ in range(count):
             tract_list.append([x, y, diff_time])
             if y <= 2:
@@ -65,6 +64,33 @@ def get_trace_list(distance):
                 diff_time += random.randint(5, 8)
             elif y == 5:
                 diff_time += random.randint(10, 33)
+    return tract_list
+
+
+def get_trace_list_by_random():
+    """随机产生连续的鼠标轨迹，用于文字点选的"""
+    tract_list = []
+
+    x_first = random.randint(0, 320)
+    y_first = random.randint(0, 160)
+    diff_time = random.randint(160, 256)
+    count = random.randint(130, 210)
+
+    tract_list.append([x_first, y_first, diff_time])
+    while count > 0:
+
+        x_first += random.randint(-3, 4)
+        y_first += random.randint(-3, 4)
+        diff_time += random.randint(3, 22)
+
+        if x_first > 320 or x_first < 0:
+            x_first = random.randint(0, 320)
+        if y_first > 320 or x_first < 0:
+            y_first = random.randint(0, 160)
+
+        tract_list.append([x_first, y_first, diff_time])
+        count -= 1
+
     return tract_list
 
 
@@ -239,7 +265,7 @@ class HandleSliderImg3(object):
                 break
             elif len(loc[1]) < 1:
                 R -= (R - L) / 2
-        cv.rectangle(img_rgb, (left_x, 0), (left_x+10, 100), (7, 249, 151), 2)
+        cv.rectangle(img_rgb, (left_x, 0), (left_x + 10, 100), (7, 249, 151), 2)
         cv.imwrite("result3.png", img_rgb)
         return [[left_x]]
 
@@ -288,7 +314,7 @@ class HandleSliderImg4(object):
         # right_down：矩形的右下角位置
         # (0,0,255)：矩形边框颜色
         # 1：矩形边框大小
-        cv.rectangle(thresh4, left_up, right_down, (0,0,255), 1)
+        cv.rectangle(thresh4, left_up, right_down, (0, 0, 255), 1)
         cv.imwrite("result.png", thresh4)
         show(thresh4)
         return [left_up, right_down]
@@ -313,8 +339,10 @@ if __name__ == "__main__":
     # trace_list = get_trace_list(219)
     # print(len(trace_list), trace_list)
 
-    handle_img4 = HandleSliderImg4(bg_path, target_path)
-    result4 = handle_img4.main()
-    print(result4)
+    # handle_img4 = HandleSliderImg4(bg_path, target_path)
+    # result4 = handle_img4.main()
+    # print(result4)
+
+    print(get_trace_list_by_random())
 
     pass

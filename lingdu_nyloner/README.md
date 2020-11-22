@@ -15,3 +15,13 @@
    那么这就是直接能够够用 String.fromCharCode((scHZjLUh1["charCodeAt"](i)) 来替换原来的 window["String"]["fromCharCode"](scHZjLUh1["charCodeAt"](i)
 - 9，继续调试，然后也是将 base64 解密转换为 nodejs的base64 解密，最后得出答案，恭喜，又破解一个网站！！！
 完毕！！
+
+
+##### 赞赏
+
+如果你觉得笔者辛苦了，可以的话请我喝杯咖啡，感谢你的支持
+
+![zanshangma](../statics/zanshangma.png)
+
+你的赞赏就是我的动力
+

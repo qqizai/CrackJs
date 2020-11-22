@@ -82,7 +82,10 @@ class YiDunDownloadClickCaptcha(object):
                 img_name = r"E:\datas\python\data_captchas\yidun\JPEGImages\%s" % img_url.split("/")[-1]
                 self.download_img(img_url, img_name)
                 self.total += 1
-                print("%d %s" % (self.total, img_name))
+
+                my_json["img_path"] = img_name
+                my_json["front"] = img_text
+                # print("%d %s" % (self.total, img_name))
         except Exception as e:
             print(e)
         return my_json
@@ -91,21 +94,22 @@ class YiDunDownloadClickCaptcha(object):
     pass
 
 
-
 if __name__ == '__main__':
     my_id = "347e9080f7a84e3e8cb79311f9e4cd3f"
     sdk_url = "http://127.0.0.1:8088"
     dun = YiDunDownloadClickCaptcha(my_id, sdk_url)
+    result = dun.get_captcha()
+    print(result)
 
-    success = 0
-    total = 0
-    fail = 0
-
-    while True:
-        if total > 3000:
-            break
-        dun.get_captcha()
-        total += 1
+    # success = 0
+    # total = 0
+    # fail = 0
+    #
+    # while True:
+    #     if total > 3000:
+    #         break
+    #     dun.get_captcha()
+    #     total += 1
 
 
     pass

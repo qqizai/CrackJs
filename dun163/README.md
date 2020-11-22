@@ -78,7 +78,7 @@ coord: f(this.$store.state.token, [Math.round(t), Math.round(n), s.now() - this.
                 data: JSON.stringify({
                     d: "",
                     m: u(s.sample(n, h).join(":")),
-                    p: u(t.join(":")),  // 这里是将前面每个文字的加密后的参数，用于 : 来连接起来，再用 u 函数去加密
+                    p: u(t.join(":")),  // 这里是将前面每个文字的加密后的参数，用于 : 来连接起来，再用 u 函数去加密, u 函数就是之前的 B 函数
                     ext: u(f(this.$store.state.token, this.clickCounts + "," + n.length))
                 })
             })
@@ -167,4 +167,11 @@ PS：本地已经补全了：屏幕大小、色彩/像素深度、浏览器插�
 - statics：  静态文件，保存图片的，有失败的图片，可以查看，备于分析原因
 
 
+##### 赞赏
+
+如果你觉得笔者辛苦了，可以的话请我喝杯咖啡，感谢你的支持
+
+![zanshangma](../statics/zanshangma.png)
+
+你的赞赏就是我的动力
 
