@@ -3,9 +3,93 @@
 
 doing list：
 
-- [ ] 可疑用户-滑动拼图验证码  (后续有精力再继续研究)
+- 点选参数生成
 
-目测步骤：
+---
+
+点选验证参数步骤：
+
+1.对比之前滑动的话，变动的地方就是：这里的验证参数里面，只是在于点选的位置参数有变化，其他没有什么变化.
+
+可以直接搜索 ``` coord: f(this.$store.state.token, [Math.round(t), Math.round(n), s.now() - this.beginTime] + "")```
+
+这个就是你所点选的三个文字的位置参数加密地方，其他地方跟滑动的一样.
+
+另外，获取文字的位置，需要打码或者深度学习来识别；深度学习的话，大佬们说，大部分需求优先从目标检测、卷积来思考，能不能满足、解决问题。
+
+我自己也在学习这些，加油吧，兄弟萌.
+
+```javascript
+//1.知道文字的  x，y 坐标后，通过下面这个方法生成加密参数
+
+coord: f(this.$store.state.token, [Math.round(t), Math.round(n), s.now() - this.beginTime] + "")
+
+/*其中最主要是这里：
+    [文字 x 坐标整数, 文字 y 坐标整数， 所经过的时间差，毫秒]
+    [Math.round(t), Math.round(n), s.now() - this.beginTime]
+
+函数 f 就是跟之前滑动的一模一样的：*/
+
+    function n(e, t) {
+        function n(e, t) {
+            return e.charCodeAt(Math.floor(t % e.length))
+        }
+        function i(e, t) {
+            return t.split("").map(function(t, i) {
+                return t.charCodeAt(0) ^ n(e, i)
+            })
+        }
+        return t = i(e, t),
+        _(t)
+    }
+
+
+//2.上面的解析都是针对于源代码：
+
+    addPoint: function(e) {
+        var t = e.left
+          , n = e.top;
+        this.pointsStack.length || this.$parent.getAnticheatToken({
+            timeout: 1e3
+        });
+        var i = this.pointsStack.length + 1;
+        if (!(i > this.MAX_POINTS)) {
+            var r = document.createElement("div");
+            r.className = "yidun_icon-point yidun_point-" + i,
+            a.css(r, "left: " + (t - 10) + "px; top: " + (n - 25) + "px;"),
+            this.$bgImg.appendChild(r);
+            debugger;
+            this.pointsStack.push({
+                el: r,
+                coord: f(this.$store.state.token, [Math.round(t), Math.round(n), s.now() - this.beginTime] + "")
+            }),
+            this.shouldVerifyCaptcha()
+        }
+    },
+    shouldVerifyCaptcha: function() {
+        var e = this.pointsStack;
+        if (e.length === this.MAX_POINTS) {
+            var t = e.map(function(e) {
+                return e.coord
+            })
+              , n = this.traceData;
+            debugger;
+            this.onVerifyCaptcha({
+                data: JSON.stringify({
+                    d: "",
+                    m: u(s.sample(n, h).join(":")),
+                    p: u(t.join(":")),  // 这里是将前面每个文字的加密后的参数，用于 : 来连接起来，再用 u 函数去加密, u 函数就是之前的 B 函数
+                    ext: u(f(this.$store.state.token, this.clickCounts + "," + n.length))
+                })
+            })
+        }
+    }
+
+```
+
+---
+
+滑动类型目测步骤：
 
 1.一次请求获取图片链接、token
 
@@ -83,4 +167,11 @@ PS：本地已经补全了：屏幕大小、色彩/像素深度、浏览器插�
 - statics：  静态文件，保存图片的，有失败的图片，可以查看，备于分析原因
 
 
+##### 赞赏
+
+如果你觉得笔者辛苦了，可以的话请我喝杯咖啡，感谢你的支持
+
+![zanshangma](../statics/zanshangma.png)
+
+你的赞赏就是我的动力
 

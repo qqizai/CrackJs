@@ -79,6 +79,30 @@ api.post("/get_trace_data", function (req, res) {
     res.send(result)
 })
 
+/*
+* 下面几个是点选验证码的
+* */
+api.post("/encrypt_one_position", function (req, res) {
+    var token = req.body.token;
+    var position = req.body.position;
+    var result = encrypt_trace.encrypt_one_position(token, position);
+    res.send(result)
+})
+
+api.post("/encrypt_func_b", function (req, res) {
+    var content = req.body.content;
+    var result = encrypt_trace.encrypt_func_b(content);
+    res.send(result)
+})
+
+api.post("/get_trace_data_for_click", function (req, res) {
+    var token = req.body.token;
+    var trace_list = JSON.parse(req.body.trace_list);
+    var p = req.body.p;
+    var result = encrypt_trace.encrypt_trace_for_click(trace_list, token, p);
+    result = JSON.stringify(result);
+    res.send(result)
+})
 
 var port = 8088;
 var server = api.listen(port, function () {

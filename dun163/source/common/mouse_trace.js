@@ -404,6 +404,22 @@ function my_encrypt(traceDataArray, token, position_left) {
     return data;
 }
 
+function encrypt_trace_for_click(traceDataArray, token, p) {
+    var _n = my_sample(traceDataArray, 50, token);
+    var value_m = B(_n.join(":"));
+    var value_ext = B(n(token,3 + "," + traceDataArray.length));
+
+    var data = {
+        d: "",
+        m: value_m,
+        p: p,
+        ext: value_ext
+    }
+    data = JSON.stringify(data);
+    // console.log("data:")
+    // console.log(data)
+    return data;
+}
 
 
 // var token = "d31197478b1b4c95a6fb28c36174a945"
@@ -415,6 +431,9 @@ function my_encrypt(traceDataArray, token, position_left) {
 
 module.exports = {
     "encrypt_trace": my_encrypt,
+    "encrypt_trace_for_click": encrypt_trace_for_click,
+    "encrypt_one_position": n,
+    "encrypt_func_b": B,
 }
 
 
