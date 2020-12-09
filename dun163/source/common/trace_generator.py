@@ -34,7 +34,7 @@ array = [[4, 0, 279], [4, 0, 287], [5, 0, 319], [6, 0, 335], [7, 0, 344], [8, 0,
 
 def get_trace_list(distance):
     """根据距离随机生成轨迹"""
-    tract_list = []
+    trace_list = []
     diff_time = random.randint(280, 382)
     for x in range(4, distance + 1):
 
@@ -58,14 +58,43 @@ def get_trace_list(distance):
         # 本次x,随机生成几个一样的 [x, y, 递增的随机时间差]
         count = random.randint(1, 5 if y>=4 else 4)
         for _ in range(count):
-            tract_list.append([x, y, diff_time])
+            trace_list.append([x, y, diff_time])
             if y <= 2:
                 diff_time += random.randint(5, 6)
             elif y <= 4:
                 diff_time += random.randint(5, 8)
             elif y == 5:
                 diff_time += random.randint(10, 33)
-    return tract_list
+    return trace_list
+
+
+def get_trace_click_select_list():
+    """ 初始的点可以随机写、初始时间也是可以随机写，只要正常一点就可以了
+    x: 取值[0, 286]
+    y: 取值[0, 143]   发现y是经常带0.5的
+    diff_time
+    :return:
+    """
+
+    diff_time = random.randint(263, 357)
+    distance = random.randint(132, 273)
+    x = random.randint(60, 198)
+    y = random.randint(28, 132) + 0.5
+    trace_list = []
+
+    for _ in range(4, distance + 1):
+        x += random.randint(-31, 35)
+        y += random.randint(-13, 17)
+        if x < 0 or x > 285:
+            x = random.randint(30, 230)
+        if y < 0 or y > 142:
+            y = random.randint(5, 143) + 0.5
+
+        count = random.randint(1, 4)
+        for _ in range(count):
+            trace_list.append([x, y, diff_time])
+            diff_time += random.randint(6, 33)
+    return trace_list
 
 
 def show(name):
@@ -313,8 +342,11 @@ if __name__ == "__main__":
     # trace_list = get_trace_list(219)
     # print(len(trace_list), trace_list)
 
-    handle_img4 = HandleSliderImg4(bg_path, target_path)
-    result4 = handle_img4.main()
-    print(result4)
+    # handle_img4 = HandleSliderImg4(bg_path, target_path)
+    # result4 = handle_img4.main()
+    # print(result4)
+
+    trace_list = get_trace_click_select_list()
+    print(len(trace_list), trace_list)
 
     pass

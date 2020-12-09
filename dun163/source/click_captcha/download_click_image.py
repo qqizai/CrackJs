@@ -6,8 +6,9 @@
 # @Software : PyCharm
 """点选验证码,下载数据集"""
 
-import re
 import json
+import re
+
 import requests
 
 
@@ -19,9 +20,9 @@ class YiDunDownloadClickCaptcha(object):
         if sdk_url is None or my_id is None:
             raise ValueError("sdk_url/my_id cann't be None.")
 
-        self.cb_url = sdk_url+"/get_cb"
-        self.fp_url = sdk_url+"/get_fp2"
-        self.callback_url = sdk_url+"/get_callback"
+        self.cb_url = sdk_url + "/get_cb"
+        self.fp_url = sdk_url + "/get_fp2"
+        self.callback_url = sdk_url + "/get_callback"
         self.my_id = my_id
 
         self.success = 0
@@ -78,7 +79,8 @@ class YiDunDownloadClickCaptcha(object):
                 my_json = json.loads(matcher.group())
                 img_url = my_json["data"]["bg"][0]
                 img_text = my_json["data"]["front"]
-                img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(".jpg", "_" + img_text + ".jpg").replace(".png", "_"+img_text+".png")
+                img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(
+                    ".jpg", "_" + img_text + ".jpg").replace(".png", "_" + img_text + ".png")
                 self.download_img(img_url, img_name)
                 self.total += 1
                 print("%d %s" % (self.total, img_name))
@@ -86,9 +88,7 @@ class YiDunDownloadClickCaptcha(object):
             print(e)
         return my_json
 
-
     pass
-
 
 
 if __name__ == '__main__':
@@ -106,9 +106,4 @@ if __name__ == '__main__':
         dun.get_captcha()
         total += 1
 
-
     pass
-
-
-
-
