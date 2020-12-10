@@ -147,13 +147,13 @@ if __name__ == '__main__':
         # dun.encrypt_data()
         _text = dun.check_data()
 
-        if '{"result":false' not in _text:
+        if '{"result":true' in _text:
             success += 1
         else:
             fail += 1
-            shutil.move("bg.jpg", "../statics/fail_img/bg_{}.jpg".format(fail))
-            shutil.move("front.png", "../statics/fail_img/front_{}.png".format(fail))
-            shutil.move("bg_res.jpg", "../statics/fail_img/bg_res_{}.jpg".format(fail))
+            # shutil.move("bg.jpg", "../statics/fail_img/bg_{}.jpg".format(fail))
+            # shutil.move("front.png", "../statics/fail_img/front_{}.png".format(fail))
+            # shutil.move("bg_res.jpg", "../statics/fail_img/bg_res_{}.jpg".format(fail))
         total += 1
         print("目前成功率为：{} {}/{}".format(success / total, success, total))
         print("-"*200)
