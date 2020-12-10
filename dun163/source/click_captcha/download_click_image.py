@@ -6,8 +6,9 @@
 # @Software : PyCharm
 """点选验证码,下载数据集"""
 
-import re
 import json
+import re
+
 import requests
 
 
@@ -19,9 +20,9 @@ class YiDunDownloadClickCaptcha(object):
         if sdk_url is None or my_id is None:
             raise ValueError("sdk_url/my_id cann't be None.")
 
-        self.cb_url = sdk_url+"/get_cb"
-        self.fp_url = sdk_url+"/get_fp2"
-        self.callback_url = sdk_url+"/get_callback"
+        self.cb_url = sdk_url + "/get_cb"
+        self.fp_url = sdk_url + "/get_fp2"
+        self.callback_url = sdk_url + "/get_callback"
         self.my_id = my_id
 
         self.success = 0
@@ -78,18 +79,14 @@ class YiDunDownloadClickCaptcha(object):
                 my_json = json.loads(matcher.group())
                 img_url = my_json["data"]["bg"][0]
                 img_text = my_json["data"]["front"]
-                # img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(".jpg", "_" + img_text + ".jpg").replace(".png", "_"+img_text+".png")
-                img_name = r"E:\datas\python\data_captchas\yidun\JPEGImages\%s" % img_url.split("/")[-1]
+                img_name = ("E:/projects/python/验证码/网易易盾验证码/点选/big_captchas/%s" % img_url.split("/")[-1]).replace(
+                    ".jpg", "_" + img_text + ".jpg").replace(".png", "_" + img_text + ".png")
                 self.download_img(img_url, img_name)
                 self.total += 1
-
-                my_json["img_path"] = img_name
-                my_json["front"] = img_text
-                # print("%d %s" % (self.total, img_name))
+                print("%d %s" % (self.total, img_name))
         except Exception as e:
             print(e)
         return my_json
-
 
     pass
 
@@ -98,22 +95,15 @@ if __name__ == '__main__':
     my_id = "347e9080f7a84e3e8cb79311f9e4cd3f"
     sdk_url = "http://127.0.0.1:8088"
     dun = YiDunDownloadClickCaptcha(my_id, sdk_url)
-    result = dun.get_captcha()
-    print(result)
 
-    # success = 0
-    # total = 0
-    # fail = 0
-    #
-    # while True:
-    #     if total > 3000:
-    #         break
-    #     dun.get_captcha()
-    #     total += 1
+    success = 0
+    total = 0
+    fail = 0
 
+    while True:
+        if total > 3000:
+            break
+        dun.get_captcha()
+        total += 1
 
     pass
-
-
-
-

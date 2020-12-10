@@ -5,10 +5,11 @@
 # @File     : temp.py
 # @Software : PyCharm
 
+import math
 import random
-
 import cv2 as cv
 import numpy as np
+from matplotlib import pyplot as plt
 
 # 真实轨迹，拿来参考的
 array = [[4, 0, 279], [4, 0, 287], [5, 0, 319], [6, 0, 335], [7, 0, 344], [8, 0, 351], [8, 0, 360], [9, 0, 365],
@@ -33,13 +34,13 @@ array = [[4, 0, 279], [4, 0, 287], [5, 0, 319], [6, 0, 335], [7, 0, 344], [8, 0,
 
 def get_trace_list(distance):
     """根据距离随机生成轨迹"""
-    tract_list = []
+    trace_list = []
     diff_time = random.randint(280, 382)
     for x in range(4, distance + 1):
 
-        if x < distance // 10 + 1 or x < distance // 10 * 5 + 1:
+        if x < distance//10+1 or x < distance // 10 * 5 + 1:
             y = 0
-        elif x < distance // 10 * 2 + 1 or x < distance // 10 * 4 + 1:
+        elif x < distance//10*2+1 or x < distance // 10 * 4 + 1:
             y = -1
         elif x < distance // 10 * 3 + 1:
             y = -2
@@ -55,43 +56,45 @@ def get_trace_list(distance):
             y = 5
 
         # 本次x,随机生成几个一样的 [x, y, 递增的随机时间差]
-        count = random.randint(1, 5 if y >= 4 else 4)
+        count = random.randint(1, 5 if y>=4 else 4)
         for _ in range(count):
-            tract_list.append([x, y, diff_time])
+            trace_list.append([x, y, diff_time])
             if y <= 2:
                 diff_time += random.randint(5, 6)
             elif y <= 4:
                 diff_time += random.randint(5, 8)
             elif y == 5:
                 diff_time += random.randint(10, 33)
-    return tract_list
+    return trace_list
 
 
-def get_trace_list_by_random():
-    """随机产生连续的鼠标轨迹，用于文字点选的"""
-    tract_list = []
+def get_trace_click_select_list():
+    """ 初始的点可以随机写、初始时间也是可以随机写，只要正常一点就可以了
+    x: 取值[0, 286]
+    y: 取值[0, 143]   发现y是经常带0.5的
+    diff_time
+    :return:
+    """
 
-    x_first = random.randint(0, 320)
-    y_first = random.randint(0, 160)
-    diff_time = random.randint(160, 256)
-    count = random.randint(130, 210)
+    diff_time = random.randint(263, 357)
+    distance = random.randint(132, 273)
+    x = random.randint(60, 198)
+    y = random.randint(28, 132) + 0.5
+    trace_list = []
 
-    tract_list.append([x_first, y_first, diff_time])
-    while count > 0:
+    for _ in range(4, distance + 1):
+        x += random.randint(-31, 35)
+        y += random.randint(-13, 17)
+        if x < 0 or x > 285:
+            x = random.randint(30, 230)
+        if y < 0 or y > 142:
+            y = random.randint(5, 143) + 0.5
 
-        x_first += random.randint(-3, 4)
-        y_first += random.randint(-3, 4)
-        diff_time += random.randint(3, 22)
-
-        if x_first > 320 or x_first < 0:
-            x_first = random.randint(0, 320)
-        if y_first > 320 or x_first < 0:
-            y_first = random.randint(0, 160)
-
-        tract_list.append([x_first, y_first, diff_time])
-        count -= 1
-
-    return tract_list
+        count = random.randint(1, 4)
+        for _ in range(count):
+            trace_list.append([x, y, diff_time])
+            diff_time += random.randint(6, 33)
+    return trace_list
 
 
 def show(name):
@@ -265,7 +268,7 @@ class HandleSliderImg3(object):
                 break
             elif len(loc[1]) < 1:
                 R -= (R - L) / 2
-        cv.rectangle(img_rgb, (left_x, 0), (left_x + 10, 100), (7, 249, 151), 2)
+        cv.rectangle(img_rgb, (left_x, 0), (left_x+10, 100), (7, 249, 151), 2)
         cv.imwrite("result3.png", img_rgb)
         return [[left_x]]
 
@@ -314,7 +317,7 @@ class HandleSliderImg4(object):
         # right_down：矩形的右下角位置
         # (0,0,255)：矩形边框颜色
         # 1：矩形边框大小
-        cv.rectangle(thresh4, left_up, right_down, (0, 0, 255), 1)
+        cv.rectangle(thresh4, left_up, right_down, (0,0,255), 1)
         cv.imwrite("result.png", thresh4)
         show(thresh4)
         return [left_up, right_down]
@@ -343,6 +346,7 @@ if __name__ == "__main__":
     # result4 = handle_img4.main()
     # print(result4)
 
-    print(get_trace_list_by_random())
+    trace_list = get_trace_click_select_list()
+    print(len(trace_list), trace_list)
 
     pass
