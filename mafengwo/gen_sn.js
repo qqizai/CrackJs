@@ -131,7 +131,7 @@ function a(t) {
 function main(input_t) {
     var _fe = "c9d6618dbc657b41a66eb0af952906f1"
     var _res = i(input_t + _fe)
-    return a(_res)
+    return a(_res).slice(2, 12)
 }
 
 
@@ -151,12 +151,12 @@ console.log(driver_res.toString())
 
 
 var demo_sn = a(res)
-my_t = "b310e0633c6fa9d35e39641789ffd5ae"
-console.log(my_t === demo_sn)
+// my_t = "b310e0633c6fa9d35e39641789ffd5ae"
+// console.log(my_t === demo_sn)
 
 var my_sn = "10e0633c6f"
-console.log(demo_sn.slice(2, 12))
-console.log(my_sn === demo_sn.slice(2, 12))
+console.log(demo_sn)
+console.log(my_sn === demo_sn)
 
 
 //  "{\"_ts\":\"1624768699499\",\"adults_num\":\"2\",\"check_in\":\"2021-06-28\",\"check_out\":\"2021-06-29\",\"children_age\":\"\",\"hotel_id\":\"8316708\",\"mdd_id\":\"10198\",\"ota_ids\":\"\",\"queryTimes\":\"1\",\"screen_scale\":\"2.75\"}"
