@@ -151,12 +151,12 @@ console.log(driver_res.toString())
 
 
 var demo_sn = a(res)
-// my_t = "b310e0633c6fa9d35e39641789ffd5ae"
-// console.log(my_t === demo_sn)
+my_t = "b310e0633c6fa9d35e39641789ffd5ae"
+console.log(my_t === demo_sn)
 
 var my_sn = "10e0633c6f"
-console.log(demo_sn)
-console.log(my_sn === demo_sn)
+console.log(demo_sn.slice(2, 12))
+console.log(my_sn === demo_sn.slice(2, 12))
 
 
 //  "{\"_ts\":\"1624768699499\",\"adults_num\":\"2\",\"check_in\":\"2021-06-28\",\"check_out\":\"2021-06-29\",\"children_age\":\"\",\"hotel_id\":\"8316708\",\"mdd_id\":\"10198\",\"ota_ids\":\"\",\"queryTimes\":\"1\",\"screen_scale\":\"2.75\"}"
@@ -166,7 +166,7 @@ demo_t = "{\"_ts\":\"1624768699499\",\"adults_num\":\"2\",\"check_in\":\"2021-06
 my_sn = "d18417a473"
 demo_sn = main(demo_t)
 console.log(demo_sn)
-console.log(my_sn === demo_sn.slice(2, 12))
+console.log(my_sn === demo_sn)
 
 
 /**
